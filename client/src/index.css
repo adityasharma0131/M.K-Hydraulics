@@ -9,28 +9,7 @@
   box-sizing: border-box;
 }
 
-.homepage {
-  min-height: 100vh;
-  /* background: url(img/iconicbgc.jpg) no-repeat; */
-  background-color: black;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  z-index: 0;
-  overflow: hidden;
-  position: relative;
-}
-.weare {
-  min-height: 100vh;
-  /* background: url(img/iconicbgc.jpg) no-repeat; */
-  background-color:blanchedalmond;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  z-index: 0;
-  overflow: hidden;
-  position: relative;
-}
+
 
 header {
   background: #1e1e1e;
@@ -92,6 +71,34 @@ header nav ul li a.active {
   font-size: 24px;
 }
 
+
+
+.homepage,
+.weare {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  z-index: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.homepage {
+  background-color: black;
+}
+
+.weare {
+  background-color: blanchedalmond;
+}
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 900px) {
   header {
     padding: 0 30px;
@@ -114,7 +121,7 @@ header nav ul li a.active {
     left: -100%;
     top: 70px;
     background: #1e1e1e;
-    padding: 30px;
+    padding: 20px;
     transition: 0.3s;
   }
 
@@ -124,10 +131,20 @@ header nav ul li a.active {
 
   header #nav_check:checked ~ .hamburger .hamburger-icon {
     display: none;
+    animation: rotateOut 0.5s forwards;
   }
 
   header #nav_check:checked ~ .hamburger .close-icon {
     display: block;
+    animation: rotateIn 0.5s forwards;
+  }
+
+  header #nav_check:not(:checked) ~ .hamburger .hamburger-icon {
+    animation: rotateIn 0.5s forwards;
+  }
+
+  header #nav_check:not(:checked) ~ .hamburger .close-icon {
+    animation: rotateOut 0.5s forwards;
   }
 
   header nav ul {
@@ -141,5 +158,23 @@ header nav ul li a.active {
 
   header nav ul li a {
     margin: 0;
+  }
+}
+
+@keyframes rotateIn {
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotateOut {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
   }
 }
