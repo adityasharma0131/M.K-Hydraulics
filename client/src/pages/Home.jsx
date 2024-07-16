@@ -5,13 +5,9 @@ const Home = () => {
   return (
     <>
       <div className="homepage">
-        <div className="hero-logo">
-        <img src={logo} alt="Logo" />
-        </div>
+        <img className="hero-logo" src={logo} alt="Logo" />
       </div>
-      <div className="weare">
-
-      </div>
+      <div className="weare"></div>
     </>
   );
 };

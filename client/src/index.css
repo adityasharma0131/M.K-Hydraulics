@@ -9,10 +9,12 @@
   box-sizing: border-box;
 }
 
-
-
 header {
-  background: #1e1e1e;
+  background: rgba(30, 30, 30, 0.47);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12.1px);
+  -webkit-backdrop-filter: blur(12.1px);
   width: 100%;
   height: 70px;
   display: flex;
@@ -71,8 +73,6 @@ header nav ul li a.active {
   font-size: 24px;
 }
 
-
-
 .homepage,
 .weare {
   min-height: 100vh;
@@ -86,22 +86,69 @@ header nav ul li a.active {
 
 .homepage {
   background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .weare {
   background-color: blanchedalmond;
 }
 
+.hero-logo {
+  margin-top: 90px;
+  width: 40%;
+  height: auto;
+}
 
+.mouse-btn {
+  margin: -1px auto;
+  width: 40px;
+  height: 80px;
+  border: 3px solid rgba(122, 122, 124, 0.918);
+  border-radius: 20px;
+  display: flex;
+}
 
+.mouse-scroll {
+  display: block;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(
+    170deg,
+    rgba(122, 122, 124, 0.918),
+    rgb(123, 124, 124)
+  );
+  border-radius: 50%;
+  margin: auto;
+  animation: scrolling13 1s linear infinite;
+}
 
+@keyframes scrolling13 {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(20px);
+  }
+}
 
-
-
+/* Responsive Styles */
+@media only screen and (max-width: 1200px) {
+  .hero-logo {
+    width: 60%;
+  }
+}
 
 @media only screen and (max-width: 900px) {
   header {
     padding: 0 30px;
+  }
+  .hero-logo {
+    width: 70%;
+    margin-top: 70px;
   }
 }
 
@@ -122,7 +169,7 @@ header nav ul li a.active {
     top: 70px;
     background: #1e1e1e;
     padding: 20px;
-    transition: 0.3s;
+    transition: left 0.3s;
   }
 
   header #nav_check:checked ~ nav {
@@ -144,6 +191,7 @@ header nav ul li a.active {
   }
 
   header #nav_check:not(:checked) ~ .hamburger .close-icon {
+    display: none;
     animation: rotateOut 0.5s forwards;
   }
 
@@ -158,6 +206,46 @@ header nav ul li a.active {
 
   header nav ul li a {
     margin: 0;
+  }
+
+  .hero-logo {
+    width: 80%;
+    margin-top: 50px;
+  }
+
+  .mouse-btn {
+    width: 30px;
+    height: 60px;
+  }
+
+  .mouse-scroll {
+    width: 15px;
+    height: 15px;
+  }
+
+  .container_mouse span {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .hero-logo {
+    width: 90%;
+    margin-top: 30px;
+  }
+
+  .mouse-btn {
+    width: 25px;
+    height: 50px;
+  }
+
+  .mouse-scroll {
+    width: 10px;
+    height: 10px;
+  }
+
+  .container_mouse span {
+    font-size: 0.8rem;
   }
 }
 
