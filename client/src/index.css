@@ -9,6 +9,20 @@
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  height: 0.5rem;
+  width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0085ff;
+  border-radius: 1rem;
+}
+
 header {
   background: rgba(30, 30, 30, 0.47);
   border-radius: 16px;
