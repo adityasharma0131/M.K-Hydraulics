@@ -88,7 +88,8 @@ header nav ul li a.active {
 }
 
 .homepage,
-.weare {
+.weare,
+.products {
   min-height: 100vh;
   background-size: cover;
   background-position: center;
@@ -118,17 +119,33 @@ header nav ul li a.active {
 .bgbox {
   position: relative;
   color: #0085ff;
-  padding: 2rem;
-  margin: 5rem 1rem 2.5rem 1rem;
+  padding: 1rem;
+  margin: 2rem 1rem 2.5rem 1rem;
   width: auto;
   height: auto;
   border-radius: 10px;
   border: solid #0085ff 2px;
   text-align: center;
+
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+.productbox {
+  position: relative;
+  color: #fff;
+  background-color: #0085ff;
+  padding: 1rem;
+  margin: 2rem 1rem 2.5rem 1rem;
+  border-radius: 10px;
+  border: 2px solid #0085ff;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .heading1 {
@@ -139,10 +156,34 @@ header nav ul li a.active {
   font-size: 15vh;
 }
 
-.para{
+.para {
   margin-top: 10px;
 }
 
+.productbox hr {
+  border: none; /* Removes the default border */
+  height: 1px; /* Sets the thickness of the line */
+  background-color: #fff; /* Sets the color of the line */
+  margin: 10px 0; /* Adds space above and below the line */
+  width: 10%; /* Sets the width of the line */
+}
+.productcard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  gap: 1rem; /* Adds space between the images */
+}
+
+.productimg {
+  max-width: 100%; /* Ensures the image doesn't overflow */
+  border-radius: 5px; /* Rounds the corners of the images */
+}
 /* Responsive Styles */
 @media only screen and (max-width: 1200px) {
   .hero-logo {
@@ -255,10 +296,6 @@ header nav ul li a.active {
 }
 
 @media (max-width: 768px) {
-  .bgbox {
-    padding: 1.5rem;
-    margin: 4rem 0.5rem 2rem 0.5rem;
-  }
   .heading1 {
     font-size: 4vh;
   }
@@ -268,10 +305,6 @@ header nav ul li a.active {
 }
 
 @media (max-width: 480px) {
-  .bgbox {
-    padding: 1rem;
-    margin: 3rem 0.5rem 1.5rem 0.5rem;
-  }
   .heading1 {
     font-size: 3vh;
   }

@@ -10,6 +10,10 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <header>
       <div className="logo">
@@ -21,27 +25,47 @@ const Header = () => {
       <nav className={isMenuOpen ? "open" : ""}>
         <ul>
           <li>
-            <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink 
+              to="/" 
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              onClick={closeMenu}
+            >
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink to="/products" className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink 
+              to="/products" 
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              onClick={closeMenu}
+            >
               Products
             </NavLink>
           </li>
           <li>
-            <NavLink to="/gallery" className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink 
+              to="/gallery" 
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              onClick={closeMenu}
+            >
               Gallery
             </NavLink>
           </li>
           <li>
-            <NavLink to="/about-us" className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink 
+              to="/about-us" 
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              onClick={closeMenu}
+            >
               About us
             </NavLink>
           </li>
           <li>
-            <NavLink to="/contact-us" className={({ isActive }) => (isActive ? 'active' : '')}>
+            <NavLink 
+              to="/contact-us" 
+              className={({ isActive }) => (isActive ? 'active' : '')}
+              onClick={closeMenu}
+            >
               Contact us
             </NavLink>
           </li>
