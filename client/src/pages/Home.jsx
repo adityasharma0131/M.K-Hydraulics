@@ -43,9 +43,9 @@ const Home = () => {
           <div className="productcard">
             <div className="card">
               <img className="productimg" src={p1} alt="Product 1" />
-              <img className="productimg" src={p1} alt="Product 1" />
-              <img className="productimg" src={p1} alt="Product 1" />
-              <img className="productimg" src={p1} alt="Product 1" />
+              <div className="info">
+                <h3 className="productname">Product Name</h3>
+              </div>
             </div>
           </div>
         </div>
