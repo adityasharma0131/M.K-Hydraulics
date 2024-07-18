@@ -44,10 +44,42 @@ const Home = () => {
             <div className="card">
               <img className="productimg" src={p1} alt="Product 1" />
               <div className="info">
-                <h3 className="productname">Product Name</h3>
+                <h3 className="productname">Hydraulic Power Pack</h3>
+                <p className="productdesc">
+                  Our hydraulic power packs are designed for optimal
+                  performance, offering reliability and efficiency in various
+                  industrial applications.
+                </p>
+              </div>
+            </div>
+            <div className="card">
+              <img className="productimg" src={p2} alt="Product 2" />
+              <div className="info">
+                <h3 className="productname">Hydraulic Cylinder</h3>
+                <p className="productdesc">
+                  Our hydraulic cylinders are engineered for precision and
+                  durability, suitable for a wide range of heavy-duty tasks.
+                </p>
+              </div>
+            </div>
+            <div className="card">
+              <img className="productimg" src={p1} alt="Product 3" />
+              <div className="info">
+                <h3 className="productname">Pharma Machines</h3>
+                <p className="productdesc">
+                  Our pharma machines are tailored to meet the stringent
+                  standards of the pharmaceutical industry, ensuring safety and
+                  efficiency.
+                </p>
               </div>
             </div>
           </div>
+            <div className="showmore">
+              <button className="showbutton">
+                Show More ..
+              </button>
+
+            </div>
         </div>
       </div>
     </>

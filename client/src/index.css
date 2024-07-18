@@ -107,7 +107,7 @@ header nav ul li a.active {
 }
 
 .weare {
-  background-color: #ffff;
+  background-color: #ffffff;
 }
 
 .hero-logo {
@@ -126,22 +126,21 @@ header nav ul li a.active {
   border-radius: 10px;
   border: solid #0085ff 2px;
   text-align: center;
-
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
+
 .productbox {
   position: relative;
-  color: #fff;
+  color: #ffffff;
   background-color: #0085ff;
   padding: 1rem;
   margin: 2rem 1rem 2.5rem 1rem;
   border-radius: 10px;
   border: 2px solid #0085ff;
   text-align: center;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -161,17 +160,19 @@ header nav ul li a.active {
 }
 
 .productbox hr {
-  border: none; /* Removes the default border */
-  height: 1px; /* Sets the thickness of the line */
-  background-color: #fff; /* Sets the color of the line */
-  margin: 10px 0; /* Adds space above and below the line */
-  width: 10%; /* Sets the width of the line */
+  border: none;
+  height: 1px;
+  background-color: #ffffff;
+  margin: 10px 0;
+  width: 10%;
 }
+
 .productcard {
   display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  gap: 1.5rem;
   flex-wrap: wrap;
 }
 
@@ -179,10 +180,9 @@ header nav ul li a.active {
   display: flex !important;
   justify-content: center;
   align-items: center;
-  display: flex;
   position: relative;
   overflow: hidden;
-  gap: 1rem; /* Adds space between the images */
+  gap: 1rem;
 }
 
 .productimg {
@@ -208,16 +208,34 @@ header nav ul li a.active {
 }
 
 .productname {
-  font-size: 3vh;
+  font-size: 5vh;
   color: #0085ff;
   padding: 1rem;
+  margin-bottom: 1rem;
 }
-
 
 .card:hover .info {
   height: 60%;
 }
 
+.productdesc {
+  color: black;
+  font-size: 2vh;
+}
+
+
+.showmore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.showbutton {
+  font-size: 3vh;
+  padding: .5rem;
+  border-radius: 10px;
+}
 
 /* Responsive Styles */
 @media only screen and (max-width: 1200px) {
