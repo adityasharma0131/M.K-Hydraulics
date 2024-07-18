@@ -147,6 +147,19 @@ header nav ul li a.active {
   justify-content: center;
 }
 
+.clients {
+  position: relative;
+  color: #0085ff;
+  padding: 1rem;
+  
+  border: 2px solid #0085ff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .heading1 {
   font-size: 8vh;
 }
@@ -163,6 +176,13 @@ header nav ul li a.active {
   border: none;
   height: 1px;
   background-color: #ffffff;
+  margin: 10px 0;
+  width: 10%;
+}
+.clients hr {
+  border: none;
+  height: 1px;
+  background-color: #0085ff;
   margin: 10px 0;
   width: 10%;
 }
@@ -223,7 +243,6 @@ header nav ul li a.active {
   font-size: 2vh;
 }
 
-
 .showmore {
   display: flex;
   align-items: center;
@@ -231,10 +250,84 @@ header nav ul li a.active {
   padding: 1rem;
 }
 
-.showbutton {
-  font-size: 3vh;
-  padding: .5rem;
-  border-radius: 10px;
+.button-80 {
+  background: #fff;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  border-style: solid;
+  border-width: 0.125rem;
+  box-sizing: border-box;
+  color: #0085ff;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  padding: 0.875rem 1.125rem;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transform: translateZ(0) scale(1);
+  transition: transform 0.2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.arrowlink {
+  background-color: #0085ff;
+  border-radius: 50%;
+  padding: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white; /* This sets the text color to white */
+  cursor: pointer;
+}
+
+.GoArrowUpRight {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: white; /* Ensure the link text color is white */
+  text-decoration: none; /* Remove underline from the link */
+}
+
+.button-80:not(:disabled):hover {
+  transform: scale(1.05);
+}
+
+.button-80:not(:disabled):hover:active {
+  transform: scale(1.05) translateY(0.125rem);
+}
+
+.button-80:focus {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:before {
+  content: "";
+  left: calc(-1 * 0.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1 * 0.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+.button-80:focus:not(:focus-visible) {
+  outline: 0 solid transparent;
+}
+
+.button-80:focus:not(:focus-visible):before {
+  border-width: 0;
+}
+
+.button-80:not(:disabled):active {
+  transform: translateY(0.125rem);
 }
 
 /* Responsive Styles */

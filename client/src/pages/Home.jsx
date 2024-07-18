@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../assets/WhatsApp_Image_2024-07-10_at_8.22.02_PM-removebg-preview 3.png";
 import p1 from "../assets/image 1.png";
 import p2 from "../assets/image 5.png";
-
+import { GoArrowUpRight } from "react-icons/go";
 const Home = () => {
   return (
     <>
@@ -43,6 +44,11 @@ const Home = () => {
           <div className="productcard">
             <div className="card">
               <img className="productimg" src={p1} alt="Product 1" />
+              <div className="arrowlink">
+                <Link to="/products/id:">
+                  <GoArrowUpRight className="GoArrowUpRight" />
+                </Link>{" "}
+              </div>
               <div className="info">
                 <h3 className="productname">Hydraulic Power Pack</h3>
                 <p className="productdesc">
@@ -53,33 +59,49 @@ const Home = () => {
               </div>
             </div>
             <div className="card">
-              <img className="productimg" src={p2} alt="Product 2" />
+              <img className="productimg" src={p1} alt="Product 1" />
+              <div className="arrowlink">
+                <Link to="/products/id:">
+                  <GoArrowUpRight className="GoArrowUpRight" />
+                </Link>
+              </div>
               <div className="info">
-                <h3 className="productname">Hydraulic Cylinder</h3>
+                <h3 className="productname">Hydraulic Power Pack</h3>
                 <p className="productdesc">
-                  Our hydraulic cylinders are engineered for precision and
-                  durability, suitable for a wide range of heavy-duty tasks.
+                  Our hydraulic power packs are designed for optimal
+                  performance, offering reliability and efficiency in various
+                  industrial applications.
                 </p>
               </div>
             </div>
             <div className="card">
-              <img className="productimg" src={p1} alt="Product 3" />
+              <img className="productimg" src={p1} alt="Product 1" />
+              <div className="arrowlink">
+                <Link to="/products/id:">
+                  <GoArrowUpRight className="GoArrowUpRight" />
+                </Link>
+              </div>
               <div className="info">
-                <h3 className="productname">Pharma Machines</h3>
+                <h3 className="productname">Hydraulic Power Pack</h3>
                 <p className="productdesc">
-                  Our pharma machines are tailored to meet the stringent
-                  standards of the pharmaceutical industry, ensuring safety and
-                  efficiency.
+                  Our hydraulic power packs are designed for optimal
+                  performance, offering reliability and efficiency in various
+                  industrial applications.
                 </p>
               </div>
             </div>
           </div>
-            <div className="showmore">
-              <button className="showbutton">
-                Show More ..
+          <div className="showmore">
+            <Link to="/products">
+              <button className="button-80" role="button">
+                Show more...
               </button>
-
-            </div>
+            </Link>
+          </div>
+        </div>
+        <div className="clients">
+          <h1 className="heading1">Our Client's</h1>
+          <hr />
         </div>
       </div>
     </>

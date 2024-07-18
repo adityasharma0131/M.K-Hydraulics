@@ -7,6 +7,7 @@ import Gallery from "./pages/Gallery";
 import Aboutus from "./pages/Aboutus";
 import Contactus from "./pages/Contactus";
 import AdminLogin from "./pages/AdminLogin";
+import Error from './pages/Error'
 const App = () => {
   return (
     <>
@@ -20,6 +21,7 @@ const App = () => {
           <Route exact path="/contact-us" element={<Contactus />} />
           <Route exact path="/products/id:" element={<Contactus />} />
           <Route exact path="/admin-login" element={<AdminLogin />} />
+          <Route exact path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>
     </>
