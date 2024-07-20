@@ -88,7 +88,7 @@ const Home = () => {
             <div className="logos">
               <div className="logos-slide">
                 {clientImages.concat(clientImages).map((image, index) => (
-                  <img key={index} src={image} alt={`Client ${index + 1}`} />
+                  <img key={index} src={image} className="item" alt={`Client ${index + 1}`} />
                 ))}
               </div>
             </div>
