@@ -4,6 +4,9 @@ import logo from "../assets/WhatsApp_Image_2024-07-10_at_8.22.02_PM-removebg-pre
 import p1 from "../assets/image 1.png";
 import p2 from "../assets/image 5.png";
 import { GoArrowUpRight } from "react-icons/go";
+import { IoIosMail } from "react-icons/io";
+
+import { TbPhoneCall } from "react-icons/tb";
 
 // Importing client images
 import client1 from "../assets/image 10.png";
@@ -44,10 +47,27 @@ const Home = () => {
           <h1 className="heading1">We Are,</h1>
           <h1 className="heading2">M.K Hydraulics</h1>
           <p className="para">
-            M.K Hydraulics is a leading manufacturer renowned for its expertise in delivering high-quality hydraulic solutions. With a diverse product portfolio that includes hydraulic power packs, hydraulic cylinders, pharma machines, marine hydraulic power pack units, and lubrication systems, we cater to a broad range of industrial applications. Our specialized offerings extend to steel mill hydraulic units and hydraulic bag lifting devices for centrifuges, reflecting our commitment to innovation and meeting the unique demands of each sector.
+            M.K Hydraulics is a leading manufacturer renowned for its expertise
+            in delivering high-quality hydraulic solutions. With a diverse
+            product portfolio that includes hydraulic power packs, hydraulic
+            cylinders, pharma machines, marine hydraulic power pack units, and
+            lubrication systems, we cater to a broad range of industrial
+            applications. Our specialized offerings extend to steel mill
+            hydraulic units and hydraulic bag lifting devices for centrifuges,
+            reflecting our commitment to innovation and meeting the unique
+            demands of each sector.
             <br />
             <br />
-            Quality is at the heart of everything we do at M.K Hydraulics. Our team of seasoned professionals ensures that every product is meticulously engineered to meet the highest standards of performance, reliability, and durability. We utilize cutting-edge technology and adhere to industry best practices to design and manufacture solutions that not only enhance operational efficiency but also stand the test of time. Our rigorous quality control processes ensure that every product leaving our facility is of the utmost quality, providing our customers with the confidence and peace of mind they deserve.
+            Quality is at the heart of everything we do at M.K Hydraulics. Our
+            team of seasoned professionals ensures that every product is
+            meticulously engineered to meet the highest standards of
+            performance, reliability, and durability. We utilize cutting-edge
+            technology and adhere to industry best practices to design and
+            manufacture solutions that not only enhance operational efficiency
+            but also stand the test of time. Our rigorous quality control
+            processes ensure that every product leaving our facility is of the
+            utmost quality, providing our customers with the confidence and
+            peace of mind they deserve.
           </p>
         </div>
 
@@ -57,7 +77,11 @@ const Home = () => {
           <div className="productcard">
             {[p1, p1, p1].map((product, index) => (
               <div className="card" key={index}>
-                <img className="productimg" src={product} alt={`Product ${index + 1}`} />
+                <img
+                  className="productimg"
+                  src={product}
+                  alt={`Product ${index + 1}`}
+                />
                 <div className="arrowlink">
                   <Link to={`/products/id:${index + 1}`}>
                     <GoArrowUpRight className="GoArrowUpRight" />
@@ -66,7 +90,9 @@ const Home = () => {
                 <div className="info">
                   <h3 className="productname">Hydraulic Power Pack</h3>
                   <p className="productdesc">
-                    Our hydraulic power packs are designed for optimal performance, offering reliability and efficiency in various industrial applications.
+                    Our hydraulic power packs are designed for optimal
+                    performance, offering reliability and efficiency in various
+                    industrial applications.
                   </p>
                 </div>
               </div>
@@ -88,10 +114,32 @@ const Home = () => {
             <div className="logos">
               <div className="logos-slide">
                 {clientImages.concat(clientImages).map((image, index) => (
-                  <img key={index} src={image} className="item" alt={`Client ${index + 1}`} />
+                  <img
+                    key={index}
+                    src={image}
+                    className="item"
+                    alt={`Client ${index + 1}`}
+                  />
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+
+        <div className="contactbox">
+          <div className="contact-item">
+            <div className="icon">
+              <TbPhoneCall />
+            </div>
+            <h2 className="contacthead">Call Us</h2>
+            <h3 className="contactdesc">+91 8530532698 | +91 9272927739</h3>
+          </div>
+          <div className="contact-item">
+            <div className="icon">
+              <IoIosMail />
+            </div>
+            <h2 className="contacthead">Email Us</h2>
+            <h3 className="contactdesc">contact@example.com</h3>
           </div>
         </div>
       </div>
