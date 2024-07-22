@@ -101,7 +101,7 @@ header nav ul li a.active {
   /* background-color: black; */
   display: flex;
   align-items: center;
-  background-image: url(../src/assets/image\ 25.png);
+  background-image: url("../src/assets/image\ 25.png");
   justify-content: center;
   background-position: center;
   background-repeat: no-repeat;
@@ -111,13 +111,22 @@ header nav ul li a.active {
 
 @keyframes change {
   0% {
-    background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (16) 1.png");
+    background-color: black;
   }
   20% {
     background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (14) 1.png");
   }
   40% {
     background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (15) 1.png");
+  }
+  60% {
+    background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (16) 1.png");
+  }
+  80% {
+    background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (16) 1.png");
+  }
+  100% {
+    background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (14) 1.png");
   }
 }
 
