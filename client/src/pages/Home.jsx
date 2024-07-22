@@ -5,7 +5,10 @@ import p1 from "../assets/image 1.png";
 import p2 from "../assets/image 5.png";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoIosMail } from "react-icons/io";
-
+import bg1 from "../assets/image 25.png"
+import bg2 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (14) 1.png"
+import bg3 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (15) 1.png"
+import bg4 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (16) 1.png"
 import { TbPhoneCall } from "react-icons/tb";
 
 // Importing client images

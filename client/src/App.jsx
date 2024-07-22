@@ -8,6 +8,7 @@ import Aboutus from "./pages/Aboutus";
 import Contactus from "./pages/Contactus";
 import AdminLogin from "./pages/AdminLogin";
 import Error from './pages/Error'
+import Footer from "./components/Footer";
 const App = () => {
   return (
     <>
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path="/admin-login" element={<AdminLogin />} />
           <Route exact path="/*" element={<Error />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   );
