@@ -1,18 +1,21 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "../src/components/Header";
+import Header from "./components/Header";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Gallery from "./pages/Gallery";
 import Aboutus from "./pages/Aboutus";
 import Contactus from "./pages/Contactus";
 import AdminLogin from "./pages/AdminLogin";
-import Error from './pages/Error'
+import Error from "./pages/Error";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop"; // Import the ScrollToTop component
+
 const App = () => {
   return (
     <>
       <BrowserRouter>
+        <ScrollToTop /> {/* Add ScrollToTop here */}
         <Header />
         <Routes>
           <Route exact path="/" element={<Home />} />
