@@ -239,7 +239,7 @@ header nav ul li a.active {
 
 .productbox hr,
 .clients hr,
-.productpage hr {
+.hero-page hr {
   border: none;
   height: 1.5px;
   width: 90px;
@@ -531,7 +531,7 @@ header nav ul li a.active {
 
 /* Products Section starts here */
 
-.productpage {
+.hero-page {
   min-height: 45vh;
   background-size: cover;
   background-color: #0085ff;
@@ -661,7 +661,7 @@ header nav ul li a.active {
   .heading2 {
     font-size: 10vh;
   }
-  .productpage {
+  .hero-page {
     min-height: 55vh;
   }
 
@@ -683,7 +683,7 @@ header nav ul li a.active {
     .productname {
       font-size: 3.5vh;
     }
-    .productpage {
+    .hero-page {
       min-height: 45vh;
     }
 

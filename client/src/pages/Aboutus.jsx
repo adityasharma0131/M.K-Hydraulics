@@ -1,8 +1,8 @@
 import React from 'react'
-
+import HeroPage from '../components/HeroPage'
 const Aboutus = () => {
   return (
-    <div>Aboutus</div>
+    <HeroPage heading="About Us" />
   )
 }
 

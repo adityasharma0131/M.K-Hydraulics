@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import HeroPage from "../components/HeroPage";
 
 const Gallery = () => {
   return (
-    <div>Gallery</div>
-  )
-}
+    <>
+      <HeroPage heading="Gallery" />
+    </>
+  );
+};
 
-export default Gallery
+export default Gallery;

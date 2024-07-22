@@ -3,7 +3,7 @@ import { IoIosArrowForward } from "react-icons/io";
 import { GoArrowUpRight } from "react-icons/go";
 import { Link } from "react-router-dom";
 import p1 from "../assets/image 1.png";
-
+import HeroPage from '../components/HeroPage'
 const Products = () => {
   const products = [
     {
@@ -28,19 +28,7 @@ const Products = () => {
 
   return (
     <>
-      <div className="productpage">
-        <h1 className="page-header">Products</h1>
-        <hr />
-        <p className="breadcrumb">
-          <Link to="/" className="links1">
-            Home
-          </Link>
-          <IoIosArrowForward className="IoIosArrowForward" />
-          <Link to="/products" className="links2">
-            Products
-          </Link>
-        </p>
-      </div>
+      <HeroPage heading="Products" />
 
       <div className="our-products">
         <div className="productbgbox">
