@@ -92,6 +92,7 @@ header nav ul li a.active {
 .homepage,
 .weare,
 .our-products,
+.about-us,
 .products {
   min-height: 100vh;
   background-size: cover;
@@ -172,6 +173,7 @@ header nav ul li a.active {
 .bgbox,
 .productbox,
 .productbgbox,
+.aboutbgbox,
 .contactbox,
 .clients {
   position: relative;
@@ -190,6 +192,9 @@ header nav ul li a.active {
   border: 2px solid #0085ff;
 }
 .productbgbox {
+  color: #0085ff;
+}
+.aboutbgbox {
   color: #0085ff;
 }
 
@@ -573,22 +578,9 @@ header nav ul li a.active {
   color: #fff;
 }
 
-
-.gallery-container{
+.gallery-container {
   padding: 10px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* Media Queries */
 @media (max-width: 1200px) {
