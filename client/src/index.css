@@ -572,6 +572,24 @@ header nav ul li a.active {
   text-decoration: none;
   color: #fff;
 }
+
+
+.gallery-container{
+  padding: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Media Queries */
 @media (max-width: 1200px) {
   .hero-logo {
