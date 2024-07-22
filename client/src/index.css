@@ -10,6 +10,9 @@
   list-style: none;
   box-sizing: border-box;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 /* Scrollbar Styles */
 ::-webkit-scrollbar {
@@ -88,6 +91,7 @@ header nav ul li a.active {
 /* Section Styles */
 .homepage,
 .weare,
+.our-products,
 .products {
   min-height: 100vh;
   background-size: cover;
@@ -133,6 +137,9 @@ header nav ul li a.active {
 .weare {
   background-color: #ffffff;
 }
+.our-products {
+  background-color: #ffffff;
+}
 
 /* Hero Logo */
 .hero-logo {
@@ -164,6 +171,7 @@ header nav ul li a.active {
 /* Content Boxes */
 .bgbox,
 .productbox,
+.productbgbox,
 .contactbox,
 .clients {
   position: relative;
@@ -180,6 +188,9 @@ header nav ul li a.active {
 .bgbox {
   color: #0085ff;
   border: 2px solid #0085ff;
+}
+.productbgbox {
+  color: #0085ff;
 }
 
 .contactbox {
@@ -553,10 +564,9 @@ header nav ul li a.active {
 }
 
 .links1 {
-  text-decoration: none;
+  text-decoration: underline;
   color: #1e1e1e;
 }
-
 
 .links2 {
   text-decoration: none;
