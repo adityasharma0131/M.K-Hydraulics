@@ -63,7 +63,16 @@ const Contactus = () => {
             <h2>Get in touch</h2>
             <p>
               Shoot us a message if you have any questions, we’re here to help!
+              Shoot us a message if you have any questions, we’re here to help!
+              Shoot us a message if you have any questions, we’re here to help!
+              Shoot us a message if you have any questions, we’re here to help!
             </p>
+            <hr />
+            <div className="address">
+              <h2>Address</h2>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Aspernatur.
+            </div>
           </div>
         </div>
       </div>

@@ -12,9 +12,7 @@ const HeroPage = ({ heading }) => {
           Home
         </Link>
         <IoIosArrowForward className="IoIosArrowForward" />
-        <Link to="/products" className="links2">
-          {heading}
-        </Link>
+        <span className="links2">{heading}</span>
       </p>
     </div>
   );
