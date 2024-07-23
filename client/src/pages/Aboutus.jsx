@@ -1,8 +1,18 @@
 import React, { useState } from "react";
 import HeroPage from "../components/HeroPage";
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 const Aboutus = () => {
+  const progressData = [
+    { value: 66, title: "Title 1" },
+    { value: 75, title: "Title 2" },
+    { value: 80, title: "Title 3" },
+    { value: 90, title: "Title 4" },
+    { value: 100, title: "Title 5" }
+  ];
+
   return (
     <>
       <HeroPage heading="About Us" />
@@ -29,8 +39,20 @@ const Aboutus = () => {
             />
           </div>
 
-          <div className="about-page">
-            <p>Hellooo there</p>
+          <div className="about-page progress-section">
+            {progressData.map((item, index) => (
+              <div className="progress-container" key={index}>
+                <CircularProgressbar
+                  value={item.value}
+                  text={`${item.value}%`}
+                  styles={buildStyles({
+                    pathColor: "#0085ff",
+                    textColor: "#0085ff",
+                  })}
+                />
+                <p className="progress-title">{item.title}</p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -51,6 +73,8 @@ const Section = ({ number, title, content }) => {
         className="about-bgbox"
         onClick={toggleSection}
         style={{ cursor: "pointer" }}
+        role="button"
+        aria-expanded={isOpen}
       >
         <h1>
           <span>{number} -</span>
