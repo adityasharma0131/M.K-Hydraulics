@@ -676,6 +676,97 @@ header nav ul li a.active {
   justify-content: center;
 }
 
+.contact-us {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+  overflow: hidden;
+  padding: 2rem;
+}
+
+.contact-sec {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.contactbx1,
+.contactbx2 {
+  position: relative;
+  padding: 2rem;
+  margin: 2rem 1rem;
+  border-radius: 10px;
+  display: flex;
+  text-align: left;
+  flex-direction: column;
+  justify-content: center;
+  color: #0085ff;
+  border: 2px solid #0085ff;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contactbx1 h2,
+.contactbx2 h2 {
+  margin-bottom: 1rem;
+}
+
+.contactbx1 p,
+.contactbx2 p {
+  margin-bottom: 2rem;
+}
+
+.contactbx1 div {
+  margin-bottom: 1rem;
+}
+
+.contactbx1 input,
+.contactbx1 textarea {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #1e1e1e;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.contactbx1 textarea {
+  height: 100px;
+  resize: vertical;
+}
+
+.contactbx1 input:focus,
+.contactbx1 textarea:focus {
+  outline: none;
+  border-color: #0085ff;
+}
+
+.contact-button {
+  background-color: #0085ff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  margin-top: 1rem;
+}
+
+.contact-button:hover {
+  background-color: #0085ff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(0, 133, 255, 0.4);
+}
+
 /* Media Queries */
 @media (max-width: 1200px) {
   .hero-logo {
@@ -796,6 +887,15 @@ header nav ul li a.active {
 
   .about-bgbox-content {
     padding: 0.75rem;
+  }
+  .contact-sec {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .contactbx1,
+  .contactbx2 {
+    margin: 1rem 0;
   }
 
   @media (max-width: 480px) {
