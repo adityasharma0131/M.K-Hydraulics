@@ -1,10 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/WhatsApp_Image_2024-07-10_at_8.22.02_PM-removebg-preview 3.png";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink, Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrollingDown, setIsScrollingDown] = useState(false);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setIsScrollingDown(true);
+      } else {
+        setIsScrollingDown(false);
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -15,7 +35,7 @@ const Header = () => {
   };
 
   return (
-    <header>
+    <header className={isScrollingDown ? "hidden" : ""}>
       <div className="logo">
         <Link to="/">
           <img src={logo} alt="Logo" />
@@ -25,45 +45,45 @@ const Header = () => {
       <nav className={isMenuOpen ? "open" : ""}>
         <ul>
           <li>
-            <NavLink 
-              to="/" 
-              className={({ isActive }) => (isActive ? 'active' : '')}
+            <NavLink
+              to="/"
+              className={({ isActive }) => (isActive ? "active" : "")}
               onClick={closeMenu}
             >
               Home
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/products" 
-              className={({ isActive }) => (isActive ? 'active' : '')}
+            <NavLink
+              to="/products"
+              className={({ isActive }) => (isActive ? "active" : "")}
               onClick={closeMenu}
             >
               Products
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/gallery" 
-              className={({ isActive }) => (isActive ? 'active' : '')}
+            <NavLink
+              to="/gallery"
+              className={({ isActive }) => (isActive ? "active" : "")}
               onClick={closeMenu}
             >
               Gallery
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/about-us" 
-              className={({ isActive }) => (isActive ? 'active' : '')}
+            <NavLink
+              to="/about-us"
+              className={({ isActive }) => (isActive ? "active" : "")}
               onClick={closeMenu}
             >
               About us
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/contact-us" 
-              className={({ isActive }) => (isActive ? 'active' : '')}
+            <NavLink
+              to="/contact-us"
+              className={({ isActive }) => (isActive ? "active" : "")}
               onClick={closeMenu}
             >
               Contact us
