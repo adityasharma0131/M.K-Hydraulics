@@ -14,7 +14,7 @@ const Contactus = () => {
       <HeroPage heading="Contact Us" />
       <div className="contact-us">
         <div className="contact-sec">
-          <div className="contactbx1">
+          <div className="contact-box">
             <h2>We're here to help you</h2>
             <p>
               Shoot us a message if you have any questions, we’re here to help!
@@ -71,49 +71,39 @@ const Contactus = () => {
               </button>
             </form>
           </div>
-          <div className="contactbx2">
+          <div className="contact-box">
             <h2>Get in touch</h2>
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit
               eligendi dolores fugiat similique blanditiis numquam dignissimos
-              ad saepe consectetur veritatis repellendus at.
+              ad saepe consectetur veritatis repellendus.
             </p>
             <hr />
-            <div className="address">
+            <div className="contact-info">
               <h3>Address</h3>
-              <div className="FaLocationDot">
+              <div className="info-item">
                 <FaLocationDot />
                 <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                   Aspernatur.
                 </p>
               </div>
-            </div>
-            <hr />
-            <div className="phnoemail">
-              <div className="phno">
-                <h3>Contact</h3>
-                <div className="FaPhone">
-                  <FaPhone />
-
-                  <p>+91 8530532698 | +91 9272927739</p>
-                </div>
+              <h3>Contact</h3>
+              <div className="info-item">
+                <FaPhone />
+                <p>+91 8530532698 | +91 9272927739</p>
               </div>
-              <div className="emailid">
-                <div className="IoIosMail">
-                  <IoIosMail />
-                  <p>contact@example.com</p>
-                </div>
+              <div className="info-item">
+                <IoIosMail />
+                <p>contact@example.com</p>
               </div>
             </div>
             <hr />
             <div className="socials">
-              <div className="social-media">
-                <FaInstagram />
-                <FaFacebook />
-                <FaLinkedin />
-                <FaWhatsapp />
-              </div>
+              <FaInstagram />
+              <FaFacebook />
+              <FaLinkedin />
+              <FaWhatsapp />
             </div>
             <hr />
             <iframe
