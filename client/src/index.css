@@ -762,8 +762,7 @@ header nav ul li a.active {
 }
 
 .contact-button:hover {
-  background-color: #006bb3;
-  color: #fff;
+  color: #1e1e1e;
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
@@ -771,6 +770,7 @@ header nav ul li a.active {
 .phnoemail,
 .socials {
   margin-bottom: 1rem;
+  padding: 1rem;
 }
 
 .address h3,
@@ -788,7 +788,7 @@ header nav ul li a.active {
 
 .socials {
   display: flex;
-  justify-content: space-around;
+  
   align-items: center;
 }
 
@@ -802,6 +802,51 @@ header nav ul li a.active {
 .socials svg:hover {
   color: #006bb3;
 }
+
+.FaLocationDot svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.FaLocationDot {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+.FaPhone svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.FaPhone {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+.IoIosMail svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.IoIosMail {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+
+.social-media {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  gap: 2.6rem;
+}
+
+
+
+
+
 
 /* Media Queries */
 @media (max-width: 1200px) {

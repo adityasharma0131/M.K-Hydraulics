@@ -81,30 +81,39 @@ const Contactus = () => {
             <hr />
             <div className="address">
               <h3>Address</h3>
-              <FaLocationDot />
-              <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                Aspernatur.
-              </p>
+              <div className="FaLocationDot">
+                <FaLocationDot />
+                <p>
+                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                  Aspernatur.
+                </p>
+              </div>
             </div>
             <hr />
             <div className="phnoemail">
               <div className="phno">
                 <h3>Contact</h3>
-                <FaPhone />
-                <p>+91 8530532698 | +91 9272927739</p>
+                <div className="FaPhone">
+                  <FaPhone />
+
+                  <p>+91 8530532698 | +91 9272927739</p>
+                </div>
               </div>
               <div className="emailid">
-                <IoIosMail />
-                <p>contact@example.com</p>
+                <div className="IoIosMail">
+                  <IoIosMail />
+                  <p>contact@example.com</p>
+                </div>
               </div>
             </div>
             <hr />
             <div className="socials">
-              <FaInstagram />
-              <FaFacebook />
-              <FaLinkedin />
-              <FaWhatsapp />
+              <div className="social-media">
+                <FaInstagram />
+                <FaFacebook />
+                <FaLinkedin />
+                <FaWhatsapp />
+              </div>
             </div>
             <hr />
             <iframe
