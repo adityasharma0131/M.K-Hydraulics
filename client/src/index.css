@@ -561,7 +561,7 @@ header nav ul li .dropdown-toggle:hover {
 .logos-slide img {
   height: 130px;
   margin: 0 20px;
-  filter: grayscale(1);
+  /* filter: grayscale(1); */
 }
 
 .logos-slide {
@@ -572,9 +572,9 @@ header nav ul li .dropdown-toggle:hover {
 .logos-slide:hover {
   animation-play-state: paused;
 }
-.logos-slide .item:hover {
+/* .logos-slide .item:hover {
   filter: grayscale(0);
-}
+} */
 
 @keyframes scroll {
   0% {
