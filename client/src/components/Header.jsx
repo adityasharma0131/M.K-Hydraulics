@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import logo from "../assets/WhatsApp_Image_2024-07-10_at_8.22.02_PM-removebg-preview 3.png";
+import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink, Link } from "react-router-dom";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
 
   useEffect(() => {
@@ -34,6 +36,10 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   return (
     <header className={isScrollingDown ? "hidden" : ""}>
       <div className="logo">
@@ -41,7 +47,13 @@ const Header = () => {
           <img src={logo} alt="Logo" />
         </Link>
       </div>
-      <input type="checkbox" id="nav_check" hidden checked={isMenuOpen} readOnly />
+      <input
+        type="checkbox"
+        id="nav_check"
+        hidden
+        checked={isMenuOpen}
+        readOnly
+      />
       <nav className={isMenuOpen ? "open" : ""}>
         <ul>
           <li>
@@ -53,14 +65,29 @@ const Header = () => {
               Home
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/products"
-              className={({ isActive }) => (isActive ? "active" : "")}
-              onClick={closeMenu}
-            >
-              Products
-            </NavLink>
+          <li className="dropdown">
+            <div className="dropdown-toggle" onClick={toggleDropdown}>
+              Products {isDropdownOpen ? <IoIosArrowUp /> : <IoIosArrowDown />}
+            </div>
+            {isDropdownOpen && (
+              <ul className="dropdown-menu">
+                <li>
+                  <NavLink to="/products" onClick={closeMenu}>
+                    Category 1
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/products" onClick={closeMenu}>
+                    Category 2
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/products" onClick={closeMenu}>
+                    Category 3
+                  </NavLink>
+                </li>
+              </ul>
+            )}
           </li>
           <li>
             <NavLink
@@ -92,7 +119,11 @@ const Header = () => {
         </ul>
       </nav>
       <label htmlFor="nav_check" className="hamburger" onClick={toggleMenu}>
-        {isMenuOpen ? <FaTimes className="close-icon" /> : <FaBars className="hamburger-icon" />}
+        {isMenuOpen ? (
+          <FaTimes className="close-icon" />
+        ) : (
+          <FaBars className="hamburger-icon" />
+        )}
       </label>
     </header>
   );

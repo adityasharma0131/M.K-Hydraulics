@@ -29,7 +29,6 @@ html {
   border-radius: 1rem;
 }
 
-/* Header Styles */
 header {
   background: rgba(30, 30, 30, 0.47);
   border-radius: 0 0 10px 10px;
@@ -64,20 +63,55 @@ header .logo img {
 
 header nav ul {
   display: flex;
+  list-style: none;
 }
 
-header nav ul li a {
+header nav ul li {
+  position: relative;
+}
+
+header nav ul li a,
+header nav ul li .dropdown-toggle {
   display: inline-block;
   color: #0085ff;
   padding: 5px 0;
   margin: 0 10px;
   border: 3px solid transparent;
   transition: 0.2s;
+  cursor: pointer;
 }
 
 header nav ul li a:hover,
-header nav ul li a.active {
+header nav ul li a.active,
+header nav ul li .dropdown-toggle:hover {
   border-bottom-color: dodgerblue;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #1e1e1e;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  list-style: none;
+  padding: 1rem;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 1rem;
+  color: #333;
+  text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+  background: #1e1e1e;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
 }
 
 .hamburger {
@@ -89,16 +123,29 @@ header nav ul li a.active {
 
 .hamburger-icon,
 .close-icon {
-  display: none;
   font-size: 24px;
 }
 
-.hamburger-icon,
+.hamburger-icon {
+  display: inline-block;
+}
+
 .close-icon {
   display: none;
-  font-size: 24px;
 }
 
+.open .hamburger-icon {
+  display: none;
+}
+
+.open .close-icon {
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+}
 /* Section Styles */
 .homepage,
 .weare,
@@ -393,22 +440,114 @@ header nav ul li a.active {
 
 /* Animation Keyframes */
 
-@keyframes rotateIn {
-  from {
-    transform: rotate(-90deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
+header {
+  background: rgba(30, 30, 30, 0.47);
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(12.1px);
+  -webkit-backdrop-filter: blur(12.1px);
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 50px;
+  position: fixed;
+  top: 0;
+  z-index: 1000;
+  transition: top 0.3s;
 }
 
-@keyframes rotateOut {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(90deg);
-  }
+header.hidden {
+  top: -70px;
+}
+
+header .logo {
+  display: flex;
+  align-items: center;
+}
+
+header .logo img {
+  max-height: 50px;
+  width: auto;
+}
+
+header nav ul {
+  display: flex;
+  list-style: none;
+}
+
+header nav ul li {
+  position: relative;
+}
+
+header nav ul li a,
+header nav ul li .dropdown-toggle {
+  display: inline-block;
+  color: #0085ff;
+  padding: 5px 0;
+  margin: 0 10px;
+  border: 3px solid transparent;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+header nav ul li a:hover,
+header nav ul li a.active,
+header nav ul li .dropdown-toggle:hover {
+  border-bottom-color: dodgerblue;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  list-style: none;
+  padding: 10px 0;
+}
+
+.dropdown-menu li a {
+  display: block;
+  padding: 10px 20px;
+  color: #0085ff;
+  text-decoration: none;
+}
+
+.dropdown-menu li a:hover {
+  color:#fff;
+}
+
+.dropdown:hover .dropdown-menu {
+  display: block;
+}
+
+.hamburger {
+  color: #0085ff;
+  cursor: pointer;
+  display: none;
+  position: relative;
+}
+
+.hamburger-icon,
+.close-icon {
+  display: none;
+  font-size: 24px;
+}
+
+.hamburger-icon,
+.close-icon {
+  display: none;
+  font-size: 24px;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
 }
 
 /* Logo Slider */
@@ -788,7 +927,7 @@ header nav ul li a.active {
 
 .socials {
   display: flex;
-  
+
   align-items: center;
 }
 
@@ -835,18 +974,12 @@ header nav ul li a.active {
   justify-content: start;
 }
 
-
 .social-media {
   display: flex;
   align-items: start;
   justify-content: start;
   gap: 2.6rem;
 }
-
-
-
-
-
 
 /* Media Queries */
 @media (max-width: 1200px) {
@@ -977,6 +1110,18 @@ header nav ul li a.active {
   .contactbx1,
   .contactbx2 {
     margin: 1rem 0;
+  }
+
+  .dropdown-menu {
+    position: static;
+    width: 100%;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+    padding: 0;
+  }
+  .dropdown-menu li a {
+    padding: 10px 20px;
   }
 
   @media (max-width: 480px) {
