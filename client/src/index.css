@@ -146,6 +146,25 @@ header nav ul li .dropdown-toggle:hover {
   display: flex;
   align-items: center;
 }
+
+@keyframes rotateIn {
+  from {
+    transform: rotate(-90deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotateOut {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(90deg);
+  }
+}
+
 /* Section Styles */
 .homepage,
 .weare,
@@ -519,7 +538,7 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .dropdown-menu li a:hover {
-  color:#fff;
+  color: #fff;
 }
 
 .dropdown:hover .dropdown-menu {
