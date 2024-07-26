@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/WhatsApp_Image_2024-07-10_at_8.22.02_PM-removebg-preview 3.png";
+import backgroundImage from "../assets/image 25.png"
 import p1 from "../assets/image 1.png";
 import p2 from "../assets/image 5.png";
 import { GoArrowUpRight } from "react-icons/go";
@@ -43,6 +44,7 @@ const Home = () => {
     <>
       <div className="homepage">
         <img className="hero-logo" src={logo} alt="M.K Hydraulics Logo" />
+        <img className="homepage-img" src={backgroundImage} alt="Background" />
       </div>
 
       <div className="weare">
