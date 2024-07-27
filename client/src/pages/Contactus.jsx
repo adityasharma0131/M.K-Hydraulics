@@ -95,7 +95,6 @@ const Contactus = () => {
                 <h3>Contact</h3>
                 <div className="FaPhone">
                   <FaPhone />
-
                   <p>+91 8530532698 | +91 9272927739</p>
                 </div>
               </div>
