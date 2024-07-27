@@ -1132,7 +1132,7 @@ header nav ul li .dropdown-toggle:hover {
   }
   .contact-sec {
     align-items: center;
-    margin-right: 3rem;
+    justify-content: center;
   }
 
   .contactbx1,
