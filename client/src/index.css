@@ -1006,6 +1006,7 @@ header nav ul li .dropdown-toggle:hover {
   display: flex;
   align-items: start;
   justify-content: start;
+  flex-wrap: wrap;
   gap: 2.6rem;
 }
 
