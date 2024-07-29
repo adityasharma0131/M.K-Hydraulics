@@ -57,7 +57,7 @@ header .logo {
 }
 
 header .logo img {
-  max-height: 50px;
+  max-height: 76px;
   width: auto;
 }
 
@@ -236,8 +236,7 @@ header nav ul li .dropdown-toggle:hover {
 
 /* Hero Logo */
 .hero-logo {
-  margin-top: 50px;
-  width: 30%;
+  width: 50%;
   height: auto;
 }
 
@@ -495,10 +494,6 @@ header .logo {
   align-items: center;
 }
 
-header .logo img {
-  max-height: 50px;
-  width: auto;
-}
 
 header nav ul {
   display: flex;
@@ -589,20 +584,20 @@ header nav ul li .dropdown-toggle:hover {
 .logos-slide img {
   height: 130px;
   margin: 0 20px;
-  /* filter: grayscale(1); */
+  filter: grayscale(1);
 }
 
 .logos-slide {
   display: flex;
-  animation: scroll 15s linear infinite;
+  animation: scroll 25s linear infinite;
 }
 
 .logos-slide:hover {
   animation-play-state: paused;
 }
-/* .logos-slide .item:hover {
+.logos-slide .item:hover {
   filter: grayscale(0);
-} */
+}
 
 @keyframes scroll {
   0% {
@@ -1013,7 +1008,7 @@ header nav ul li .dropdown-toggle:hover {
 /* Media Queries */
 @media (max-width: 1200px) {
   .hero-logo {
-    width: 50%;
+    width: 55%;
   }
   .heading1 {
     font-size: 6vh;
@@ -1029,7 +1024,6 @@ header nav ul li .dropdown-toggle:hover {
   }
   .hero-logo {
     width: 70%;
-    margin-top: 70px;
   }
 }
 
@@ -1080,15 +1074,13 @@ header nav ul li .dropdown-toggle:hover {
     margin: 0;
   }
   .hero-logo {
-    width: 80%;
-    margin-top: 50px;
+    width: 100%;
   }
 }
 
 @media (max-width: 500px) {
   .hero-logo {
-    width: 90%;
-    margin-top: 30px;
+    width: 40rem;
   }
 }
 
