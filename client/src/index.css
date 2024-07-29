@@ -256,8 +256,8 @@ header nav ul li .dropdown-toggle:hover {
   justify-content: center;
 }
 .footer-logo {
-  width: 15rem;
-  height: 15rem;
+  width: 20rem;
+  height: 20rem;
 }
 
 /* Content Boxes */
@@ -323,6 +323,22 @@ header nav ul li .dropdown-toggle:hover {
   position: relative;
   padding: 1rem;
   margin: 2rem 1rem 2.5rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.loginbgbox {
+  color: #0085ff;
+  border: 2px solid #1e1e1e;
+
+  position: relative;
+  padding: 1rem;
+  margin: 5rem 1rem 2.5rem 1rem;
   border-radius: 10px;
   text-align: center;
   display: flex;
