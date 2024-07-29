@@ -1,15 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/WhatsApp_Image_2024-07-10_at_8.22.02_PM-removebg-preview 3.png";
-import backgroundImage from "../assets/image 25.png"
+import logo from "../assets/Black_and_Blue_Airplane_Travel_Logo-removebg-preview.png";
+import backgroundImage from "../assets/image 25.png";
 import p1 from "../assets/image 1.png";
 import p2 from "../assets/image 5.png";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoIosMail } from "react-icons/io";
-import bg1 from "../assets/image 25.png"
-import bg2 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (14) 1.png"
-import bg3 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (15) 1.png"
-import bg4 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (16) 1.png"
+import bg1 from "../assets/image 25.png";
+import bg2 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (14) 1.png";
+import bg3 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (15) 1.png";
+import bg4 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (16) 1.png";
 import { TbPhoneCall } from "react-icons/tb";
 
 // Importing client images
@@ -24,6 +24,19 @@ import client9 from "../assets/WhatsApp Image 2024-07-14 at 1.19.36 PM (2).png";
 import client10 from "../assets/WhatsApp Image 2024-07-14 at 1.19.36 PM.png";
 import client11 from "../assets/WhatsApp Image 2024-07-14 at 1.19.37 PM (1).png";
 import client12 from "../assets/WhatsApp Image 2024-07-14 at 1.19.37 PM (2).png";
+import client13 from "../assets/WhatsApp Image 2024-07-14 at 1.19.37 PM.png";
+import client14 from "../assets/WhatsApp Image 2024-07-29 at 9.09.31 AM.jpeg";
+import client15 from "../assets/WhatsApp Image 2024-07-29 at 9.09.34 AM.jpeg";
+import client16 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (1).jpeg";
+import client17 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (2).jpeg";
+import client18 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (3).jpeg";
+import client19 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM.jpeg";
+import client20 from "../assets/WhatsApp Image 2024-07-29 at 9.09.36 AM (3).jpeg";
+import client21 from "../assets/WhatsApp Image 2024-07-29 at 9.09.36 AM.jpeg";
+import client22 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM (2).jpeg";
+import client23 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM (3).jpeg";
+import client24 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM.jpeg";
+import client25 from "../assets/WhatsApp Image 2024-07-29 at 9.09.38 AM.jpeg";
 
 const Home = () => {
   const clientImages = [
@@ -38,6 +51,19 @@ const Home = () => {
     client10,
     client11,
     client12,
+    client13,
+    client14,
+    client15,
+    client16,
+    client17,
+    client18,
+    client19,
+    client20,
+    client21,
+    client22,
+    client23,
+    client24,
+    client25,
   ];
 
   return (
@@ -113,7 +139,7 @@ const Home = () => {
         </div>
 
         <div className="clients">
-          <h1 className="heading1">Our Clients</h1>
+          <h1 className="heading1">Our Brand</h1>
           <hr />
           <div className="slider">
             <div className="logos">

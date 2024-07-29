@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../assets/WhatsApp_Image_2024-07-10_at_8.22.02_PM-removebg-preview 3.png";
+import logo from "../assets/Black_and_Blue_Airplane_Travel_Logo-removebg-preview.png";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
