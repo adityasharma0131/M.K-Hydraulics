@@ -265,7 +265,6 @@ header nav ul li .dropdown-toggle:hover {
 .productbox,
 .productbgbox,
 .aboutbgbox,
-.contactbox,
 .clients {
   position: relative;
   padding: 1rem;
@@ -277,6 +276,22 @@ header nav ul li .dropdown-toggle:hover {
   align-items: center;
   justify-content: center;
 }
+
+
+.contactbox
+{
+  position: relative;
+  padding: 1rem;
+  margin: 0 1rem .5rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
 
 .bgbox {
   color: #0085ff;
@@ -295,8 +310,8 @@ header nav ul li .dropdown-toggle:hover {
   flex-wrap: wrap;
   gap: 2rem;
   background-color: #0085ff;
-  padding: 2rem;
-  border-radius: 10px;
+  padding: 1rem;
+  border-radius: 50px;
   color: #ffffff;
   text-align: center;
   justify-content: center;
@@ -610,12 +625,15 @@ header nav ul li .dropdown-toggle:hover {
 
 .contact-item {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  text-align: center;
+  gap: 2rem;
+  text-align: left;
+
   background-color: rgba(255, 255, 255, 0.1);
   padding: 1rem;
-  border-radius: 10px;
+  border-radius: 50px;
   min-width: 200px;
   flex: 1;
 }
@@ -629,7 +647,6 @@ header nav ul li .dropdown-toggle:hover {
   background-color: #ffffff;
   color: #0085ff;
   font-size: 2rem;
-  margin-bottom: 1rem;
 }
 
 .contacthead {
