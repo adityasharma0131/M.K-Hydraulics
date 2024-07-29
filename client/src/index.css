@@ -277,12 +277,10 @@ header nav ul li .dropdown-toggle:hover {
   justify-content: center;
 }
 
-
-.contactbox
-{
+.contactbox {
   position: relative;
   padding: 1rem;
-  margin: 0 1rem .5rem 1rem;
+  margin: 0 1rem 0.5rem 1rem;
   border-radius: 10px;
   text-align: center;
   display: flex;
@@ -290,8 +288,6 @@ header nav ul li .dropdown-toggle:hover {
   align-items: center;
   justify-content: center;
 }
-
-
 
 .bgbox {
   color: #0085ff;
@@ -331,22 +327,6 @@ header nav ul li .dropdown-toggle:hover {
   justify-content: center;
 }
 
-
-.loginbgbox {
-  color: #0085ff;
-  border: 2px solid #1e1e1e;
-
-  position: relative;
-  padding: 1rem;
-  margin: 5rem 1rem 2.5rem 1rem;
-  border-radius: 10px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .clients {
   color: #0085ff;
 }
@@ -366,7 +346,8 @@ header nav ul li .dropdown-toggle:hover {
 
 .productbox hr,
 .clients hr,
-.hero-page hr {
+.hero-page hr,
+.login-bg-box hr {
   border: none;
   height: 1.5px;
   width: 90px;
@@ -375,6 +356,9 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .productbox hr {
+  background-color: #ffffff;
+}
+.login-bg-box hr {
   background-color: #ffffff;
 }
 
@@ -524,7 +508,6 @@ header .logo {
   display: flex;
   align-items: center;
 }
-
 
 header nav ul {
   display: flex;
@@ -1036,6 +1019,75 @@ header nav ul li .dropdown-toggle:hover {
   justify-content: start;
   flex-wrap: wrap;
   gap: 2.6rem;
+}
+.login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+.login-bg-box {
+  color: #0085ff;
+  border: 2px solid #1e1e1e;
+  background-color: #1e1e1e;
+  position: relative;
+  padding: 2rem 2rem 6rem 2rem;
+  margin: 7rem 1rem 10rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-box {
+  display: flex;
+  align-items: start;
+  justify-content: left;
+  text-align: left;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-box-label {
+  padding-bottom: 1rem;
+  font-size: 1.6rem;
+  color: #0085ff;
+}
+
+.form-box-input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  background-color: #1e1e1e;
+  color: #0085ff;
+  border: 1px solid #777777;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.form-box-input:focus {
+  border-color: #0085ff;
+  outline: none;
+}
+
+.form-box-button {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #0085ff;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.form-box-button:hover {
+  color: #1e1e1e;
 }
 
 /* Media Queries */
