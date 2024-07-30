@@ -10,24 +10,96 @@ import AdminLogin from "./pages/AdminLogin";
 import Error from "./pages/Error";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop"; // Import the ScrollToTop component
+import Dashboard from "./pages/Dashboard";
+import Sidebar from "./components/Sidebar";
+
+// Wrapper component to include Header and Footer
+const ClientWrapper = ({ children }) => (
+  <>
+    <Header />
+    {children}
+    <Footer />
+  </>
+);
+const AdminWrapper = ({ children }) => (
+  <>
+    <Sidebar />
+    {children}
+  </>
+);
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
         <ScrollToTop /> {/* Add ScrollToTop here */}
-        <Header />
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/products" element={<Products />} />
-          <Route exact path="/gallery" element={<Gallery />} />
-          <Route exact path="/about-us" element={<Aboutus />} />
-          <Route exact path="/contact-us" element={<Contactus />} />
-          <Route exact path="/products/id:" element={<Contactus />} />
+          <Route
+            exact
+            path="/"
+            element={
+              <ClientWrapper>
+                <Home />
+              </ClientWrapper>
+            }
+          />
+          <Route
+            exact
+            path="/products"
+            element={
+              <ClientWrapper>
+                <Products />
+              </ClientWrapper>
+            }
+          />
+          <Route
+            exact
+            path="/gallery"
+            element={
+              <ClientWrapper>
+                <Gallery />
+              </ClientWrapper>
+            }
+          />
+          <Route
+            exact
+            path="/about-us"
+            element={
+              <ClientWrapper>
+                <Aboutus />
+              </ClientWrapper>
+            }
+          />
+          <Route
+            exact
+            path="/contact-us"
+            element={
+              <ClientWrapper>
+                <Contactus />
+              </ClientWrapper>
+            }
+          />
+          <Route
+            exact
+            path="/products/id:"
+            element={
+              <ClientWrapper>
+                <Contactus />
+              </ClientWrapper>
+            }
+          />
           <Route exact path="/admin-login" element={<AdminLogin />} />
+          <Route
+            exact
+            path="/dashboard"
+            element={
+              <AdminWrapper>
+                <Dashboard />
+              </AdminWrapper>
+            }
+          />
           <Route exact path="/*" element={<Error />} />
         </Routes>
-        <Footer />
       </BrowserRouter>
     </>
   );
