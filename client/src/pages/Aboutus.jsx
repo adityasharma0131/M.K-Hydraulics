@@ -6,11 +6,11 @@ import "react-circular-progressbar/dist/styles.css";
 
 const Aboutus = () => {
   const progressData = [
-    { value: 66, title: "Title 1" },
-    { value: 75, title: "Title 2" },
-    { value: 80, title: "Title 3" },
-    { value: 90, title: "Title 4" },
-    { value: 100, title: "Title 5" },
+    { value: 66, title: "Product Range Expansion" },
+    { value: 75, title: "Customer Satisfaction" },
+    { value: 80, title: "Innovation in Design" },
+    { value: 90, title: "Environmental Compliance" },
+    { value: 100, title: "Quality Assurance" },
   ];
 
   return (
