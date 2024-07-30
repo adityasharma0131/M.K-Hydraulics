@@ -22,6 +22,7 @@ const Footer = () => {
           <div className="footer-content">
             <div className="footer-section">
               <h4 className="footer-head">Quick Links</h4>
+              <hr />
               <ul>
                 <li>
                   <IoIosArrowForward />
@@ -49,6 +50,7 @@ const Footer = () => {
             </div>
             <div className="footer-section">
               <h4 className="footer-head">Categories</h4>
+              <hr />
               <ul>
                 <li>
                   <IoIosArrowForward />
@@ -76,6 +78,7 @@ const Footer = () => {
             </div>
             <div className="footer-section">
               <h4 className="footer-head">Categories</h4>
+              <hr />
               <ul>
                 <li>
                   <IoIosArrowForward />
@@ -103,6 +106,7 @@ const Footer = () => {
             </div>
             <div className="footer-section">
               <h4 className="footer-head">Categories</h4>
+              <hr />
               <ul>
                 <li>
                   <IoIosArrowForward />
@@ -135,6 +139,7 @@ const Footer = () => {
           <div className="footer-soc">
             <div className="footer-sec">
               <h4 className="footer-head">Quick Links</h4>
+              <hr />
               <ul>
                 <li>
                   <TbPhoneCall />

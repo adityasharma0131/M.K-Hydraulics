@@ -703,13 +703,39 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .footer-desc {
-  color: #0085ff;
+  color: #b1b1b1;
   margin: 5px;
+  font-weight: 1px;
   font-size: 1.1rem;
 }
 
 .footer-desc:hover {
-  color: #fff;
+  color: #0085ff;
+}
+
+.footer-section ul li svg {
+  color: #0085ff;
+}
+
+.footer-sec ul li svg {
+  color: #0085ff;
+}
+.footer-sec hr {
+  padding-left: 2rem;
+  border: none;
+  height: 1px;
+  width: 250px;
+  background-color: #0085ff;
+  margin: 10px 0;
+}
+
+.footer-section hr {
+  padding-left: 2rem;
+  border: none;
+  height: 1px;
+  width: 90px;
+  background-color: #0085ff;
+  margin: 10px 0;
 }
 
 .sociallll {
