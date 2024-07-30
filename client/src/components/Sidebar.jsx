@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import logo from "../assets/footer-logo.png";
 import {
   BiChevronRight,
   BiGridAlt,
@@ -30,13 +31,9 @@ const Sidebar = () => {
       <nav className="sidebar__nav">
         <div>
           <a href="#" className="sidebar__logo">
-            <img
-              src="assets/icons/logo.svg"
-              alt="Logo"
-              className="sidebar__logo-icon"
-            />
+            <img src={logo} alt="Logo" className="sidebar__logo-icon" />
             {isExpanded && (
-              <span className="sidebar__logo-text">Bedimcode</span>
+              <span className="sidebar__logo-text">M.K Hydraulics</span>
             )}
           </a>
 

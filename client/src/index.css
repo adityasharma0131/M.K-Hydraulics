@@ -1271,13 +1271,15 @@ header nav ul li .dropdown-toggle:hover {
   }
 }
 
+/* ================SIDEBAR SECTION================ */
+
 .sidebar {
   position: fixed;
   top: 0;
   left: 0;
   width: 56px;
   height: 100vh;
-  background-color: #12192c;
+  background-color: #1e1e1e;
   padding: 1.25rem 0.5rem 2rem;
   transition: width 0.3s;
   z-index: 100;
@@ -1303,7 +1305,9 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .sidebar__logo-icon {
-  margin-right: 1.2rem;
+  padding-right: 1rem;
+  max-height: 3.4rem;
+  max-width: 3rem;
 }
 
 .sidebar__logo-text {
@@ -1317,7 +1321,7 @@ header nav ul li .dropdown-toggle:hover {
   right: -0.6rem;
   width: 18px;
   height: 18px;
-  background-color: #f5a623;
+  background-color: #0085ff;
   border-radius: 50%;
   font-size: 1.25rem;
   color: #12192c;
@@ -1348,13 +1352,13 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .sidebar__link:hover {
-  background-color: #f5a623;
+  background-color: #0085ff;
   color: #12192c;
 }
 
 .sidebar__icon {
   font-size: 1.5rem;
-  margin-right: .2rem;
+  margin-right: 0.2rem;
 }
 
 .sidebar__text {
@@ -1362,7 +1366,7 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .sidebar__link--active {
-  background-color: #f5a623;
+  background-color: #0085ff;
   color: #12192c;
 }
 
