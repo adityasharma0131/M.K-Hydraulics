@@ -194,7 +194,7 @@ header nav ul li .dropdown-toggle:hover {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  animation: change 10s infinite ease-in-out;
+  animation: change 20s infinite ease-in-out;
 }
 
 .homepage-img {
