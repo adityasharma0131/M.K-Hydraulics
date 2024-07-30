@@ -1400,3 +1400,33 @@ body.expander {
   padding: 1rem 0 0 12rem;
   transition: padding 0.3s;
 }
+
+.dashboard-name,
+.dashboard-number {
+  position: relative;
+  padding: 1rem;
+  margin: 1rem 1rem 2.5rem 4rem;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-content: start;
+  justify-content: center;
+}
+
+.dashboard-name {
+  color: #0085ff;
+}
+.dashboard-number {
+  background-color: #1e1e1e;
+  border: 2px solid #1e1e1e;
+  color: #0085ff;
+}
+
+.progressive-bar {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

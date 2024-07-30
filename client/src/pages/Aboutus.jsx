@@ -10,7 +10,7 @@ const Aboutus = () => {
     { value: 75, title: "Title 2" },
     { value: 80, title: "Title 3" },
     { value: 90, title: "Title 4" },
-    { value: 100, title: "Title 5" }
+    { value: 100, title: "Title 5" },
   ];
 
   return (
@@ -25,17 +25,17 @@ const Aboutus = () => {
             <Section
               number="01"
               title="Who are we"
-              content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt magnam in dolores culpa, assumenda, dolorem minus nam blanditiis qui voluptas enim nemo quam? Temporibus non quis, optio aspernatur magnam ullam."
+              content="M.K Hydraulics, established in 2006, is a leading manufacturer of specialized hydraulic systems. With over 18 years of experience, our founder K. Mushtaq has guided the company in delivering high-quality products including hydraulic power packs, cylinders, and customized solutions for various industries like pharmaceuticals, marine, and steel mills."
             />
             <Section
               number="02"
               title="Vision"
-              content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt magnam in dolores culpa, assumenda, dolorem minus nam blanditiis qui voluptas enim nemo quam? Temporibus non quis, optio aspernatur magnam ullam."
+              content="Our vision is to be a global leader in hydraulic solutions, providing innovative and reliable products that meet the evolving needs of our clients. We strive to set industry standards in quality, customer satisfaction, and environmental responsibility."
             />
             <Section
               number="03"
               title="Mission"
-              content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt magnam in dolores culpa, assumenda, dolorem minus nam blanditiis qui voluptas enim nemo quam? Temporibus non quis, optio aspernatur magnam ullam."
+              content="M.K Hydraulics is committed to engineering excellence and customer service. Our mission is to deliver advanced hydraulic systems that enhance operational efficiency and safety, while fostering sustainable practices. We aim to build lasting partnerships with our clients through quality products and dedicated support."
             />
           </div>
 
