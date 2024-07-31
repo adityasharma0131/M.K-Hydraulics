@@ -1,15 +1,12 @@
 import React, { useState } from "react";
 import logo from "../assets/footer-logo.png";
-import {
-  BiChevronRight,
-  BiGridAlt,
-  BiUser,
-  BiBell,
-  BiHeart,
-  BiBookmark,
-  BiMessageRounded,
-  BiLogOutCircle,
-} from "react-icons/bi";
+import { AiFillProduct } from "react-icons/ai";
+import { RiGalleryFill } from "react-icons/ri";
+import { LuLayoutDashboard } from "react-icons/lu";
+import { FiUsers } from "react-icons/fi";
+import { RiContactsLine } from "react-icons/ri";
+import { IoShareSocialOutline } from "react-icons/io5";
+import { BiChevronRight, BiLogOutCircle } from "react-icons/bi";
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -47,20 +44,29 @@ const Sidebar = () => {
 
           <ul className="sidebar__list">
             {[
-              { name: "Home", icon: <BiGridAlt className="sidebar__icon" /> },
-              { name: "User", icon: <BiUser className="sidebar__icon" /> },
               {
-                name: "Notification",
-                icon: <BiBell className="sidebar__icon" />,
+                name: "Dashboard",
+                icon: <LuLayoutDashboard className="sidebar__icon" />,
               },
               {
-                name: "Favorites",
-                icon: <BiHeart className="sidebar__icon" />,
+                name: "Products",
+                icon: <AiFillProduct className="sidebar__icon" />,
               },
-              { name: "Saved", icon: <BiBookmark className="sidebar__icon" /> },
               {
-                name: "Chat",
-                icon: <BiMessageRounded className="sidebar__icon" />,
+                name: "Galllery",
+                icon: <RiGalleryFill className="sidebar__icon" />,
+              },
+              {
+                name: "Users",
+                icon: <FiUsers className="sidebar__icon" />,
+              },
+              {
+                name: "Contact Us",
+                icon: <RiContactsLine className="sidebar__icon" />,
+              },
+              {
+                name: "Socials",
+                icon: <IoShareSocialOutline className="sidebar__icon" />,
               },
             ].map((link) => (
               <li key={link.name}>
@@ -82,7 +88,7 @@ const Sidebar = () => {
         </div>
         <a href="#" className="sidebar__link">
           <BiLogOutCircle className="sidebar__icon" />
-          {isExpanded && <span className="sidebar__text">Close</span>}
+          {isExpanded && <span className="sidebar__text">Logout</span>}
         </a>
       </nav>
     </div>

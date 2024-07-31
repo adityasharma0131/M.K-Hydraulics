@@ -1303,14 +1303,17 @@ header nav ul li .dropdown-toggle:hover {
   left: 0;
   width: 56px;
   height: 100vh;
-  background-color: #1e1e1e;
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  background-color: rgba(17, 25, 40, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.125);
   padding: 1.25rem 0.5rem 2rem;
   transition: width 0.3s;
   z-index: 100;
 }
 
 .sidebar--expanded {
-  width: 168px;
+  width: 200px;
 }
 
 .sidebar__nav {
@@ -1394,18 +1397,14 @@ header nav ul li .dropdown-toggle:hover {
   color: #12192c;
 }
 
-body.expander {
-  padding: 1rem 0 0 12rem;
-  transition: padding 0.3s;
-}
-
 .dashboard-name,
 .dashboard-number,
 .recent-queries,
+.product-listing,
 .admin-users {
   position: relative;
   padding: 1rem;
-  margin: 1rem 1rem 2.5rem 4rem;
+  margin: 1rem 1rem 1rem 4rem;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -1422,7 +1421,9 @@ body.expander {
   color: #0085ff;
 }
 .recent-queries,
+.product-listing,
 .admin-users {
+  overflow-x: auto;
   background-color: #1e1e1e;
   border: 2px solid #1e1e1e;
   color: #0085ff;
@@ -1439,9 +1440,52 @@ body.expander {
 
 .tables-area {
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
-.recent-queries {
+.heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.modern-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.modern-table th,
+.modern-table td {
+  padding: 12px 15px;
+  text-align: left;
+}
+
+.modern-table th {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+.modern-table tbody tr:hover {
+  background-color: #383838;
+}
+
+.product-image {
+  width: 100px;
+  height: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-image {
+    width: 80px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-image {
+    width: 60px;
+  }
 }
