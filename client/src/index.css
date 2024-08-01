@@ -1477,6 +1477,35 @@ header nav ul li .dropdown-toggle:hover {
   height: auto;
 }
 
+.operation-header {
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.add {
+  background-color: #0085ff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.add:hover {
+  color: #1e1e1e;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .product-image {

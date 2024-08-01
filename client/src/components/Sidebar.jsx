@@ -26,6 +26,11 @@ const Sidebar = () => {
     setIsExpanded(!isExpanded);
   };
 
+  const handleLinkClick = (linkName) => {
+    setActiveLink(linkName);
+    setIsExpanded(false); // Close the sidebar when a link is clicked
+  };
+
   const links = [
     { name: "Dashboard", icon: <LuLayoutDashboard className="sidebar__icon" />, link: "/dashboard" },
     { name: "Products", icon: <AiFillProduct className="sidebar__icon" />, link: "/product-operation" },
@@ -60,7 +65,7 @@ const Sidebar = () => {
                 <Link
                   to={link.link}
                   className={`sidebar__link ${activeLink === link.name ? "sidebar__link--active" : ""}`}
-                  onClick={() => setActiveLink(link.name)}
+                  onClick={() => handleLinkClick(link.name)}
                   aria-current={activeLink === link.name ? "page" : undefined}
                 >
                   {link.icon}

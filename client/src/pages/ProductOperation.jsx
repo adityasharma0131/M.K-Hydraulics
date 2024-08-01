@@ -1,9 +1,123 @@
-import React from 'react'
+import React from "react";
+import { MdEditNote } from "react-icons/md";
+import { AiFillDelete } from "react-icons/ai";
 
 const ProductOperation = () => {
-  return (
-    <div>ProductOperation</div>
-  )
-}
+  const Categories = [
+    {
+      name: "Category 1",
+    },
+    {
+      name: "Category 2",
+    },
+    {
+      name: "Category 3",
+    },
+  ];
 
-export default ProductOperation
+  const adminUsers = [
+    { id: 1, name: "John Doe", email: "john.doe@example.com" },
+    { id: 2, name: "Jane Smith", email: "jane.smith@example.com" },
+    { id: 3, name: "Michael Brown", email: "michael.brown@example.com" },
+  ];
+  const productList = [
+    {
+      id: 1,
+      name: "Product A",
+      category: "Category 1",
+      image: "https://picsum.photos/seed/picsum/500/500",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
+    },
+    {
+      id: 2,
+      name: "Product B",
+      category: "Category 2",
+      image: "https://picsum.photos/seed/picsum/500/500",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
+    },
+    {
+      id: 3,
+      name: "Product C",
+      category: "Category 3",
+      image: "https://picsum.photos/seed/picsum/500/500",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
+    },
+  ];
+
+  return (
+    <>
+      <div className="dashboard-name">
+        <h1>Products Page</h1>
+      </div>
+
+      <div className="tables-area">
+        <div className="recent-queries">
+          <div className="operation-header">
+            <h1 className="heading">Categories</h1>
+            <button className="add">Add Category +</button>
+          </div>
+          <table className="modern-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Operation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {Categories.map((query, index) => (
+                <tr key={index}>
+                  <td>{query.name}</td>
+                  <td>
+                    <MdEditNote /> <AiFillDelete />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div className="product-listing">
+          <div className="operation-header">
+            <h1 className="heading">Admin Users</h1>
+            <button className="add">Add Products +</button>
+          </div>
+          <table className="modern-table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Image</th>
+                <th>Small Description</th>
+                <th>Operation</th>
+              </tr>
+            </thead>
+            <tbody>
+              {productList.map((product) => (
+                <tr key={product.id}>
+                  <td>{product.name}</td>
+                  <td>{product.category}</td>
+                  <td>
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="product-image"
+                    />
+                  </td>
+                  <td>{product.description}</td>
+                  <td>
+                    <MdEditNote /> <AiFillDelete />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default ProductOperation;
