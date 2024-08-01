@@ -1,19 +1,23 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Sidebar from "./components/Sidebar";
+import ScrollToTop from "./components/ScrollToTop";
 import Home from "./pages/Home";
 import Products from "./pages/Products";
 import Gallery from "./pages/Gallery";
 import Aboutus from "./pages/Aboutus";
 import Contactus from "./pages/Contactus";
 import AdminLogin from "./pages/AdminLogin";
-import Error from "./pages/Error";
-import Footer from "./components/Footer";
-import ScrollToTop from "./components/ScrollToTop"; // Import the ScrollToTop component
 import Dashboard from "./pages/Dashboard";
-import Sidebar from "./components/Sidebar";
+import ProductOperation from "./pages/ProductOperation";
+import GalleryOperation from "./pages/GalleryOperation";
+import UserOperation from "./pages/UserOperation";
+import ContactOperation from "./pages/ContactOperation";
+import SocialOperation from "./pages/SocialOperation";
+import Error from "./pages/Error";
 
-// Wrapper component to include Header and Footer
 const ClientWrapper = ({ children }) => (
   <>
     <Header />
@@ -21,6 +25,7 @@ const ClientWrapper = ({ children }) => (
     <Footer />
   </>
 );
+
 const AdminWrapper = ({ children }) => (
   <>
     <Sidebar />
@@ -30,79 +35,109 @@ const AdminWrapper = ({ children }) => (
 
 const App = () => {
   return (
-    <>
-      <BrowserRouter>
-        <ScrollToTop /> {/* Add ScrollToTop here */}
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <ClientWrapper>
-                <Home />
-              </ClientWrapper>
-            }
-          />
-          <Route
-            exact
-            path="/products"
-            element={
-              <ClientWrapper>
-                <Products />
-              </ClientWrapper>
-            }
-          />
-          <Route
-            exact
-            path="/gallery"
-            element={
-              <ClientWrapper>
-                <Gallery />
-              </ClientWrapper>
-            }
-          />
-          <Route
-            exact
-            path="/about-us"
-            element={
-              <ClientWrapper>
-                <Aboutus />
-              </ClientWrapper>
-            }
-          />
-          <Route
-            exact
-            path="/contact-us"
-            element={
-              <ClientWrapper>
-                <Contactus />
-              </ClientWrapper>
-            }
-          />
-          <Route
-            exact
-            path="/products/id:"
-            element={
-              <ClientWrapper>
-                <Contactus />
-              </ClientWrapper>
-            }
-          />
-          <Route exact path="/admin-login" element={<AdminLogin />} />
-          <Route
-            exact
-            path="/dashboard"
-            element={
-              <AdminWrapper>
-                <Dashboard />
-              </AdminWrapper>
-            }
-          />
-          
-          <Route exact path="/*" element={<Error />} />
-        </Routes>
-      </BrowserRouter>
-    </>
+    <BrowserRouter>
+      <ScrollToTop />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <ClientWrapper>
+              <Home />
+            </ClientWrapper>
+          }
+        />
+        <Route
+          path="/products"
+          element={
+            <ClientWrapper>
+              <Products />
+            </ClientWrapper>
+          }
+        />
+        <Route
+          path="/gallery"
+          element={
+            <ClientWrapper>
+              <Gallery />
+            </ClientWrapper>
+          }
+        />
+        <Route
+          path="/about-us"
+          element={
+            <ClientWrapper>
+              <Aboutus />
+            </ClientWrapper>
+          }
+        />
+        <Route
+          path="/contact-us"
+          element={
+            <ClientWrapper>
+              <Contactus />
+            </ClientWrapper>
+          }
+        />
+        <Route
+          path="/products/:id"
+          element={
+            <ClientWrapper>
+              <Products />
+            </ClientWrapper>
+          }
+        />
+        <Route path="/admin-login" element={<AdminLogin />} />
+        <Route
+          path="/dashboard"
+          element={
+            <AdminWrapper>
+              <Dashboard />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/product-operation"
+          element={
+            <AdminWrapper>
+              <ProductOperation />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/gallery-operation"
+          element={
+            <AdminWrapper>
+              <GalleryOperation />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/user-operation"
+          element={
+            <AdminWrapper>
+              <UserOperation />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/contact-operation"
+          element={
+            <AdminWrapper>
+              <ContactOperation />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/social-operation"
+          element={
+            <AdminWrapper>
+              <SocialOperation />
+            </AdminWrapper>
+          }
+        />
+        <Route path="/*" element={<Error />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
