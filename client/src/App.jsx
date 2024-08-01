@@ -98,6 +98,7 @@ const App = () => {
               </AdminWrapper>
             }
           />
+          
           <Route exact path="/*" element={<Error />} />
         </Routes>
       </BrowserRouter>
