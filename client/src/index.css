@@ -637,6 +637,7 @@ header nav ul li .dropdown-toggle:hover {
   flex: 1;
 }
 
+
 .icon {
   display: flex;
   align-items: center;
@@ -1001,9 +1002,7 @@ header nav ul li .dropdown-toggle:hover {
   transition: color 0.3s;
 }
 
-.socials svg:hover {
-  color: #006bb3;
-}
+
 
 .FaLocationDot svg {
   width: 1.5rem;
