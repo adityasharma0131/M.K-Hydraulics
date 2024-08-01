@@ -1505,6 +1505,11 @@ header nav ul li .dropdown-toggle:hover {
   box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+.social-link {
+  text-decoration: none; /* Remove underline */
+  color: #0085ff;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .product-image {
