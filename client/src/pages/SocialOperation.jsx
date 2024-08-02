@@ -64,8 +64,14 @@ const SocialOperation = () => {
                     {account.link}
                   </Link>
                 </td>
-                <td>
-                  <MdEditNote /> <AiFillDelete />
+                <td className="action-icons">
+                  <Link
+                    to="/social-operation/edit-socials"
+                    className="edit-link"
+                  >
+                    <MdEditNote className="edit-icon" />
+                  </Link>
+                  <AiFillDelete className="delete-icon" />
                 </td>
               </tr>
             ))}

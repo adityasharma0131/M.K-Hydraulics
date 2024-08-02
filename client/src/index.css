@@ -637,7 +637,6 @@ header nav ul li .dropdown-toggle:hover {
   flex: 1;
 }
 
-
 .icon {
   display: flex;
   align-items: center;
@@ -1001,8 +1000,6 @@ header nav ul li .dropdown-toggle:hover {
   cursor: pointer;
   transition: color 0.3s;
 }
-
-
 
 .FaLocationDot svg {
   width: 1.5rem;
@@ -1469,6 +1466,26 @@ header nav ul li .dropdown-toggle:hover {
 
 .modern-table tbody tr:hover {
   background-color: #383838;
+}
+
+.action-icons {
+  padding: 10px;
+  text-align: center;
+}
+
+.edit-link {
+  color: #007bff;
+  text-decoration: none;
+  margin: 0 5px;
+  font-size: 1.2em;
+}
+
+.edit-icon,
+.delete-icon {
+  cursor: pointer;
+  margin: 0 5px;
+  font-size: 1.5em;
+  transition: color 0.3s;
 }
 
 .product-image {

@@ -1,6 +1,7 @@
 import React from "react";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
+import { Link } from "react-router-dom";
 
 const GalleryOperation = () => {
   const gallery = [
@@ -21,7 +22,9 @@ const GalleryOperation = () => {
         <div className="product-listing">
           <div className="operation-header">
             <h1 className="heading">Products</h1>
-            <button className="add">Add Product +</button>
+            <Link to="/gallery-operation/add-gallery">
+              <button className="add">Add Image +</button>
+            </Link>
           </div>
           <table className="modern-table">
             <thead>
@@ -42,8 +45,8 @@ const GalleryOperation = () => {
                     />
                   </td>
                   <td>{product.filename}</td>
-                  <td>
-                    <AiFillDelete />
+                  <td className="action-icons">
+                    <AiFillDelete className="delete-icon" />
                   </td>
                 </tr>
               ))}

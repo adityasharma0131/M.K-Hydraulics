@@ -17,6 +17,14 @@ import UserOperation from "./pages/UserOperation";
 import ContactOperation from "./pages/ContactOperation";
 import SocialOperation from "./pages/SocialOperation";
 import Error from "./pages/Error";
+import AddCategory from "./pages/AddCategory";
+import AddProducts from "./pages/AddProducts";
+import AddGallery from "./pages/AddGallery";
+import AddUsers from "./pages/AddUsers";
+import EditSocials from "./pages/EditSocials";
+import EditCategory from "./pages/EditCategory";
+import EditProduct from "./pages/EditProduct";
+import EditUser from "./pages/EditUser";
 
 const ClientWrapper = ({ children }) => (
   <>
@@ -132,6 +140,72 @@ const App = () => {
           element={
             <AdminWrapper>
               <SocialOperation />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/product-operation/add-category"
+          element={
+            <AdminWrapper>
+              <AddCategory />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/product-operation/add-products"
+          element={
+            <AdminWrapper>
+              <AddProducts />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/gallery-operation/add-gallery"
+          element={
+            <AdminWrapper>
+              <AddGallery />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/user-operation/add-users"
+          element={
+            <AdminWrapper>
+              <AddUsers />
+            </AdminWrapper>
+          }
+        />
+
+        <Route
+          path="/product-operation/edit-category"
+          element={
+            <AdminWrapper>
+              <EditCategory />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/product-operation/edit-product"
+          element={
+            <AdminWrapper>
+              <EditProduct />
+            </AdminWrapper>
+          }
+        />
+        <Route
+          path="/product-operation/edit-user"
+          element={
+            <AdminWrapper>
+              <EditUser />
+            </AdminWrapper>
+          }
+        />
+
+        <Route
+          path="/social-operation/edit-socials"
+          element={
+            <AdminWrapper>
+              <EditSocials />
             </AdminWrapper>
           }
         />

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 
@@ -57,7 +58,9 @@ const ProductOperation = () => {
         <div className="recent-queries">
           <div className="operation-header">
             <h1 className="heading">Categories</h1>
-            <button className="add">Add Category +</button>
+            <Link to="/product-operation/add-category">
+              <button className="add">Add Category +</button>
+            </Link>
           </div>
           <table className="modern-table">
             <thead>
@@ -70,8 +73,14 @@ const ProductOperation = () => {
               {Categories.map((query, index) => (
                 <tr key={index}>
                   <td>{query.name}</td>
-                  <td>
-                    <MdEditNote /> <AiFillDelete />
+                  <td className="action-icons">
+                    <Link
+                      to="/product-operation/edit-category"
+                      className="edit-link"
+                    >
+                      <MdEditNote className="edit-icon" />
+                    </Link>
+                    <AiFillDelete className="delete-icon" />
                   </td>
                 </tr>
               ))}
@@ -81,8 +90,10 @@ const ProductOperation = () => {
 
         <div className="product-listing">
           <div className="operation-header">
-            <h1 className="heading">Admin Users</h1>
-            <button className="add">Add Products +</button>
+            <h1 className="heading">Products</h1>
+            <Link to="/product-operation/add-products">
+              <button className="add">Add Products +</button>
+            </Link>
           </div>
           <table className="modern-table">
             <thead>
@@ -107,8 +118,14 @@ const ProductOperation = () => {
                     />
                   </td>
                   <td>{product.description}</td>
-                  <td>
-                    <MdEditNote /> <AiFillDelete />
+                  <td className="action-icons">
+                    <Link
+                      to="/product-operation/edit-product"
+                      className="edit-link"
+                    >
+                      <MdEditNote className="edit-icon" />
+                    </Link>
+                    <AiFillDelete className="delete-icon" />
                   </td>
                 </tr>
               ))}

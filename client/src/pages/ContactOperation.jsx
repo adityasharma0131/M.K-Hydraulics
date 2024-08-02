@@ -13,7 +13,7 @@ const ContactOperation = () => {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dicta error ducimus deleniti modi sunt hic nostrum voluptatum consectetur, dolor ea facere. Architecto laborum corporis delectus unde exercitationem modi quo!",
     },
     {
-      id: 1,
+      id: 2,
       name: "John Doe",
       email: "john.doe@example.com",
       organization: "Organization Name",
@@ -21,7 +21,7 @@ const ContactOperation = () => {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dicta error ducimus deleniti modi sunt hic nostrum voluptatum consectetur, dolor ea facere. Architecto laborum corporis delectus unde exercitationem modi quo!",
     },
     {
-      id: 1,
+      id: 3,
       name: "John Doe",
       email: "john.doe@example.com",
       organization: "Organization Name",
@@ -53,9 +53,8 @@ const ContactOperation = () => {
                 <td>{user.email}</td>
                 <td>{user.organization}</td>
                 <td>{user.message}</td>
-                <td>
-                  {" "}
-                  <AiFillDelete />
+                <td className="action-icons">
+                  <AiFillDelete className="delete-icon" />
                 </td>
               </tr>
             ))}
