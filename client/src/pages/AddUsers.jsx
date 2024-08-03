@@ -1,9 +1,22 @@
-import React from 'react'
-
+import React from "react";
+import { Link } from "react-router-dom";
+import { IoIosArrowForward } from "react-icons/io";
 const AddUsers = () => {
   return (
-    <div>AddUsers</div>
-  )
-}
+    <>
+      <div className="dashboard-name">
+        <div className="dash-opr-head">
+          <h1>
+            <Link className="dash-head" to="/user-operation">
+              Users Page
+            </Link>
+            <IoIosArrowForward />
+            Add Users
+          </h1>
+        </div>
+      </div>
+    </>
+  );
+};
 
-export default AddUsers
+export default AddUsers;

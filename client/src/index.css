@@ -959,7 +959,9 @@ header nav ul li .dropdown-toggle:hover {
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
   margin-top: 1rem;
 }
 
@@ -1371,7 +1373,9 @@ header nav ul li .dropdown-toggle:hover {
   margin-bottom: 1rem;
   border-radius: 0.5rem;
   color: #ededed;
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 .sidebar__link:hover {
@@ -1513,7 +1517,9 @@ header nav ul li .dropdown-toggle:hover {
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
-  transition: background-color 0.3s, box-shadow 0.3s;
+  transition:
+    background-color 0.3s,
+    box-shadow 0.3s;
 }
 
 .add:hover {
@@ -1523,6 +1529,16 @@ header nav ul li .dropdown-toggle:hover {
 
 .social-link {
   text-decoration: none; /* Remove underline */
+  color: #0085ff;
+}
+.dash-opr-head h1 {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: start;
+}
+.dash-head {
+  text-decoration: underline;
   color: #0085ff;
 }
 
