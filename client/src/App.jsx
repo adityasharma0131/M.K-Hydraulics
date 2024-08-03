@@ -193,7 +193,7 @@ const App = () => {
           }
         />
         <Route
-          path="/product-operation/edit-user"
+          path="/user-operation/edit-user"
           element={
             <AdminWrapper>
               <EditUser />

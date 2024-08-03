@@ -34,7 +34,7 @@ const UserOperation = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td className="action-icons">
-                  <Link to="/product-operation/edit-user" className="edit-link">
+                  <Link to="/user-operation/edit-user" className="edit-link">
                     <MdEditNote className="edit-icon" />
                   </Link>
                   <AiFillDelete className="delete-icon" />

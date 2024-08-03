@@ -7,11 +7,11 @@ const EditCategory = () => {
       <div className="dashboard-name">
         <div className="dash-opr-head">
           <h1>
-            <Link className="dash-head" to="/user-operation">
-              Users Page
+            <Link className="dash-head" to="/product-operation">
+              Products Page
             </Link>
             <IoIosArrowForward />
-            Add Users
+            Edit Category
           </h1>
         </div>
       </div>
