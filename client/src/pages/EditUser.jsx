@@ -8,7 +8,7 @@ const EditUser = () => {
         <div className="dash-opr-head">
           <h1>
             <Link className="dash-head" to="/user-operation">
-              User Page
+              Users Page
             </Link>
             <IoIosArrowForward />
             Edit Product
