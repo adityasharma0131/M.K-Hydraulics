@@ -19,7 +19,7 @@ const AddUsers = () => {
       <div className="tables-area">
         <div className="recent-queries">
           <div className="operation-header">
-            <h1 className="heading">User</h1>
+            <h1 className="heading">Add new User</h1>
           </div>
           <table className="modern-table">
             <thead>

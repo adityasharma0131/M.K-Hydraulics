@@ -20,7 +20,7 @@ const AddCategory = () => {
       <div className="tables-area">
         <div className="recent-queries">
           <div className="operation-header">
-            <h1 className="heading">Categories</h1>
+            <h1 className="heading">Add new Category</h1>
           </div>
           <table className="modern-table">
             <thead>
