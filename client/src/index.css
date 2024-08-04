@@ -1443,6 +1443,7 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .heading {
+  color: #0085ff;
   font-size: 24px;
   margin-bottom: 10px;
 }
@@ -1537,10 +1538,16 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .form-area {
+  position: relative;
+  padding: 1rem;
+  margin: 2rem 1rem 2.5rem 4rem;
+  border-radius: 10px;
+  text-align: left;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  justify-content: center;
+  background-color: #1e1e1e;
 }
 
 .form-section {
@@ -1570,6 +1577,7 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .form-label {
+  color: #0085ff;
   margin-bottom: 0.5rem;
   font-weight: bold;
 }
@@ -1578,8 +1586,10 @@ header nav ul li .dropdown-toggle:hover {
 .form-textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
+  background-color: #1e1e1e;
+  border: 2px solid #0085ff;
+  color: #fff;
 }
 
 .form-textarea {

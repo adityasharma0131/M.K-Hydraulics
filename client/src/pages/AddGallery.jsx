@@ -16,6 +16,37 @@ const AddGallery = () => {
           </h1>
         </div>
       </div>
+
+      <div className="tables-area">
+        <div className="recent-queries">
+          <div className="operation-header">
+            <h1 className="heading">Image</h1>
+          </div>
+          <table className="modern-table">
+            <thead>
+              <tr>
+                <th>File</th>
+
+                <th>Operation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input
+                    type="file"
+                    name="image-file"
+                    className="dash-input"
+                  />{" "}
+                </td>
+                <td>
+                  <button className="add">Add +</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 };

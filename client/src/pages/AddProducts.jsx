@@ -94,7 +94,7 @@ const AddProducts = () => {
               ></textarea>
             </li>
             <li className="form-item">
-              <button className="add-btn">Add +</button>
+              <button className="add">Add +</button>
             </li>
           </ul>
         </div>
