@@ -16,6 +16,38 @@ const AddCategory = () => {
           </h1>
         </div>
       </div>
+
+      <div className="tables-area">
+        <div className="recent-queries">
+          <div className="operation-header">
+            <h1 className="heading">Categories</h1>
+          </div>
+          <table className="modern-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+
+                <th>Operation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <input
+                    type="text"
+                    name="category-name"
+                    className="dash-input"
+                    placeholder="Enter category name"
+                  />{" "}
+                </td>
+                <td>
+                  <button className="add">Add +</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </>
   );
 };

@@ -959,9 +959,7 @@ header nav ul li .dropdown-toggle:hover {
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
-  transition:
-    background-color 0.3s,
-    box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
   margin-top: 1rem;
 }
 
@@ -1373,9 +1371,7 @@ header nav ul li .dropdown-toggle:hover {
   margin-bottom: 1rem;
   border-radius: 0.5rem;
   color: #ededed;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 .sidebar__link:hover {
@@ -1517,9 +1513,7 @@ header nav ul li .dropdown-toggle:hover {
   border-radius: 5px;
   font-size: 1rem;
   cursor: pointer;
-  transition:
-    background-color 0.3s,
-    box-shadow 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .add:hover {
@@ -1539,6 +1533,66 @@ header nav ul li .dropdown-toggle:hover {
 }
 .dash-head {
   text-decoration: underline;
+  color: #0085ff;
+}
+
+.form-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+}
+
+.form-section {
+  width: 100%;
+  max-width: 800px;
+}
+
+.form-header {
+  margin-bottom: 1rem;
+}
+
+.heading {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.form-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.form-item {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.form-label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+}
+
+.form-input,
+.form-textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.dash-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #1e1e1e;
+  border: 2px solid #0085ff;
   color: #0085ff;
 }
 
