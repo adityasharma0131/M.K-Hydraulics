@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddGallery = () => {
+  const [file, setFile] = useState(null);
+
+  const handleChange = (e) => {
+    setFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!file) {
+      return toast.error("Please select an image file");
+    }
+
+    const formData = new FormData();
+    formData.append("image-file", file);
+
+    try {
+      const response = await fetch("http://localhost:3000/upload-image", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        toast.success(result.message);
+        setFile(null);
+      } else {
+        toast.error(result.message);
+      }
+    } catch (err) {
+      toast.error("Server error: " + err.message);
+    }
+  };
+
   return (
     <>
+      <Toaster />
       <div className="dashboard-name">
         <div className="dash-opr-head">
           <h1>
@@ -22,29 +58,33 @@ const AddGallery = () => {
           <div className="operation-header">
             <h1 className="heading">Add new Image</h1>
           </div>
-          <table className="modern-table">
-            <thead>
-              <tr>
-                <th>File</th>
-
-                <th>Operation</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input
-                    type="file"
-                    name="image-file"
-                    className="dash-input"
-                  />{" "}
-                </td>
-                <td>
-                  <button className="add">Add +</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <form onSubmit={handleSubmit}>
+            <table className="modern-table">
+              <thead>
+                <tr>
+                  <th>File</th>
+                  <th>Operation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input
+                      type="file"
+                      name="image-file"
+                      className="dash-input"
+                      onChange={handleChange}
+                    />
+                  </td>
+                  <td>
+                    <button type="submit" className="add">
+                      Add +
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
         </div>
       </div>
     </>
