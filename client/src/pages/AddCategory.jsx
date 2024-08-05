@@ -1,10 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
+import toast, { Toaster } from "react-hot-toast";
 
 const AddCategory = () => {
+  const [categoryName, setCategoryName] = useState("");
+
+  const handleChange = (e) => {
+    setCategoryName(e.target.value);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!categoryName) {
+      return toast.error("Category name is required");
+    }
+
+    try {
+      const response = await fetch("http://localhost:3000/add-category", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ name: categoryName }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        toast.success(result.message);
+        setCategoryName("");
+      } else {
+        toast.error(result.message);
+      }
+    } catch (err) {
+      toast.error("Server error: " + err.message);
+    }
+  };
+
   return (
     <>
+      <Toaster />
       <div className="dashboard-name">
         <div className="dash-opr-head">
           <h1>
@@ -22,30 +58,35 @@ const AddCategory = () => {
           <div className="operation-header">
             <h1 className="heading">Add new Category</h1>
           </div>
-          <table className="modern-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-
-                <th>Operation</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <input
-                    type="text"
-                    name="category-name"
-                    className="dash-input"
-                    placeholder="Enter category name"
-                  />{" "}
-                </td>
-                <td>
-                  <button className="add">Add +</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <form onSubmit={handleSubmit}>
+            <table className="modern-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Operation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <input
+                      type="text"
+                      name="category-name"
+                      className="dash-input"
+                      placeholder="Enter category name"
+                      value={categoryName}
+                      onChange={handleChange}
+                    />{" "}
+                  </td>
+                  <td>
+                    <button type="submit" className="add">
+                      Add +
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
         </div>
       </div>
     </>
