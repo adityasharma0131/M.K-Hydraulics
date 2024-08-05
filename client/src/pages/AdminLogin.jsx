@@ -41,9 +41,22 @@ const AdminLogin = () => {
         },
         body: JSON.stringify(loginInfo),
       });
+
+      if (!response.ok) {
+        // Handle non-200 responses
+        const errorResult = await response.json();
+        const { error, message } = errorResult;
+        if (error && error.details) {
+          handleError(error.details[0].message || message);
+        } else {
+          handleError(message || "An error occurred during login");
+        }
+        return;
+      }
+
       const result = await response.json();
       console.log(result); // Debugging line
-      const { success, message, token, user, error } = result;
+      const { success, message, token, user } = result;
       if (success) {
         handleSuccess(message);
         localStorage.setItem("token", token);
@@ -51,14 +64,11 @@ const AdminLogin = () => {
         setTimeout(() => {
           navigate("/dashboard");
         }, 1000);
-      } else if (error) {
-        const details = error?.details[0].message;
-        handleError(details || message);
-      } else if (!success) {
-        handleError(message);
+      } else {
+        handleError(message || "Login failed");
       }
     } catch (err) {
-      handleError(err.message);
+      handleError("An unexpected error occurred: " + err.message);
     }
   };
 
