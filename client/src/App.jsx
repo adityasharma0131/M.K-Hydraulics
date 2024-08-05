@@ -25,6 +25,8 @@ import EditSocials from "./pages/EditSocials";
 import EditCategory from "./pages/EditCategory";
 import EditProduct from "./pages/EditProduct";
 import EditUser from "./pages/EditUser";
+import AuthGuard from "./components/AuthGuard";
+import { Toaster } from "react-hot-toast";
 
 const ClientWrapper = ({ children }) => (
   <>
@@ -98,119 +100,146 @@ const App = () => {
         <Route
           path="/dashboard"
           element={
-            <AdminWrapper>
-              <Dashboard />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <Dashboard />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/product-operation"
           element={
-            <AdminWrapper>
-              <ProductOperation />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <ProductOperation />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/gallery-operation"
           element={
-            <AdminWrapper>
-              <GalleryOperation />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <GalleryOperation />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/user-operation"
           element={
-            <AdminWrapper>
-              <UserOperation />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <UserOperation />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/contact-operation"
           element={
-            <AdminWrapper>
-              <ContactOperation />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <ContactOperation />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/social-operation"
           element={
-            <AdminWrapper>
-              <SocialOperation />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <SocialOperation />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/product-operation/add-category"
           element={
-            <AdminWrapper>
-              <AddCategory />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <AddCategory />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/product-operation/add-products"
           element={
-            <AdminWrapper>
-              <AddProducts />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <AddProducts />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/gallery-operation/add-gallery"
           element={
-            <AdminWrapper>
-              <AddGallery />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <AddGallery />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/user-operation/add-users"
           element={
-            <AdminWrapper>
-              <AddUsers />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <AddUsers />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
-
         <Route
           path="/product-operation/edit-category"
           element={
-            <AdminWrapper>
-              <EditCategory />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <EditCategory />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/product-operation/edit-product"
           element={
-            <AdminWrapper>
-              <EditProduct />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <EditProduct />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route
           path="/user-operation/edit-user"
           element={
-            <AdminWrapper>
-              <EditUser />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <EditUser />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
-
         <Route
           path="/social-operation/edit-socials"
           element={
-            <AdminWrapper>
-              <EditSocials />
-            </AdminWrapper>
+            <AuthGuard>
+              <AdminWrapper>
+                <EditSocials />
+              </AdminWrapper>
+            </AuthGuard>
           }
         />
         <Route path="/*" element={<Error />} />
       </Routes>
+      <Toaster />
     </BrowserRouter>
   );
 };

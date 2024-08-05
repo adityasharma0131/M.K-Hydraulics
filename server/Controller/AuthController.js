@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const UserModel = require("../models/User"); // Adjust the path according to your project structure
 
-const SECRET_KEY = "your_secret_key"; // Replace with your actual secret key
+const SECRET_KEY = "your_secret_key"; // Ensure your actual secret key is stored in an environment variable
 
 const signup = async (req, res) => {
   try {
@@ -23,6 +23,15 @@ const signup = async (req, res) => {
     // Create new user
     const newUser = new UserModel({ name, email, password: hashedPassword });
     await newUser.save();
+
+    // Generate JWT
+    const token = jwt.sign(
+      { id: newUser._id, email: newUser.email },
+      SECRET_KEY,
+      {
+        expiresIn: "1h",
+      }
+    );
 
     // Respond with success message and token
     return res.status(201).json({

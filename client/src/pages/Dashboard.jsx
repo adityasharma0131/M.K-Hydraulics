@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -61,10 +62,15 @@ const Dashboard = () => {
     },
   ];
 
+  const [loggedInUser, setloggedInUser] = useState("");
+  useEffect(() => {
+    setloggedInUser(localStorage.getItem("loggedInUser"));
+  }, []);
+
   return (
     <>
       <div className="dashboard-name">
-        <h1>Welcome Admin</h1>
+        <h1>Welcome {loggedInUser}</h1>
       </div>
       <div className="dashboard-number">
         <div className="progressive-bar">

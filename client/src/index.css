@@ -1606,6 +1606,27 @@ header nav ul li .dropdown-toggle:hover {
   color: #0085ff;
 }
 
+.sidebar__link--logout {
+  background: none;
+  border: none;
+  color: #ffffff;
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+
+
+.sidebar__link--logout .sidebar__text {
+  margin-left: 10px;
+  font-size: 1rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .product-image {
