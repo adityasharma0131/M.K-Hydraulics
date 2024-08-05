@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import HeroPage from "../components/HeroPage";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa6";
@@ -8,9 +8,54 @@ import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
 
+import toast, { Toaster } from "react-hot-toast";
+
 const Contactus = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    organization: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("http://localhost:3000/contact-submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        toast.success(result.message);
+        setFormData({
+          name: "",
+          email: "",
+          organization: "",
+          message: "",
+        });
+      } else {
+        toast.error(result.message);
+      }
+    } catch (error) {
+      toast.error("Server error: " + error.message);
+    }
+  };
+
   return (
     <>
+      <Toaster />
       <HeroPage heading="Contact Us" />
       <div className="contact-us">
         <div className="contact-sec">
@@ -19,7 +64,7 @@ const Contactus = () => {
             <p>
               Shoot us a message if you have any questions, we’re here to help!
             </p>
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <label htmlFor="name">
                   <h3>Your Name</h3>
@@ -29,6 +74,8 @@ const Contactus = () => {
                   placeholder="Enter your name"
                   name="name"
                   id="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -41,6 +88,8 @@ const Contactus = () => {
                   placeholder="Enter your email"
                   name="email"
                   id="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -53,6 +102,8 @@ const Contactus = () => {
                   placeholder="Enter your organization's name"
                   name="organization"
                   id="organization"
+                  value={formData.organization}
+                  onChange={handleChange}
                 />
               </div>
               <div className="form-group">
@@ -63,6 +114,8 @@ const Contactus = () => {
                   name="message"
                   placeholder="Write your message"
                   id="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   required
                 ></textarea>
               </div>

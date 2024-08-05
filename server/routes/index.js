@@ -3,6 +3,7 @@ const router = express.Router();
 const Category = require("../Models/Category");
 const multer = require("multer");
 const Image = require("../Models/Gallery");
+const Contact = require("../Models/Contact");
 
 // Add a new category
 router.post("/add-category", async (req, res) => {
@@ -71,6 +72,28 @@ router.post("/upload-image", upload.single("image-file"), async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Server error", error: err.message });
+  }
+});
+
+router.post("/contact-submit", async (req, res) => {
+  try {
+    const { name, email, organization, message } = req.body;
+
+    const newContact = new Contact({
+      name,
+      email,
+      organization,
+      message,
+    });
+
+    await newContact.save();
+    res
+      .status(201)
+      .json({ success: true, message: "Contact form submitted successfully" });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ success: false, message: "Server error", error: error.message });
   }
 });
 
