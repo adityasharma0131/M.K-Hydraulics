@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddGallery = () => {
+  const navigate = useNavigate();
   const [file, setFile] = useState(null);
 
   const handleChange = (e) => {
@@ -29,6 +31,7 @@ const AddGallery = () => {
 
       if (response.ok) {
         toast.success(result.message);
+        navigate("/gallery-operation");
         setFile(null);
       } else {
         toast.error(result.message);

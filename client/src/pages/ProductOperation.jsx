@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import axios from "axios";
+import toast, { Toaster } from 'react-hot-toast'; // Import toast and Toaster
 
 const ProductOperation = () => {
   const [categories, setCategories] = useState([]);
@@ -31,9 +32,11 @@ const ProductOperation = () => {
       setCategories(
         categories.filter((category) => category._id !== categoryId)
       );
+      toast.success("Category deleted successfully!"); // Show success notification
     } catch (error) {
       console.error("Error deleting category:", error);
       setError(error);
+      toast.error("Error deleting category: " + error.message); // Show error notification
     }
   };
 
@@ -105,6 +108,7 @@ const ProductOperation = () => {
                         <AiFillDelete
                           className="delete-icon"
                           onClick={() => handleDeleteCategory(category._id)}
+                          style={{ cursor: "pointer" }}
                         />
                       </td>
                     </tr>
@@ -164,6 +168,7 @@ const ProductOperation = () => {
           </table>
         </div>
       </div>
+      <Toaster /> {/* Add Toaster component to display notifications */}
     </>
   );
 };

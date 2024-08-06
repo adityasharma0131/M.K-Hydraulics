@@ -107,6 +107,43 @@ router.get("/recent-queries", async (req, res) => {
   }
 });
 
+router.get("/contact-queries", async (req, res) => {
+  try {
+    const queries = await Contact.find(); // Fetch all contact queries
+    res.json(queries);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+// Get a single contact query by ID
+router.get("/contact-queries/:id", async (req, res) => {
+  try {
+    const contact = await Contact.findById(req.params.id);
+    if (contact) {
+      res.json(contact);
+    } else {
+      res.status(404).json({ message: "Contact not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Delete a contact query by ID
+router.delete("/contact-queries/:id", async (req, res) => {
+  try {
+    const contact = await Contact.findByIdAndDelete(req.params.id);
+    if (contact) {
+      res.json({ message: "Contact deleted successfully" });
+    } else {
+      res.status(404).json({ message: "Contact not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 router.get("/admin-users", async (req, res) => {
   try {
     console.log("Fetching admin users..."); // Debugging log
@@ -134,6 +171,16 @@ router.get("/gallery", async (req, res) => {
   try {
     const images = await Image.find();
     res.json(images);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+router.delete("/gallery/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Image.findByIdAndDelete(id);
+    res.status(204).send(); // No content
   } catch (error) {
     res.status(500).json({ message: error.message });
   }

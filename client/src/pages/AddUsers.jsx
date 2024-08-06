@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const AddUsers = () => {
+  const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({
     name: "",
     email: "",
@@ -39,6 +41,7 @@ const AddUsers = () => {
 
       if (response.ok) {
         toast.success(result.message);
+        navigate("/user-operation");
         setUserInfo({
           name: "",
           email: "",

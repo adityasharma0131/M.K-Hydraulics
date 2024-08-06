@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
 
 const UserOperation = () => {
   const [adminUsers, setAdminUsers] = useState([]);
@@ -32,8 +33,12 @@ const UserOperation = () => {
           throw new Error("Network response was not ok");
         }
         setAdminUsers(adminUsers.filter((user) => user._id !== userId));
+        toast.success("User deleted successfully!"); // Show success notification
       })
-      .catch((error) => console.error("Error deleting user:", error));
+      .catch((error) => {
+        console.error("Error deleting user:", error);
+        toast.error("Error deleting user: " + error.message); // Show error notification
+      });
   };
 
   return (
@@ -72,6 +77,7 @@ const UserOperation = () => {
                     <AiFillDelete
                       className="delete-icon"
                       onClick={() => handleDelete(user._id)}
+                      style={{ cursor: "pointer" }}
                     />
                   </td>
                 </tr>
@@ -84,6 +90,7 @@ const UserOperation = () => {
           </tbody>
         </table>
       </div>
+      <Toaster /> {/* Add Toaster component to display notifications */}
     </>
   );
 };

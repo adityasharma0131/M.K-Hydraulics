@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AiFillDelete } from "react-icons/ai";
+import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
 
 const GalleryOperation = () => {
   const [gallery, setGallery] = useState([]);
@@ -27,12 +28,31 @@ const GalleryOperation = () => {
     fetchGallery();
   }, []);
 
+  const handleDelete = async (imageId) => {
+    try {
+      const response = await fetch(`http://localhost:3000/gallery/${imageId}`, {
+        method: "DELETE",
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      // Remove the deleted image from the state
+      setGallery((prevGallery) =>
+        prevGallery.filter((item) => item._id !== imageId)
+      );
+      toast.success("Image deleted successfully!"); // Show success notification
+    } catch (error) {
+      console.error("Error deleting image:", error);
+      setError(error);
+      toast.error("Error deleting image: " + error.message); // Show error notification
+    }
+  };
+
   return (
     <>
       <div className="dashboard-name">
         <h1>Gallery Page</h1>
       </div>
-
       <div className="tables-area">
         <div className="product-listing">
           <div className="operation-header">
@@ -68,7 +88,11 @@ const GalleryOperation = () => {
                       </td>
                       <td>{item.filename}</td>
                       <td className="action-icons">
-                        <AiFillDelete className="delete-icon" />
+                        <AiFillDelete
+                          className="delete-icon"
+                          onClick={() => handleDelete(item._id)}
+                          style={{ cursor: "pointer" }}
+                        />
                       </td>
                     </tr>
                   ))
@@ -82,6 +106,7 @@ const GalleryOperation = () => {
           )}
         </div>
       </div>
+      <Toaster /> {/* Add Toaster component to display notifications */}
     </>
   );
 };

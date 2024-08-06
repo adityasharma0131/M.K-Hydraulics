@@ -1,38 +1,57 @@
-import React from "react";
-import { MdEditNote } from "react-icons/md";
+import React, { useEffect, useState } from "react";
 import { AiFillDelete } from "react-icons/ai";
+import toast from "react-hot-toast";
 
 const ContactOperation = () => {
-  const adminUsers = [
-    {
-      id: 1,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      organization: "Organization Name",
-      message:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dicta error ducimus deleniti modi sunt hic nostrum voluptatum consectetur, dolor ea facere. Architecto laborum corporis delectus unde exercitationem modi quo!",
-    },
-    {
-      id: 2,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      organization: "Organization Name",
-      message:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dicta error ducimus deleniti modi sunt hic nostrum voluptatum consectetur, dolor ea facere. Architecto laborum corporis delectus unde exercitationem modi quo!",
-    },
-    {
-      id: 3,
-      name: "John Doe",
-      email: "john.doe@example.com",
-      organization: "Organization Name",
-      message:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam dicta error ducimus deleniti modi sunt hic nostrum voluptatum consectetur, dolor ea facere. Architecto laborum corporis delectus unde exercitationem modi quo!",
-    },
-  ];
+  const [contacts, setContacts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Fetch contact data from the backend
+    fetch("http://localhost:3000/contact-queries") // Adjust the URL if necessary
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setContacts(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+        toast.error("Error fetching contacts");
+      });
+  }, []);
+
+  const handleDelete = (contactId) => {
+    fetch(`http://localhost:3000/contact-queries/${contactId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        // Remove the deleted contact from the state
+        setContacts(contacts.filter((contact) => contact._id !== contactId));
+        toast.success("Contact deleted successfully!");
+      })
+      .catch((error) => {
+        toast.error("Error deleting contact");
+        console.error("Error deleting contact:", error);
+      });
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading contacts: {error.message}</p>;
+
   return (
     <>
       <div className="dashboard-name">
-        <h1>Contact us Page</h1>
+        <h1>Contact Us Page</h1>
       </div>
       <div className="admin-users">
         <h1 className="heading">Queries</h1>
@@ -47,17 +66,26 @@ const ContactOperation = () => {
             </tr>
           </thead>
           <tbody>
-            {adminUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td>{user.organization}</td>
-                <td>{user.message}</td>
-                <td className="action-icons">
-                  <AiFillDelete className="delete-icon" />
-                </td>
+            {contacts.length > 0 ? (
+              contacts.map((contact) => (
+                <tr key={contact._id}>
+                  <td>{contact.name}</td>
+                  <td>{contact.email}</td>
+                  <td>{contact.organization}</td>
+                  <td>{contact.message}</td>
+                  <td className="action-icons">
+                    <AiFillDelete
+                      className="delete-icon"
+                      onClick={() => handleDelete(contact._id)}
+                    />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5">No contacts available</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>
