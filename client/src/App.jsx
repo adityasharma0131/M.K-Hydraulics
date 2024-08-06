@@ -88,14 +88,14 @@ const App = () => {
             </ClientWrapper>
           }
         />
-        <Route
+        {/* <Route
           path="/products/:id"
           element={
             <ClientWrapper>
               <Products />
             </ClientWrapper>
           }
-        />
+        /> */}
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route
           path="/dashboard"
@@ -198,7 +198,7 @@ const App = () => {
           }
         />
         <Route
-          path="/product-operation/edit-category"
+          path="/product-operation/edit-category/:id"
           element={
             <AuthGuard>
               <AdminWrapper>
@@ -208,7 +208,7 @@ const App = () => {
           }
         />
         <Route
-          path="/product-operation/edit-product"
+          path="/product-operation/edit-product/:id"
           element={
             <AuthGuard>
               <AdminWrapper>
@@ -218,7 +218,7 @@ const App = () => {
           }
         />
         <Route
-          path="/user-operation/edit-user"
+          path="/user-operation/edit-user/:id"
           element={
             <AuthGuard>
               <AdminWrapper>

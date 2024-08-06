@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
+import axios from "axios";
 
 const ProductOperation = () => {
   const [categories, setCategories] = useState([]);
@@ -9,24 +10,32 @@ const ProductOperation = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    // Fetch categories from backend
-    fetch("http://localhost:3000/categories")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setCategories(data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.error("Error fetching categories:", error);
-        setError(error);
-        setLoading(false);
-      });
+    fetchCategories();
   }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/categories");
+      setCategories(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      setError(error);
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteCategory = async (categoryId) => {
+    try {
+      await axios.delete(`http://localhost:3000/categories/${categoryId}`);
+      setCategories(
+        categories.filter((category) => category._id !== categoryId)
+      );
+    } catch (error) {
+      console.error("Error deleting category:", error);
+      setError(error);
+    }
+  };
 
   const productList = [
     {
@@ -93,7 +102,10 @@ const ProductOperation = () => {
                         >
                           <MdEditNote className="edit-icon" />
                         </Link>
-                        <AiFillDelete className="delete-icon" />
+                        <AiFillDelete
+                          className="delete-icon"
+                          onClick={() => handleDeleteCategory(category._id)}
+                        />
                       </td>
                     </tr>
                   ))

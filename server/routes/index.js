@@ -140,4 +140,58 @@ router.get("/gallery", async (req, res) => {
   }
 });
 
+
+router.get("/categories/:id", async (req, res) => {
+  try {
+    const category = await Category.findById(req.params.id);
+    if (!category) {
+      return res.status(404).json({ error: "Category not found" });
+    }
+    res.json(category);
+  } catch (error) {
+    console.error("Error fetching category:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// Update a category
+router.put("/categories/:id", async (req, res) => {
+  const { name } = req.body;
+  if (!name) {
+    return res.status(400).json({ success: false, message: "Name is required" });
+  }
+
+  try {
+    const updatedCategory = await Category.findByIdAndUpdate(
+      req.params.id,
+      { name },
+      { new: true }
+    );
+
+    if (!updatedCategory) {
+      return res.status(404).json({ success: false, message: "Category not found" });
+    }
+
+    res.json({ success: true, message: "Category updated successfully" });
+  } catch (error) {
+    console.error("Error updating category:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
+
+// Delete a category
+router.delete("/categories/:id", async (req, res) => {
+  try {
+    const deletedCategory = await Category.findByIdAndDelete(req.params.id);
+
+    if (!deletedCategory) {
+      return res.status(404).json({ success: false, message: "Category not found" });
+    }
+
+    res.json({ success: true, message: "Category deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting category:", error);
+    res.status(500).json({ success: false, message: "Server error" });
+  }
+});
 module.exports = router;

@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
+import { useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import toast, { Toaster } from "react-hot-toast";
 
 const AddCategory = () => {
+  const navigate = useNavigate();
   const [categoryName, setCategoryName] = useState("");
 
   const handleChange = (e) => {
@@ -29,7 +32,7 @@ const AddCategory = () => {
 
       if (response.ok) {
         toast.success(result.message);
-        setCategoryName("");
+        navigate("/product-operation");
       } else {
         toast.error(result.message);
       }
