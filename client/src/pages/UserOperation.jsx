@@ -23,6 +23,19 @@ const UserOperation = () => {
       .catch((error) => console.error("Error fetching admin users:", error));
   }, []);
 
+  const handleDelete = (userId) => {
+    fetch(`http://localhost:3000/admin-users/${userId}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        setAdminUsers(adminUsers.filter((user) => user._id !== userId));
+      })
+      .catch((error) => console.error("Error deleting user:", error));
+  };
+
   return (
     <>
       <div className="dashboard-name">
@@ -56,7 +69,10 @@ const UserOperation = () => {
                     >
                       <MdEditNote className="edit-icon" />
                     </Link>
-                    <AiFillDelete className="delete-icon" />
+                    <AiFillDelete
+                      className="delete-icon"
+                      onClick={() => handleDelete(user._id)}
+                    />
                   </td>
                 </tr>
               ))

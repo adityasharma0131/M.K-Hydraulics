@@ -130,7 +130,6 @@ router.get("/categories", async (req, res) => {
   }
 });
 
-
 router.get("/gallery", async (req, res) => {
   try {
     const images = await Image.find();
@@ -139,7 +138,6 @@ router.get("/gallery", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
-
 
 router.get("/categories/:id", async (req, res) => {
   try {
@@ -158,7 +156,9 @@ router.get("/categories/:id", async (req, res) => {
 router.put("/categories/:id", async (req, res) => {
   const { name } = req.body;
   if (!name) {
-    return res.status(400).json({ success: false, message: "Name is required" });
+    return res
+      .status(400)
+      .json({ success: false, message: "Name is required" });
   }
 
   try {
@@ -169,7 +169,9 @@ router.put("/categories/:id", async (req, res) => {
     );
 
     if (!updatedCategory) {
-      return res.status(404).json({ success: false, message: "Category not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Category not found" });
     }
 
     res.json({ success: true, message: "Category updated successfully" });
@@ -185,7 +187,9 @@ router.delete("/categories/:id", async (req, res) => {
     const deletedCategory = await Category.findByIdAndDelete(req.params.id);
 
     if (!deletedCategory) {
-      return res.status(404).json({ success: false, message: "Category not found" });
+      return res
+        .status(404)
+        .json({ success: false, message: "Category not found" });
     }
 
     res.json({ success: true, message: "Category deleted successfully" });
@@ -194,4 +198,53 @@ router.delete("/categories/:id", async (req, res) => {
     res.status(500).json({ success: false, message: "Server error" });
   }
 });
+
+// Get a single user by ID
+router.get("/admin-users/:id", async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.id);
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Update a user
+router.put("/admin-users/:id", async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    const user = await UserModel.findById(req.params.id);
+
+    if (user) {
+      user.name = name || user.name;
+      user.email = email || user.email;
+      user.password = password || user.password; // Hash the password in production
+      await user.save();
+      res.json(user);
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Delete a user
+router.delete("/admin-users/:id", async (req, res) => {
+  try {
+    const user = await UserModel.findByIdAndDelete(req.params.id);
+    if (user) {
+      res.json({ message: "User deleted" });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 module.exports = router;
