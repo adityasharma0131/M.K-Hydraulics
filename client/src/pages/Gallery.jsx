@@ -1,29 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeroPage from "../components/HeroPage";
 import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
 
 const Gallery = () => {
-  const images = [
-    "http://picsum.photos/2000/3000",
-    "http://picsum.photos/3000/3000",
-    "http://picsum.photos/4000/3000",
-    "http://picsum.photos/3000/3000",
-    "http://picsum.photos/1000/3000",
-    "http://picsum.photos/2000/1500",
-    "http://picsum.photos/2500/3000",
-    "http://picsum.photos/3000/2000",
-    "http://picsum.photos/2000/3000",
-    "http://picsum.photos/3000/3000",
-    "http://picsum.photos/3000/3000",
-    "http://picsum.photos/1000/3000",
-    "http://picsum.photos/2500/3000",
-    "http://picsum.photos/3000/2000",
-  ];
-
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [data, setData] = useState({
     img: "",
     i: 0,
   });
+
+  useEffect(() => {
+    const fetchGallery = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/gallery");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const fetchedImages = await response.json();
+        setImages(fetchedImages);
+      } catch (error) {
+        console.error("Error fetching gallery images:", error);
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchGallery();
+  }, []);
 
   const viewImage = (img, i) => {
     setData({ img, i });
@@ -32,14 +38,18 @@ const Gallery = () => {
   const nextImage = () => {
     setData((prev) => {
       const nextIndex = (prev.i + 1) % images.length;
-      return { img: images[nextIndex], i: nextIndex };
+      const nextImageUrl = `http://localhost:3000/uploads/${images[nextIndex].filename}`;
+
+      return { img: nextImageUrl, i: nextIndex };
     });
   };
 
   const prevImage = () => {
     setData((prev) => {
       const prevIndex = (prev.i - 1 + images.length) % images.length;
-      return { img: images[prevIndex], i: prevIndex };
+      const prevImageUrl = `http://localhost:3000/uploads/${images[prevIndex].filename}`;
+
+      return { img: prevImageUrl, i: prevIndex };
     });
   };
 
@@ -121,23 +131,36 @@ const Gallery = () => {
       )}
       <HeroPage heading="Gallery" />
       <div className="gallery-container">
-        <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
-          <Masonry gutter="20px">
-            {images.map((src, index) => (
-              <img
-                key={index}
-                src={src}
-                alt={`Gallery Image ${index + 1}`}
-                style={{
-                  width: "100%",
-                  display: "block",
-                  cursor: "pointer",
-                }}
-                onClick={() => viewImage(src, index)}
-              />
-            ))}
-          </Masonry>
-        </ResponsiveMasonry>
+        {loading ? (
+          <p>Loading gallery images...</p>
+        ) : error ? (
+          <p>Error loading gallery images: {error.message}</p>
+        ) : (
+          <ResponsiveMasonry
+            columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}
+          >
+            <Masonry gutter="20px">
+              {images.map((item, index) => (
+                <img
+                  key={item._id}
+                  src={`http://localhost:3000/uploads/${item.filename}`}
+                  alt={`Gallery Image ${index + 1}`}
+                  style={{
+                    width: "100%",
+                    display: "block",
+                    cursor: "pointer",
+                  }}
+                  onClick={() =>
+                    viewImage(
+                      `http://localhost:3000/uploads/${item.filename}`,
+                      index
+                    )
+                  }
+                />
+              ))}
+            </Masonry>
+          </ResponsiveMasonry>
+        )}
       </div>
     </>
   );
