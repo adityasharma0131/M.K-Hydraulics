@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
@@ -12,29 +11,37 @@ const Dashboard = () => {
     { value: 100, title: "Quality Assurance" },
   ];
 
-  const recentQueries = [
-    {
-      name: "Aditya Sharma",
-      email: "adityasharma0431@gmail.com",
-      organization: "Tech Mahindra",
-    },
-    {
-      name: "Aditya Sharma",
-      email: "adityasharma0431@gmail.com",
-      organization: "Tech Mahindra",
-    },
-    {
-      name: "Aditya Sharma",
-      email: "adityasharma0431@gmail.com",
-      organization: "Tech Mahindra",
-    },
-  ];
+  const [recentQueries, setRecentQueries] = useState([]);
+  const [adminUsers, setAdminUsers] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState("");
 
-  const adminUsers = [
-    { id: 1, name: "John Doe", email: "john.doe@example.com" },
-    { id: 2, name: "Jane Smith", email: "jane.smith@example.com" },
-    { id: 3, name: "Michael Brown", email: "michael.brown@example.com" },
-  ];
+  useEffect(() => {
+    // Fetch logged-in user
+    setLoggedInUser(localStorage.getItem("loggedInUser"));
+
+    // Fetch recent queries
+    fetch("http://localhost:3000/recent-queries")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setRecentQueries(data))
+      .catch((error) => console.error("Error fetching recent queries:", error));
+
+    // Fetch admin users
+    fetch("http://localhost:3000/admin-users")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setAdminUsers(data))
+      .catch((error) => console.error("Error fetching admin users:", error));
+  }, []);
+
   const productList = [
     {
       id: 1,
@@ -61,11 +68,6 @@ const Dashboard = () => {
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
     },
   ];
-
-  const [loggedInUser, setloggedInUser] = useState("");
-  useEffect(() => {
-    setloggedInUser(localStorage.getItem("loggedInUser"));
-  }, []);
 
   return (
     <>
@@ -101,13 +103,19 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {recentQueries.map((query, index) => (
-                <tr key={index}>
-                  <td>{query.name}</td>
-                  <td>{query.email}</td>
-                  <td>{query.organization}</td>
+              {recentQueries.length > 0 ? (
+                recentQueries.map((query, index) => (
+                  <tr key={index}>
+                    <td>{query.name}</td>
+                    <td>{query.email}</td>
+                    <td>{query.organization}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3">No recent queries available</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
@@ -122,18 +130,24 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {adminUsers.map((user) => (
-                <tr key={user.id}>
-                  <td>{user.id}</td>
-                  <td>{user.name}</td>
-                  <td>{user.email}</td>
+              {adminUsers.length > 0 ? (
+                adminUsers.map((user) => (
+                  <tr key={user._id}>
+                    <td>{user._id}</td>
+                    <td>{user.name}</td>
+                    <td>{user.email}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="3">No admin users available</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
         <div className="product-listing">
-          <h1 className="heading">Admin Users</h1>
+          <h1 className="heading">Recent Products</h1>
           <table className="modern-table">
             <thead>
               <tr>

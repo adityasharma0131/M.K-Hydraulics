@@ -14,13 +14,17 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "http://localhost:5173", // Frontend URL
     methods: "GET, POST, PUT, DELETE",
     credentials: true,
   })
 );
+
+// Serve static files (images) from the "uploads" directory
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -4,6 +4,7 @@ const Category = require("../Models/Category");
 const multer = require("multer");
 const Image = require("../Models/Gallery");
 const Contact = require("../Models/Contact");
+const UserModel = require("../Models/User"); // Adjust the path according to your project structure
 
 // Add a new category
 router.post("/add-category", async (req, res) => {
@@ -94,6 +95,48 @@ router.post("/contact-submit", async (req, res) => {
     res
       .status(500)
       .json({ success: false, message: "Server error", error: error.message });
+  }
+});
+
+router.get("/recent-queries", async (req, res) => {
+  try {
+    const queries = await Contact.find(); // Adjust query as needed
+    res.json(queries);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+router.get("/admin-users", async (req, res) => {
+  try {
+    console.log("Fetching admin users..."); // Debugging log
+    const users = await UserModel.find(); // Fetch users from the database
+
+    res.status(200).json(users); // Send a successful response
+  } catch (error) {
+    console.error("Error fetching admin users:", error); // Log error details
+    res.status(500).json({ message: "Server error", error: error.message }); // Send error response
+  }
+});
+
+// Backend Route for Categories
+router.get("/categories", async (req, res) => {
+  try {
+    const categories = await Category.find(); // Adjust query as needed
+    res.status(200).json(categories);
+  } catch (error) {
+    console.error("Error fetching categories:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+
+router.get("/gallery", async (req, res) => {
+  try {
+    const images = await Image.find();
+    res.json(images);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
   }
 });
 

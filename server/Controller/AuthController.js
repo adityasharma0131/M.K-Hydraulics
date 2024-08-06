@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const UserModel = require("../models/User"); // Adjust the path according to your project structure
+const UserModel = require("../Models/User"); // Adjust the path according to your project structure
 
 const SECRET_KEY = "your_secret_key"; // Ensure your actual secret key is stored in an environment variable
 

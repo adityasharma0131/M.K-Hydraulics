@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
+
 const UserOperation = () => {
-  const adminUsers = [
-    { id: 1, name: "John Doe", email: "john.doe@example.com" },
-    { id: 2, name: "Jane Smith", email: "jane.smith@example.com" },
-    { id: 3, name: "Michael Brown", email: "michael.brown@example.com" },
-  ];
+  const [adminUsers, setAdminUsers] = useState([]);
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  useEffect(() => {
+    // Fetch logged-in user
+    setLoggedInUser(localStorage.getItem("loggedInUser"));
+
+    // Fetch admin users
+    fetch("http://localhost:3000/admin-users")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => setAdminUsers(data))
+      .catch((error) => console.error("Error fetching admin users:", error));
+  }, []);
+
   return (
     <>
       <div className="dashboard-name">
@@ -29,18 +44,27 @@ const UserOperation = () => {
             </tr>
           </thead>
           <tbody>
-            {adminUsers.map((user) => (
-              <tr key={user.id}>
-                <td>{user.name}</td>
-                <td>{user.email}</td>
-                <td className="action-icons">
-                  <Link to="/user-operation/edit-user" className="edit-link">
-                    <MdEditNote className="edit-icon" />
-                  </Link>
-                  <AiFillDelete className="delete-icon" />
-                </td>
+            {adminUsers.length > 0 ? (
+              adminUsers.map((user) => (
+                <tr key={user._id}>
+                  <td>{user.name}</td>
+                  <td>{user.email}</td>
+                  <td>
+                    <Link
+                      to={`/user-operation/edit-user/${user._id}`}
+                      className="edit-link"
+                    >
+                      <MdEditNote className="edit-icon" />
+                    </Link>
+                    <AiFillDelete className="delete-icon" />
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="3">No admin users available</td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

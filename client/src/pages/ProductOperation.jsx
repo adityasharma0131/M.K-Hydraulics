@@ -1,26 +1,33 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 
 const ProductOperation = () => {
-  const Categories = [
-    {
-      name: "Category 1",
-    },
-    {
-      name: "Category 2",
-    },
-    {
-      name: "Category 3",
-    },
-  ];
+  const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const adminUsers = [
-    { id: 1, name: "John Doe", email: "john.doe@example.com" },
-    { id: 2, name: "Jane Smith", email: "jane.smith@example.com" },
-    { id: 3, name: "Michael Brown", email: "michael.brown@example.com" },
-  ];
+  useEffect(() => {
+    // Fetch categories from backend
+    fetch("http://localhost:3000/categories")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setCategories(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching categories:", error);
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
   const productList = [
     {
       id: 1,
@@ -62,30 +69,42 @@ const ProductOperation = () => {
               <button className="add">Add Category +</button>
             </Link>
           </div>
-          <table className="modern-table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Operation</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Categories.map((query, index) => (
-                <tr key={index}>
-                  <td>{query.name}</td>
-                  <td className="action-icons">
-                    <Link
-                      to="/product-operation/edit-category"
-                      className="edit-link"
-                    >
-                      <MdEditNote className="edit-icon" />
-                    </Link>
-                    <AiFillDelete className="delete-icon" />
-                  </td>
+          {loading ? (
+            <p>Loading categories...</p>
+          ) : error ? (
+            <p>Error loading categories: {error.message}</p>
+          ) : (
+            <table className="modern-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Operation</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {categories.length > 0 ? (
+                  categories.map((category) => (
+                    <tr key={category._id}>
+                      <td>{category.name}</td>
+                      <td className="action-icons">
+                        <Link
+                          to={`/product-operation/edit-category/${category._id}`}
+                          className="edit-link"
+                        >
+                          <MdEditNote className="edit-icon" />
+                        </Link>
+                        <AiFillDelete className="delete-icon" />
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="2">No categories available</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
 
         <div className="product-listing">
@@ -120,7 +139,7 @@ const ProductOperation = () => {
                   <td>{product.description}</td>
                   <td className="action-icons">
                     <Link
-                      to="/product-operation/edit-product"
+                      to={`/product-operation/edit-product/${product.id}`}
                       className="edit-link"
                     >
                       <MdEditNote className="edit-icon" />
