@@ -1619,12 +1619,39 @@ header nav ul li .dropdown-toggle:hover {
   transition: background-color 0.3s;
 }
 
-
-
-
 .sidebar__link--logout .sidebar__text {
   margin-left: 10px;
   font-size: 1rem;
+}
+
+.form-quill {
+  color: #0085ff;
+}
+.generated-content {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  overflow-x: auto; /* Add scroll if content overflows */
+}
+
+.generated-content ul,
+.generated-content ol {
+  margin: 0;
+  padding: 0;
+  list-style-position: inside;
+}
+
+.generated-content ul {
+  list-style-type: disc; /* Bullet points for unordered lists */
+}
+
+.generated-content ol {
+  list-style-type: upper-roman; /* Numbering for ordered lists */
+}
+
+.generated-content li {
+  margin-bottom: 5px;
 }
 
 /* Responsive Design */

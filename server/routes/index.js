@@ -5,6 +5,7 @@ const multer = require("multer");
 const Image = require("../Models/Gallery");
 const Contact = require("../Models/Contact");
 const UserModel = require("../Models/User"); // Adjust the path according to your project structure
+const Social = require("../Models/Social");
 
 // Add a new category
 router.post("/add-category", async (req, res) => {
@@ -294,4 +295,40 @@ router.delete("/admin-users/:id", async (req, res) => {
   }
 });
 
+// Get all social media accounts
+router.get("/socials", async (req, res) => {
+  try {
+    const socials = await Social.find();
+    res.json(socials);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Get a single social media account by ID
+router.get("/socials/:id", async (req, res) => {
+  try {
+    const social = await Social.findById(req.params.id);
+    if (!social) return res.status(404).json({ message: "Social not found" });
+    res.json(social);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+// Update a social media account
+router.put("/socials/:id", async (req, res) => {
+  try {
+    const { name, link } = req.body;
+    const social = await Social.findByIdAndUpdate(
+      req.params.id,
+      { name, link },
+      { new: true, runValidators: true }
+    );
+    if (!social) return res.status(404).json({ message: "Social not found" });
+    res.json(social);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
 module.exports = router;

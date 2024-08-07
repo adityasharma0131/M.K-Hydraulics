@@ -1,37 +1,46 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
-import { FaInstagram, FaFacebook, FaLinkedin } from "react-icons/fa";
-import { FaWhatsapp } from "react-icons/fa6";
+import {
+  FaInstagram,
+  FaFacebook,
+  FaLinkedin,
+  FaWhatsapp,
+} from "react-icons/fa";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const SocialOperation = () => {
-  const socialMediaAccounts = [
-    {
-      id: 1,
-      icon: <FaInstagram />,
-      name: "Instagram",
-      link: "https://www.instagram.com/john.doe",
-    },
-    {
-      id: 2,
-      icon: <FaFacebook />,
-      name: "Facebook",
-      link: "https://www.facebook.com/jane.smith",
-    },
-    {
-      id: 3,
-      icon: <FaLinkedin />,
-      name: "LinkedIn",
-      link: "https://www.linkedin.com/in/michael.brown",
-    },
-    {
-      id: 4,
-      icon: <FaWhatsapp />,
-      name: "WhatsApp",
-      link: "https://wa.me/1234567890",
-    },
-  ];
+  const [socialMediaAccounts, setSocialMediaAccounts] = useState([]);
+
+  useEffect(() => {
+    const fetchSocialMediaAccounts = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/socials");
+        setSocialMediaAccounts(response.data);
+      } catch (error) {
+        console.error("Error fetching social media accounts:", error);
+      }
+    };
+
+    fetchSocialMediaAccounts();
+  }, []);
+
+  // Helper function to get the corresponding icon for each social media platform
+  const getSocialIcon = (name) => {
+    switch (name.toLowerCase()) {
+      case "instagram":
+        return <FaInstagram />;
+      case "facebook":
+        return <FaFacebook />;
+      case "linkedin":
+        return <FaLinkedin />;
+      case "whatsapp":
+        return <FaWhatsapp />;
+      default:
+        return null;
+    }
+  };
 
   return (
     <>
@@ -39,7 +48,7 @@ const SocialOperation = () => {
         <h1>Socials Page</h1>
       </div>
       <div className="admin-users">
-        <h1 className="heading">Social media accounts</h1>
+        <h1 className="heading">Social Media Accounts</h1>
         <table className="modern-table">
           <thead>
             <tr>
@@ -50,28 +59,29 @@ const SocialOperation = () => {
           </thead>
           <tbody>
             {socialMediaAccounts.map((account) => (
-              <tr key={account.id}>
+              <tr key={account._id}>
                 <td>
-                  {account.icon} {account.name}
+                  <span style={{ display: "flex", alignItems: "center" }}>
+                    {getSocialIcon(account.name)} {account.name}
+                  </span>
                 </td>
                 <td>
-                  <Link
-                    to={{ pathname: account.link }}
+                  <a
+                    href={account.link}
                     target="_blank"
-                    className="social-link"
                     rel="noopener noreferrer"
+                    className="social-link"
                   >
                     {account.link}
-                  </Link>
+                  </a>
                 </td>
                 <td className="action-icons">
                   <Link
-                    to="/social-operation/edit-socials"
+                    to={`/social-operation/edit-socials/${account._id}`}
                     className="edit-link"
                   >
                     <MdEditNote className="edit-icon" />
                   </Link>
-                  <AiFillDelete className="delete-icon" />
                 </td>
               </tr>
             ))}

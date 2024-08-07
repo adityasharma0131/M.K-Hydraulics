@@ -228,7 +228,7 @@ const App = () => {
           }
         />
         <Route
-          path="/social-operation/edit-socials"
+          path="/social-operation/edit-socials/:id"
           element={
             <AuthGuard>
               <AdminWrapper>
