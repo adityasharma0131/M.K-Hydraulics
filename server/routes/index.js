@@ -333,11 +333,37 @@ router.put("/socials/:id", async (req, res) => {
   }
 });
 
+router.get("/products", async (req, res) => {
+  try {
+    const products = await Product.find();
+    res.json(products);
+  } catch (error) {
+    res.status(500).send("Error fetching products");
+  }
+});
+
+router.delete("/products/:id", async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.send("Product deleted");
+  } catch (error) {
+    res.status(500).send("Error deleting product");
+  }
+});
+
 router.post("/products", upload.single("image"), async (req, res) => {
   try {
+    // Find or create category
+    let category = await Category.findOne({ name: req.body.category });
+    if (!category) {
+      category = new Category({ name: req.body.category });
+      await category.save();
+    }
+
+    // Create product with the found or created category
     const product = new Product({
       name: req.body.name,
-      category: req.body.category,
+      category: category._id, // Store category ID in the database
       image: req.file ? req.file.path : null,
       smallDesc: req.body.smallDesc,
       fullDesc: req.body.fullDesc,
@@ -350,6 +376,7 @@ router.post("/products", upload.single("image"), async (req, res) => {
     await product.save();
     res.status(201).json({ message: "Product added successfully!" });
   } catch (error) {
+    console.error("Error adding product:", error);
     res.status(500).json({ error: "Failed to add product." });
   }
 });

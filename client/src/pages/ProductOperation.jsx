@@ -7,11 +7,13 @@ import toast, { Toaster } from 'react-hot-toast'; // Import toast and Toaster
 
 const ProductOperation = () => {
   const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState([]); // Add state for products
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     fetchCategories();
+    fetchProducts(); // Fetch products on component mount
   }, []);
 
   const fetchCategories = async () => {
@@ -26,12 +28,22 @@ const ProductOperation = () => {
     }
   };
 
+  const fetchProducts = async () => {
+    try {
+      const response = await axios.get("http://localhost:3000/products");
+      setProducts(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching products:", error);
+      setError(error);
+      setLoading(false);
+    }
+  };
+
   const handleDeleteCategory = async (categoryId) => {
     try {
       await axios.delete(`http://localhost:3000/categories/${categoryId}`);
-      setCategories(
-        categories.filter((category) => category._id !== categoryId)
-      );
+      setCategories(categories.filter((category) => category._id !== categoryId));
       toast.success("Category deleted successfully!"); // Show success notification
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -40,32 +52,17 @@ const ProductOperation = () => {
     }
   };
 
-  const productList = [
-    {
-      id: 1,
-      name: "Product A",
-      category: "Category 1",
-      image: "https://picsum.photos/seed/picsum/500/500",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
-    },
-    {
-      id: 2,
-      name: "Product B",
-      category: "Category 2",
-      image: "https://picsum.photos/seed/picsum/500/500",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
-    },
-    {
-      id: 3,
-      name: "Product C",
-      category: "Category 3",
-      image: "https://picsum.photos/seed/picsum/500/500",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
-    },
-  ];
+  const handleDeleteProduct = async (productId) => {
+    try {
+      await axios.delete(`http://localhost:3000/products/${productId}`);
+      setProducts(products.filter((product) => product._id !== productId));
+      toast.success("Product deleted successfully!"); // Show success notification
+    } catch (error) {
+      console.error("Error deleting product:", error);
+      setError(error);
+      toast.error("Error deleting product: " + error.message); // Show error notification
+    }
+  };
 
   return (
     <>
@@ -141,29 +138,40 @@ const ProductOperation = () => {
               </tr>
             </thead>
             <tbody>
-              {productList.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.category}</td>
-                  <td>
+              {products.length > 0 ? (
+                products.map((product) => (
+                  <tr key={product._id}>
+                    <td>{product.name}</td>
+                    <td>{product.category}</td>
+                    <td>
                     <img
-                      src={product.image}
-                      alt={product.name}
-                      className="product-image"
-                    />
-                  </td>
-                  <td>{product.description}</td>
-                  <td className="action-icons">
-                    <Link
-                      to={`/product-operation/edit-product/${product.id}`}
-                      className="edit-link"
-                    >
-                      <MdEditNote className="edit-icon" />
-                    </Link>
-                    <AiFillDelete className="delete-icon" />
-                  </td>
+                          src={`http://localhost:3000/${product.image}`}
+                          alt={`Image of ${product.image}`}
+                          className="product-image"
+                          style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
+                        />
+                    </td>
+                    <td>{product.smallDesc}</td>
+                    <td className="action-icons">
+                      <Link
+                        to={`/product-operation/edit-product/${product._id}`}
+                        className="edit-link"
+                      >
+                        <MdEditNote className="edit-icon" />
+                      </Link>
+                      <AiFillDelete
+                        className="delete-icon"
+                        onClick={() => handleDeleteProduct(product._id)}
+                        style={{ cursor: "pointer" }}
+                      />
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan="5">No products available</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

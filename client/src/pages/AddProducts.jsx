@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
+import toast, { Toaster } from 'react-hot-toast'; // Import toast and Toaster
 
 const AddProducts = () => {
   const [product, setProduct] = useState({
@@ -27,10 +28,11 @@ const AddProducts = () => {
       try {
         const response = await fetch("http://localhost:3000/categories"); // Replace with your API endpoint
         const data = await response.json();
-        setCategories(data); // Assuming the data is an array of category names or objects with a 'name' field
+        setCategories(data); // Assuming the data is an array of category objects with 'name' and '_id' fields
       } catch (err) {
         console.error("Error fetching categories:", err);
         setError("Failed to fetch categories.");
+        toast.error("Failed to fetch categories.");
       }
     };
 
@@ -57,6 +59,7 @@ const AddProducts = () => {
 
     try {
       const formData = new FormData();
+      // Append each field to formData
       Object.keys(product).forEach((key) => {
         if (product[key] !== null) {
           formData.append(key, product[key]);
@@ -85,11 +88,12 @@ const AddProducts = () => {
         additionalDesc: "",
       });
 
-      // Optionally, show a success message using React Hot Toast or a similar library
-      // toast.success("Product added successfully!");
+      // Show success message
+      toast.success("Product added successfully!");
     } catch (err) {
       console.error("Error adding product:", err);
       setError("Failed to add product. Please try again.");
+      toast.error("Failed to add product. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -139,7 +143,7 @@ const AddProducts = () => {
                 >
                   <option value="">Select a category</option>
                   {categories.map((cat) => (
-                    <option key={cat._id} value={cat._id}>
+                    <option key={cat._id} value={cat.name}>
                       {cat.name}
                     </option>
                   ))}
@@ -217,7 +221,7 @@ const AddProducts = () => {
             </div>
             <div>
               <strong>Category:</strong>{" "}
-              {categories.find((cat) => cat._id === product.category)?.name ||
+              {categories.find((cat) => cat.name === product.category)?.name ||
                 "N/A"}
             </div>
             <div>
@@ -269,6 +273,7 @@ const AddProducts = () => {
           </div>
         </div>
       </div>
+      <Toaster /> {/* Add Toaster to render notifications */}
     </>
   );
 };
