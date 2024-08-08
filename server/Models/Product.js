@@ -1,16 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const ProductSchema = new Schema({
-  name: String,
-  category: mongoose.Schema.Types.ObjectId, // Assuming categories are stored as ObjectIds
-  image: String,
-  smallDesc: String,
-  fullDesc: String,
-  features: String,
-  applications: String,
-  advantages: String,
-  additionalDesc: String,
+const ProductSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  category: { type: String, required: true }, // Changed to String
+  image: { type: String },
+  smallDesc: { type: String },
+  fullDesc: { type: String },
+  features: { type: String },
+  applications: { type: String },
+  advantages: { type: String },
+  additionalDesc: { type: String },
 });
-
 module.exports = mongoose.model("Product", ProductSchema);

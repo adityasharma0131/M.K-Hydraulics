@@ -342,28 +342,12 @@ router.get("/products", async (req, res) => {
   }
 });
 
-router.delete("/products/:id", async (req, res) => {
-  try {
-    await Product.findByIdAndDelete(req.params.id);
-    res.send("Product deleted");
-  } catch (error) {
-    res.status(500).send("Error deleting product");
-  }
-});
-
 router.post("/products", upload.single("image"), async (req, res) => {
   try {
-    // Find or create category
-    let category = await Category.findOne({ name: req.body.category });
-    if (!category) {
-      category = new Category({ name: req.body.category });
-      await category.save();
-    }
-
-    // Create product with the found or created category
+    // Directly use category name
     const product = new Product({
       name: req.body.name,
-      category: category._id, // Store category ID in the database
+      category: req.body.category, // Store category name instead of ID
       image: req.file ? req.file.path : null,
       smallDesc: req.body.smallDesc,
       fullDesc: req.body.fullDesc,
@@ -378,6 +362,48 @@ router.post("/products", upload.single("image"), async (req, res) => {
   } catch (error) {
     console.error("Error adding product:", error);
     res.status(500).json({ error: "Failed to add product." });
+  }
+});
+
+
+router.delete("/products/:id", async (req, res) => {
+  try {
+    await Product.findByIdAndDelete(req.params.id);
+    res.send("Product deleted");
+  } catch (error) {
+    res.status(500).send("Error deleting product");
+  }
+});
+
+router.get("/products/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.json(product);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Route to update a product by ID
+router.put("/products/:id", upload.single("image"), async (req, res) => {
+  try {
+    const updates = req.body;
+    if (req.file) {
+      updates.image = req.file.path;
+    }
+    const product = await Product.findByIdAndUpdate(req.params.id, updates, {
+      new: true,
+      runValidators: true,
+    });
+    if (!product) {
+      return res.status(404).json({ error: "Product not found" });
+    }
+    res.json(product);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
 
