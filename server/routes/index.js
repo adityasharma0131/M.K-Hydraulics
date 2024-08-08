@@ -4,8 +4,9 @@ const Category = require("../Models/Category");
 const multer = require("multer");
 const Image = require("../Models/Gallery");
 const Contact = require("../Models/Contact");
-const UserModel = require("../Models/User"); // Adjust the path according to your project structure
+const UserModel = require("../Models/User");
 const Social = require("../Models/Social");
+const Product = require("../Models/Product");
 
 // Add a new category
 router.post("/add-category", async (req, res) => {
@@ -331,4 +332,26 @@ router.put("/socials/:id", async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 });
+
+router.post("/products", upload.single("image"), async (req, res) => {
+  try {
+    const product = new Product({
+      name: req.body.name,
+      category: req.body.category,
+      image: req.file ? req.file.path : null,
+      smallDesc: req.body.smallDesc,
+      fullDesc: req.body.fullDesc,
+      features: req.body.features,
+      applications: req.body.applications,
+      advantages: req.body.advantages,
+      additionalDesc: req.body.additionalDesc,
+    });
+
+    await product.save();
+    res.status(201).json({ message: "Product added successfully!" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to add product." });
+  }
+});
+
 module.exports = router;

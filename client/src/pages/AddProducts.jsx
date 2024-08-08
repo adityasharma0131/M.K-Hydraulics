@@ -58,14 +58,21 @@ const AddProducts = () => {
     try {
       const formData = new FormData();
       Object.keys(product).forEach((key) => {
-        formData.append(key, product[key]);
+        if (product[key] !== null) {
+          formData.append(key, product[key]);
+        }
       });
 
-      await fetch("http://localhost:3000/products", {
+      const response = await fetch("http://localhost:3000/products", {
         method: "POST",
         body: formData,
       });
 
+      if (!response.ok) {
+        throw new Error("Network response was not ok.");
+      }
+
+      // Reset form after successful submission
       setProduct({
         name: "",
         category: "",
@@ -145,7 +152,6 @@ const AddProducts = () => {
                   name="image"
                   onChange={handleFileChange}
                   className="form-input"
-                  required
                 />
               </li>
               <li className="form-item">
