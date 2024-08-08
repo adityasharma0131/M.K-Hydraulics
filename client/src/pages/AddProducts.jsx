@@ -3,9 +3,11 @@ import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css"; // Import Quill styles
-import toast, { Toaster } from 'react-hot-toast'; // Import toast and Toaster
+import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
+import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
+  const navigate = useNavigate();
   const [product, setProduct] = useState({
     name: "",
     category: "",
@@ -90,6 +92,7 @@ const AddProducts = () => {
 
       // Show success message
       toast.success("Product added successfully!");
+      navigate('/product-operation')
     } catch (err) {
       console.error("Error adding product:", err);
       setError("Failed to add product. Please try again.");
@@ -112,7 +115,6 @@ const AddProducts = () => {
           </h1>
         </div>
       </div>
-
       <div className="form-area">
         <div className="form-section">
           <div className="form-header">

@@ -13,7 +13,10 @@ const Dashboard = () => {
 
   const [recentQueries, setRecentQueries] = useState([]);
   const [adminUsers, setAdminUsers] = useState([]);
+  const [products, setProducts] = useState([]); // Add state for products
   const [loggedInUser, setLoggedInUser] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     // Fetch logged-in user
@@ -40,34 +43,25 @@ const Dashboard = () => {
       })
       .then((data) => setAdminUsers(data))
       .catch((error) => console.error("Error fetching admin users:", error));
-  }, []);
 
-  const productList = [
-    {
-      id: 1,
-      name: "Product A",
-      category: "Category 1",
-      image: "https://picsum.photos/seed/picsum/500/500",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
-    },
-    {
-      id: 2,
-      name: "Product B",
-      category: "Category 2",
-      image: "https://picsum.photos/seed/picsum/500/500",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
-    },
-    {
-      id: 3,
-      name: "Product C",
-      category: "Category 3",
-      image: "https://picsum.photos/seed/picsum/500/500",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. In est cupiditate nemo quisquam minus quas perferendis, quos aliquam similique molestiae rem voluptatibus et debitis facere esse.",
-    },
-  ];
+    // Fetch products
+    fetch("http://localhost:3000/products")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setProducts(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching products:", error);
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
 
   return (
     <>
@@ -148,32 +142,45 @@ const Dashboard = () => {
         </div>
         <div className="product-listing">
           <h1 className="heading">Recent Products</h1>
-          <table className="modern-table">
-            <thead>
-              <tr>
-                <th>Product Name</th>
-                <th>Category</th>
-                <th>Image</th>
-                <th>Small Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {productList.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.name}</td>
-                  <td>{product.category}</td>
-                  <td>
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className="product-image"
-                    />
-                  </td>
-                  <td>{product.description}</td>
+          {loading ? (
+            <p>Loading products...</p>
+          ) : error ? (
+            <p>Error loading products: {error.message}</p>
+          ) : (
+            <table className="modern-table">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Category</th>
+                  <th>Image</th>
+                  <th>Small Description</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {products.length > 0 ? (
+                  products.map((product) => (
+                    <tr key={product._id}>
+                      <td>{product.name}</td>
+                      <td>{product.category}</td>
+                      <td>
+                        <img
+                          src={`http://localhost:3000/${product.image}`}
+                          alt={product.name}
+                          className="product-image"
+                          style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
+                        />
+                      </td>
+                      <td>{product.smallDesc}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="4">No products available</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
