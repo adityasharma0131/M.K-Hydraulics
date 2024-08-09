@@ -28,6 +28,7 @@ import EditUser from "./pages/EditUser";
 import AuthGuard from "./components/AuthGuard";
 import { Toaster } from "react-hot-toast";
 import CatProduct from "./pages/CatProduct";
+import SingProduct from "./pages/SingProduct";
 
 const ClientWrapper = ({ children }) => (
   <>
@@ -94,6 +95,14 @@ const App = () => {
           element={
             <ClientWrapper>
               <CatProduct />
+            </ClientWrapper>
+          }
+        />
+        <Route
+          path="/product/:id"
+          element={
+            <ClientWrapper>
+              <SingProduct />
             </ClientWrapper>
           }
         />

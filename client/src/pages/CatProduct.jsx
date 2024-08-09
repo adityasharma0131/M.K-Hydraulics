@@ -74,7 +74,7 @@ const CatProduct = () => {
                     alt={product.name}
                   />
                   <div className="arrowlink">
-                    <Link to={`/products/${product._id}`}>
+                    <Link to={`/product/${product._id}`}>
                       <GoArrowUpRight className="GoArrowUpRight" />
                     </Link>
                   </div>
