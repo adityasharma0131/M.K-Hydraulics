@@ -27,6 +27,7 @@ import EditProduct from "./pages/EditProduct";
 import EditUser from "./pages/EditUser";
 import AuthGuard from "./components/AuthGuard";
 import { Toaster } from "react-hot-toast";
+import CatProduct from "./pages/CatProduct";
 
 const ClientWrapper = ({ children }) => (
   <>
@@ -88,14 +89,14 @@ const App = () => {
             </ClientWrapper>
           }
         />
-        {/* <Route
-          path="/products/:id"
+        <Route
+          path="/products/:name/:id"
           element={
             <ClientWrapper>
-              <Products />
+              <CatProduct />
             </ClientWrapper>
           }
-        /> */}
+        />
         <Route path="/admin-login" element={<AdminLogin />} />
         <Route
           path="/dashboard"

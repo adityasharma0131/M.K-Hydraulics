@@ -391,8 +391,9 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .productimg {
-  display: block;
-  width: 100%;
+  max-width: 100%;
+  max-height: 500px;
+  width: auto;
   height: auto;
 }
 
