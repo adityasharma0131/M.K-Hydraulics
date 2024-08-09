@@ -3,11 +3,13 @@ import logo from "../assets/Black_and_Blue_Airplane_Travel_Logo-removebg-preview
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink, Link } from "react-router-dom";
+import axios from "axios";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isScrollingDown, setIsScrollingDown] = useState(false);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -26,6 +28,20 @@ const Header = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
+  }, []);
+
+  useEffect(() => {
+    // Fetch categories from backend
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/categories");
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
   }, []);
 
   const toggleMenu = () => {
@@ -71,21 +87,20 @@ const Header = () => {
             </div>
             {isDropdownOpen && (
               <ul className="dropdown-menu">
-                <li>
-                  <NavLink to="/products" onClick={closeMenu}>
-                    Category 1
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/products" onClick={closeMenu}>
-                    Category 2
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/products" onClick={closeMenu}>
-                    Category 3
-                  </NavLink>
-                </li>
+                {categories.length > 0 ? (
+                  categories.map((category) => (
+                    <li key={category._id}>
+                      <NavLink
+                        to={`/products/${category.name}`} // Use category name in URL
+                        onClick={closeMenu}
+                      >
+                        {category.name}
+                      </NavLink>
+                    </li>
+                  ))
+                ) : (
+                  <li>No categories available</li>
+                )}
               </ul>
             )}
           </li>

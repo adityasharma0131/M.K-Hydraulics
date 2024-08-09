@@ -334,8 +334,16 @@ router.put("/socials/:id", async (req, res) => {
 });
 
 router.get("/products", async (req, res) => {
+  const { category } = req.query; // Use "category" instead of "categoryId"
+
   try {
-    const products = await Product.find();
+    let products;
+    if (category) {
+      products = await Product.find({ category }); // Filter by category name
+    } else {
+      products = await Product.find(); // Fetch all products if no category is provided
+    }
+
     res.json(products);
   } catch (error) {
     res.status(500).send("Error fetching products");
@@ -364,7 +372,6 @@ router.post("/products", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: "Failed to add product." });
   }
 });
-
 
 router.delete("/products/:id", async (req, res) => {
   try {
