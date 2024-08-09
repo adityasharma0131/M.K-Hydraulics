@@ -12,6 +12,7 @@ const EditProduct = () => {
   const [product, setProduct] = useState({
     name: "",
     category: "",
+    categoryId: "",
     image: null,
     smallDesc: "",
     fullDesc: "",
@@ -44,7 +45,10 @@ const EditProduct = () => {
         const response = await fetch(`http://localhost:3000/products/${id}`);
         if (!response.ok) throw new Error("Product not found.");
         const data = await response.json();
-        setProduct(data);
+        setProduct({
+          ...data,
+          categoryId: data.categoryId || "",
+        });
       } catch (err) {
         console.error("Error fetching product:", err);
         setError("Failed to fetch product.");
@@ -60,7 +64,16 @@ const EditProduct = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prev) => ({ ...prev, [name]: value }));
+    if (name === "category") {
+      const selectedCategory = categories.find((cat) => cat.name === value);
+      setProduct((prev) => ({
+        ...prev,
+        category: value,
+        categoryId: selectedCategory ? selectedCategory._id : "",
+      }));
+    } else {
+      setProduct((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleFileChange = (e) => {

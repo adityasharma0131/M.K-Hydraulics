@@ -352,10 +352,10 @@ router.get("/products", async (req, res) => {
 
 router.post("/products", upload.single("image"), async (req, res) => {
   try {
-    // Directly use category name
     const product = new Product({
       name: req.body.name,
-      category: req.body.category, // Store category name instead of ID
+      category: req.body.category, // Store category name
+      categoryId: req.body.categoryId, // Store category ID
       image: req.file ? req.file.path : null,
       smallDesc: req.body.smallDesc,
       fullDesc: req.body.fullDesc,
@@ -372,6 +372,7 @@ router.post("/products", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: "Failed to add product." });
   }
 });
+
 
 router.delete("/products/:id", async (req, res) => {
   try {
@@ -398,16 +399,22 @@ router.get("/products/:id", async (req, res) => {
 router.put("/products/:id", upload.single("image"), async (req, res) => {
   try {
     const updates = req.body;
+
+    // Handle image file upload
     if (req.file) {
       updates.image = req.file.path;
     }
+
+    // Update product in the database
     const product = await Product.findByIdAndUpdate(req.params.id, updates, {
       new: true,
       runValidators: true,
     });
+
     if (!product) {
       return res.status(404).json({ error: "Product not found" });
     }
+
     res.json(product);
   } catch (err) {
     res.status(400).json({ error: err.message });

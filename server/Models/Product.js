@@ -3,7 +3,8 @@ const Schema = mongoose.Schema;
 
 const ProductSchema = new mongoose.Schema({
   name: { type: String, required: true },
-  category: { type: String, required: true }, // Changed to String
+  category: { type: String, required: true }, // Category name
+  categoryId: { type: Schema.Types.ObjectId, required: true }, // Category ID
   image: { type: String },
   smallDesc: { type: String },
   fullDesc: { type: String },
@@ -12,4 +13,5 @@ const ProductSchema = new mongoose.Schema({
   advantages: { type: String },
   additionalDesc: { type: String },
 });
+
 module.exports = mongoose.model("Product", ProductSchema);

@@ -11,6 +11,7 @@ const AddProducts = () => {
   const [product, setProduct] = useState({
     name: "",
     category: "",
+    categoryId: "",
     image: null,
     smallDesc: "",
     fullDesc: "",
@@ -81,6 +82,7 @@ const AddProducts = () => {
       setProduct({
         name: "",
         category: "",
+        categoryId: "",
         image: null,
         smallDesc: "",
         fullDesc: "",
@@ -139,7 +141,14 @@ const AddProducts = () => {
                 <select
                   name="category"
                   value={product.category}
-                  onChange={handleInputChange}
+                  onChange={(e) => {
+                    const selectedCategory = categories.find(cat => cat.name === e.target.value);
+                    setProduct(prev => ({
+                      ...prev,
+                      category: e.target.value,
+                      categoryId: selectedCategory ? selectedCategory._id : ""
+                    }));
+                  }}
                   className="form-input"
                   required
                 >
@@ -223,7 +232,7 @@ const AddProducts = () => {
             </div>
             <div>
               <strong>Category:</strong>{" "}
-              {categories.find((cat) => cat.name === product.category)?.name ||
+              {categories.find((cat) => cat._id === product.categoryId)?.name ||
                 "N/A"}
             </div>
             <div>
