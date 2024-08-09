@@ -2,32 +2,50 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import HeroPage from "../components/HeroPage";
-import axios from 'axios';
+import axios from "axios";
+
+// Function to strip HTML tags from a string
+const stripHtmlTags = (html) => {
+  return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
+};
 
 const CatProduct = () => {
-  const { categoryName } = useParams(); // Get category name from URL
+  const { categoryId } = useParams(); // Get category ID from URL
   const [products, setProducts] = useState([]);
+  const [category, setCategory] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchCategoryAndProducts = async () => {
       try {
-        // Fetch products based on category name
-        const response = await axios.get("http://localhost:3000/products", {
-          params: { category: categoryName } // Send category name as query parameter
-        });
-        setProducts(response.data);
+        // Fetch category details
+        const categoryResponse = await axios.get(
+          `http://localhost:3000/categories/${categoryId}`
+        );
+        setCategory(categoryResponse.data);
+
+        // Fetch products based on category ID
+        const productsResponse = await axios.get(
+          "http://localhost:3000/products",
+          {
+            params: { categoryId }, // Send category ID as query parameter
+          }
+        );
+        setProducts(productsResponse.data);
       } catch (err) {
         setError(err);
-        console.error("Error fetching products:", err);
+        console.error("Error fetching category or products:", err);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
-  }, [categoryName]);
+    if (categoryId) {
+      // Ensure categoryId is not undefined
+      fetchCategoryAndProducts();
+    }
+  }, [categoryId]);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
@@ -42,7 +60,9 @@ const CatProduct = () => {
         </div>
 
         <div className="productbox">
-          <h1 className="heading1">Category: {categoryName}</h1>
+          <h1 className="heading1">
+            {category ? category.name : "Loading..."}
+          </h1>
           <hr />
           <div className="productcard">
             {products.length > 0 ? (
@@ -60,7 +80,10 @@ const CatProduct = () => {
                   </div>
                   <div className="info">
                     <h3 className="productname">{product.name}</h3>
-                    <p className="productdesc">{product.smallDesc}</p>
+                    <p className="productdesc">
+                      {stripHtmlTags(product.smallDesc)}
+                    </p>{" "}
+                    {/* Remove HTML tags */}
                   </div>
                 </div>
               ))

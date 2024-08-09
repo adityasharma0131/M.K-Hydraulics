@@ -90,7 +90,7 @@ const App = () => {
           }
         />
         <Route
-          path="/products/:name"
+          path="/products/:categoryId"
           element={
             <ClientWrapper>
               <CatProduct />

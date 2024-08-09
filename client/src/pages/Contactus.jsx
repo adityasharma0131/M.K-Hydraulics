@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeroPage from "../components/HeroPage";
 import { FaLocationDot } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa6";
@@ -7,7 +7,6 @@ import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
-
 import toast, { Toaster } from "react-hot-toast";
 
 const Contactus = () => {
@@ -17,6 +16,27 @@ const Contactus = () => {
     organization: "",
     message: "",
   });
+  const [socialLinks, setSocialLinks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchSocialLinks = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/social-links");
+        if (!response.ok) throw new Error("Network response was not ok");
+        const data = await response.json();
+        setSocialLinks(data);
+      } catch (err) {
+        setError(err);
+        console.error("Error fetching social links:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSocialLinks();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -52,6 +72,9 @@ const Contactus = () => {
       toast.error("Server error: " + error.message);
     }
   };
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>
@@ -161,10 +184,20 @@ const Contactus = () => {
             <hr />
             <div className="socials">
               <div className="social-media">
-                <FaInstagram />
-                <FaFacebook />
-                <FaLinkedin />
-                <FaWhatsapp />
+                {socialLinks.map((link) => (
+                  <a
+                    key={link._id}
+                    href={link.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="social-icon"
+                  >
+                    {link.name === "Instagram" && <FaInstagram />}
+                    {link.name === "Facebook" && <FaFacebook />}
+                    {link.name === "LinkedIn" && <FaLinkedin />}
+                    {link.name === "WhatsApp" && <FaWhatsapp />}
+                  </a>
+                ))}
               </div>
             </div>
             <hr />

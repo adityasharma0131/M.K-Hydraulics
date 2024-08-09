@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../assets/footer-logo.png";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
@@ -7,12 +7,63 @@ import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
-
 import { IoIosMail } from "react-icons/io";
-
 import { TbPhoneCall } from "react-icons/tb";
 
 const Footer = () => {
+  const [categories, setCategories] = useState([]);
+  const [products, setProducts] = useState({});
+  const [socialLinks, setSocialLinks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        // Fetch categories
+        const categoriesResponse = await fetch(
+          "http://localhost:3000/categories"
+        );
+        if (!categoriesResponse.ok)
+          throw new Error("Network response was not ok");
+        const categoriesData = await categoriesResponse.json();
+        setCategories(categoriesData);
+
+        // Fetch products
+        const productsResponse = await fetch("http://localhost:3000/products");
+        if (!productsResponse.ok)
+          throw new Error("Network response was not ok");
+        const productsData = await productsResponse.json();
+
+        // Organize products by category
+        const productsByCategory = productsData.reduce((acc, product) => {
+          const { categoryId, name } = product;
+          if (!acc[categoryId]) acc[categoryId] = [];
+          acc[categoryId].push(name);
+          return acc;
+        }, {});
+
+        setProducts(productsByCategory);
+
+        // Fetch social media links
+        const socialResponse = await fetch("http://localhost:3000/socials");
+        if (!socialResponse.ok) throw new Error("Network response was not ok");
+        const socialData = await socialResponse.json();
+        setSocialLinks(socialData);
+      } catch (err) {
+        setError(err);
+        console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
     <>
       <div className="footer">
@@ -30,9 +81,7 @@ const Footer = () => {
                 </li>
                 <li>
                   <IoIosArrowForward />
-                  <Link href="#" className="footer-desc">
-                    Products
-                  </Link>
+                  <Link className="footer-desc">Products</Link>
                 </li>
                 <li>
                   <IoIosArrowForward />
@@ -48,94 +97,23 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-            <div className="footer-section">
-              <h4 className="footer-head">Categories</h4>
-              <hr />
-              <ul>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link href="#" className="footer-desc">
-                    Products
-                  </Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-              </ul>
-            </div>
-            <div className="footer-section">
-              <h4 className="footer-head">Categories</h4>
-              <hr />
-              <ul>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link href="#" className="footer-desc">
-                    Products
-                  </Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-              </ul>
-            </div>
-            <div className="footer-section">
-              <h4 className="footer-head">Categories</h4>
-              <hr />
-              <ul>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link href="#" className="footer-desc">
-                    Products
-                  </Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-                <li>
-                  <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
-                </li>
-              </ul>
-            </div>
+            {categories.map((category) => (
+              <div key={category._id} className="footer-section">
+                <h4 className="footer-head">{category.name}</h4>
+                <hr />
+                <ul>
+                  {(products[category._id] || []).map((productName, index) => (
+                    <li key={index}>
+                      <IoIosArrowForward />
+                      <Link className="footer-desc">{productName}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
           </div>
 
-          {/* footer-side */}
-
+          {/* Footer-side */}
           <div className="footer-soc">
             <div className="footer-sec">
               <h4 className="footer-head">Quick Links</h4>
@@ -162,18 +140,22 @@ const Footer = () => {
             <div className="footer-sec">
               <h4 className="footer-head">Socials</h4>
               <ul className="sociallll">
-                <li>
-                  <FaInstagram />
-                </li>
-                <li>
-                  <IoIosMail />
-                </li>
-                <li>
-                  <FaLinkedin />
-                </li>
-                <li>
-                  <FaWhatsapp />
-                </li>
+                {socialLinks.map((social) => (
+                  <li key={social._id}>
+                    <a
+                      href={social.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {social.name === "Instagram" && <FaInstagram />}
+                      {social.name === "Facebook" && <FaFacebook />}
+                      {social.name === "LinkedIn" && <FaLinkedin />}
+                      {social.name === "WhatsApp" && <FaWhatsapp />}
+                      {social.name === "Email" && <IoIosMail />}
+                      {/* Add more icons based on your social media types */}
+                    </a>
+                  </li>
+                ))}
               </ul>
               <ul>
                 <li>

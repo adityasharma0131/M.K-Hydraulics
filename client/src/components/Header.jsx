@@ -91,7 +91,7 @@ const Header = () => {
                   categories.map((category) => (
                     <li key={category._id}>
                       <NavLink
-                        to={`/products/${category.name}`} // Use category name in URL
+                        to={`/products/${category._id}`} // Pass category ID in URL
                         onClick={closeMenu}
                       >
                         {category.name}

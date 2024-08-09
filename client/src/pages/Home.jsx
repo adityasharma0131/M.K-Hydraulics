@@ -1,15 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { Link } from "react-router-dom";
 import logo from "../assets/Black_and_Blue_Airplane_Travel_Logo-removebg-preview.png";
 import backgroundImage from "../assets/image 25.png";
-import p1 from "../assets/image 1.png";
-import p2 from "../assets/image 5.png";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoIosMail } from "react-icons/io";
-import bg1 from "../assets/image 25.png";
-import bg2 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (14) 1.png";
-import bg3 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (15) 1.png";
-import bg4 from "../assets/pikaso_enhance__vivid_2K_Standard_r_c_ (16) 1.png";
 import { TbPhoneCall } from "react-icons/tb";
 
 // Importing client images
@@ -66,6 +61,30 @@ const Home = () => {
     client25,
   ];
 
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        // Fetch 3 products from the backend
+        const response = await axios.get("http://localhost:3000/products-home");
+        setProducts(response.data);
+      } catch (err) {
+        setError(err);
+        console.error("Error fetching products:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
+
   return (
     <>
       <div className="homepage">
@@ -104,28 +123,28 @@ const Home = () => {
           <h1 className="heading1">Our Products</h1>
           <hr />
           <div className="productcard">
-            {[p1, p1, p1].map((product, index) => (
-              <div className="card" key={index}>
-                <img
-                  className="productimg"
-                  src={product}
-                  alt={`Product ${index + 1}`}
-                />
-                <div className="arrowlink">
-                  <Link to={`/products/id:${index + 1}`}>
-                    <GoArrowUpRight className="GoArrowUpRight" />
-                  </Link>
+            {products.length > 0 ? (
+              products.map((product) => (
+                <div className="card" key={product._id}>
+                  <img
+                    className="productimg"
+                    src={`http://localhost:3000/${product.image}`} // Adjust URL as needed
+                    alt={product.name}
+                  />
+                  <div className="arrowlink">
+                    <Link to={`/products/${product._id}`}>
+                      <GoArrowUpRight className="GoArrowUpRight" />
+                    </Link>
+                  </div>
+                  <div className="info">
+                    <h3 className="productname">{product.name}</h3>
+                    <p className="productdesc">{product.smallDesc}</p>
+                  </div>
                 </div>
-                <div className="info">
-                  <h3 className="productname">Hydraulic Power Pack</h3>
-                  <p className="productdesc">
-                    Our hydraulic power packs are designed for optimal
-                    performance, offering reliability and efficiency in various
-                    industrial applications.
-                  </p>
-                </div>
-              </div>
-            ))}
+              ))
+            ) : (
+              <p>No products available.</p>
+            )}
           </div>
           <div className="showmore">
             <Link to="/products">

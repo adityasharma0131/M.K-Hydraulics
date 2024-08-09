@@ -1,112 +1,86 @@
-import React from "react";
-import { IoIosArrowForward } from "react-icons/io";
-import { GoArrowUpRight } from "react-icons/go";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import p1 from "../assets/image 1.png";
-import HeroPage from '../components/HeroPage'
+import { GoArrowUpRight } from "react-icons/go";
+import HeroPage from '../components/HeroPage';
+import axios from 'axios';
+
 const Products = () => {
-  const products = [
-    {
-      name: "Hydraulic Power Pack",
-      description:
-        "Our hydraulic power packs are designed for optimal performance, offering reliability and efficiency in various industrial applications.",
-      image: p1,
-    },
-    {
-      name: "Hydraulic Power Pack",
-      description:
-        "Our hydraulic power packs are designed for optimal performance, offering reliability and efficiency in various industrial applications.",
-      image: p1,
-    },
-    {
-      name: "Hydraulic Power Pack",
-      description:
-        "Our hydraulic power packs are designed for optimal performance, offering reliability and efficiency in various industrial applications.",
-      image: p1,
-    },
-  ];
+  const [categories, setCategories] = useState([]);
+  const [productsByCategory, setProductsByCategory] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchCategoriesAndProducts = async () => {
+      try {
+        // Fetch categories
+        const categoriesResponse = await axios.get("http://localhost:3000/categories");
+        setCategories(categoriesResponse.data);
+
+        // Fetch products
+        const productsResponse = await axios.get("http://localhost:3000/products");
+        const products = productsResponse.data;
+
+        // Organize products by category
+        const productsMap = {};
+        products.forEach((product) => {
+          const category = product.category; // Assuming product has a category field
+          if (!productsMap[category]) {
+            productsMap[category] = [];
+          }
+          productsMap[category].push(product);
+        });
+
+        setProductsByCategory(productsMap);
+      } catch (err) {
+        setError(err);
+        console.error("Error fetching data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategoriesAndProducts();
+  }, []);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <>
       <HeroPage heading="Products" />
 
       <div className="our-products">
-        <div className="productbgbox">
-          <h1 className="heading1">Our Products</h1>
-        </div>
-
-        <div className="productbox">
-          <h1 className="heading1">Category 1</h1>
-          <hr />
-          <div className="productcard">
-            {products.map((product, index) => (
-              <div className="card" key={index}>
-                <img
-                  className="productimg"
-                  src={product.image}
-                  alt={`Product ${index + 1}`}
-                />
-                <div className="arrowlink">
-                  <Link to={`/products/id:${index + 1}`}>
-                    <GoArrowUpRight className="GoArrowUpRight" />
-                  </Link>
-                </div>
-                <div className="info">
-                  <h3 className="productname">{product.name}</h3>
-                  <p className="productdesc">{product.description}</p>
-                </div>
-              </div>
-            ))}
+        {categories.map((category) => (
+          <div key={category._id} className="productbox">
+            <h1 className="heading1">{category.name}</h1>
+            <hr />
+            <div className="productcard">
+              {productsByCategory[category.name] && productsByCategory[category.name].length > 0 ? (
+                productsByCategory[category.name].map((product) => (
+                  <div className="card" key={product._id}>
+                    <img
+                      className="productimg"
+                      src={`http://localhost:3000/${product.image}`} // Adjust URL as needed
+                      alt={product.name}
+                    />
+                    <div className="arrowlink">
+                      <Link to={`/products/${product._id}`}>
+                        <GoArrowUpRight className="GoArrowUpRight" />
+                      </Link>
+                    </div>
+                    <div className="info">
+                      <h3 className="productname">{product.name}</h3>
+                      <p className="productdesc">{product.smallDesc}</p>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p>No products available for this category.</p>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="productbox">
-          <h1 className="heading1">Category 2</h1>
-          <hr />
-          <div className="productcard">
-            {products.map((product, index) => (
-              <div className="card" key={index}>
-                <img
-                  className="productimg"
-                  src={product.image}
-                  alt={`Product ${index + 1}`}
-                />
-                <div className="arrowlink">
-                  <Link to={`/products/id:${index + 1}`}>
-                    <GoArrowUpRight className="GoArrowUpRight" />
-                  </Link>
-                </div>
-                <div className="info">
-                  <h3 className="productname">{product.name}</h3>
-                  <p className="productdesc">{product.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="productbox">
-          <h1 className="heading1">Category 3</h1>
-          <hr />
-          <div className="productcard">
-            {products.map((product, index) => (
-              <div className="card" key={index}>
-                <img
-                  className="productimg"
-                  src={product.image}
-                  alt={`Product ${index + 1}`}
-                />
-                <div className="arrowlink">
-                  <Link to={`/products/id:${index + 1}`}>
-                    <GoArrowUpRight className="GoArrowUpRight" />
-                  </Link>
-                </div>
-                <div className="info">
-                  <h3 className="productname">{product.name}</h3>
-                  <p className="productdesc">{product.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
+        ))}
       </div>
     </>
   );

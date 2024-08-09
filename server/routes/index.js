@@ -333,20 +333,48 @@ router.put("/socials/:id", async (req, res) => {
   }
 });
 
+router.get("/social-links", async (req, res) => {
+  try {
+    const socialLinks = await Social.find(); // Adjust the model name if necessary
+    res.status(200).json(socialLinks);
+  } catch (error) {
+    console.error("Error fetching social links:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
 router.get("/products", async (req, res) => {
-  const { category } = req.query; // Use "category" instead of "categoryId"
+  const { categoryId } = req.query;
 
   try {
-    let products;
-    if (category) {
-      products = await Product.find({ category }); // Filter by category name
-    } else {
-      products = await Product.find(); // Fetch all products if no category is provided
-    }
+    // If categoryId is provided, filter by it; otherwise, return all products
+    const products = categoryId
+      ? await Product.find({ categoryId }) // Adjust field name if needed
+      : await Product.find();
 
-    res.json(products);
+    res.status(200).json(products);
   } catch (error) {
-    res.status(500).send("Error fetching products");
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+router.get("/products-home", async (req, res) => {
+  const { categoryId, limit } = req.query;
+
+  try {
+    // Set default limit to 3 if not provided
+    const productsLimit = parseInt(limit) || 3;
+
+    // If categoryId is provided, filter by it; otherwise, return all products
+    const products = categoryId
+      ? await Product.find({ categoryId }).limit(productsLimit)
+      : await Product.find().limit(productsLimit);
+
+    res.status(200).json(products);
+  } catch (error) {
+    console.error("Error fetching products:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 
@@ -372,7 +400,6 @@ router.post("/products", upload.single("image"), async (req, res) => {
     res.status(500).json({ error: "Failed to add product." });
   }
 });
-
 
 router.delete("/products/:id", async (req, res) => {
   try {
