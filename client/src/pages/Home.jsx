@@ -9,17 +9,8 @@ import { TbPhoneCall } from "react-icons/tb";
 
 // Importing client images
 import client1 from "../assets/image 10.png";
-import client2 from "../assets/image 23.png";
-import client3 from "../assets/image 24.png";
 import client5 from "../assets/image 7.png";
 import client6 from "../assets/image 8.png";
-import client7 from "../assets/image 9.png";
-import client8 from "../assets/WhatsApp Image 2024-07-14 at 1.19.36 PM (1).png";
-import client9 from "../assets/WhatsApp Image 2024-07-14 at 1.19.36 PM (2).png";
-import client10 from "../assets/WhatsApp Image 2024-07-14 at 1.19.36 PM.png";
-import client11 from "../assets/WhatsApp Image 2024-07-14 at 1.19.37 PM (1).png";
-import client12 from "../assets/WhatsApp Image 2024-07-14 at 1.19.37 PM (2).png";
-import client13 from "../assets/WhatsApp Image 2024-07-14 at 1.19.37 PM.png";
 import client14 from "../assets/WhatsApp Image 2024-07-29 at 9.09.31 AM.jpeg";
 import client15 from "../assets/WhatsApp Image 2024-07-29 at 9.09.34 AM.jpeg";
 import client16 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (1).jpeg";
@@ -34,19 +25,14 @@ import client24 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM.jpeg";
 import client25 from "../assets/WhatsApp Image 2024-07-29 at 9.09.38 AM.jpeg";
 
 const Home = () => {
+  const stripHtmlTags = (html) => {
+    return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
+  };
   const clientImages = [
     client1,
-    client2,
-    client3,
+
     client5,
     client6,
-    client7,
-    client8,
-    client9,
-    client10,
-    client11,
-    client12,
-    client13,
     client14,
     client15,
     client16,
@@ -138,7 +124,9 @@ const Home = () => {
                   </div>
                   <div className="info">
                     <h3 className="productname">{product.name}</h3>
-                    <p className="productdesc">{product.smallDesc}</p>
+                    <p className="productdesc">
+                      {stripHtmlTags(product.smallDesc)}
+                    </p>
                   </div>
                 </div>
               ))

@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
-import HeroPage from '../components/HeroPage';
-import axios from 'axios';
+import HeroPage from "../components/HeroPage";
+import axios from "axios";
 
 const Products = () => {
+  const stripHtmlTags = (html) => {
+    return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
+  };
   const [categories, setCategories] = useState([]);
   const [productsByCategory, setProductsByCategory] = useState({});
   const [loading, setLoading] = useState(true);
@@ -14,11 +17,15 @@ const Products = () => {
     const fetchCategoriesAndProducts = async () => {
       try {
         // Fetch categories
-        const categoriesResponse = await axios.get("http://localhost:3000/categories");
+        const categoriesResponse = await axios.get(
+          "http://localhost:3000/categories"
+        );
         setCategories(categoriesResponse.data);
 
         // Fetch products
-        const productsResponse = await axios.get("http://localhost:3000/products");
+        const productsResponse = await axios.get(
+          "http://localhost:3000/products"
+        );
         const products = productsResponse.data;
 
         // Organize products by category
@@ -56,7 +63,8 @@ const Products = () => {
             <h1 className="heading1">{category.name}</h1>
             <hr />
             <div className="productcard">
-              {productsByCategory[category.name] && productsByCategory[category.name].length > 0 ? (
+              {productsByCategory[category.name] &&
+              productsByCategory[category.name].length > 0 ? (
                 productsByCategory[category.name].map((product) => (
                   <div className="card" key={product._id}>
                     <img
@@ -71,7 +79,9 @@ const Products = () => {
                     </div>
                     <div className="info">
                       <h3 className="productname">{product.name}</h3>
-                      <p className="productdesc">{product.smallDesc}</p>
+                      <p className="productdesc">
+                        {stripHtmlTags(product.smallDesc)}
+                      </p>
                     </div>
                   </div>
                 ))

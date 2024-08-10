@@ -1,15 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const SingleProduct = () => {
+  const stripHtmlTags = (html) => {
+    return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
+  };
   const { id, name } = useParams(); // Get both the product ID and name from the URL
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/single-product/${name}/${id}`);
+        const response = await fetch(
+          `http://localhost:3000/single-product/${name}/${id}`
+        );
         const result = await response.json();
         if (response.ok) {
           setProduct(result);
@@ -17,7 +22,7 @@ const SingleProduct = () => {
           toast.error(result.message);
         }
       } catch (error) {
-        toast.error('Error fetching product: ' + error.message);
+        toast.error("Error fetching product: " + error.message);
       }
     };
 
@@ -34,22 +39,22 @@ const SingleProduct = () => {
       <div className="product-details">
         <div className="product-section">
           <h3>Full Description</h3>
-          <div dangerouslySetInnerHTML={{ __html: product.fullDesc }} />
+          <div>{stripHtmlTags(product.fullDesc)}</div>
         </div>
         <div className="product-section">
           <h3>Features</h3>
-          <div dangerouslySetInnerHTML={{ __html: product.features }} />
+          <div>{stripHtmlTags(product.features)}</div>
         </div>
         <div className="product-section">
           <h3>Applications</h3>
-          <div dangerouslySetInnerHTML={{ __html: product.applications }} />
+          <div>{stripHtmlTags(product.applications)}</div>
         </div>
         <div className="product-section">
           <h3>Advantages</h3>
-          <div dangerouslySetInnerHTML={{ __html: product.advantages }} />
+          <div>{stripHtmlTags(product.advantages)}</div>
         </div>
         <div className="product-section">
-          <div dangerouslySetInnerHTML={{ __html: product.additionalDesc }} />
+          <div>{stripHtmlTags(product.additionalDesc)}</div>
         </div>
       </div>
     </div>
