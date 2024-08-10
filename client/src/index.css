@@ -1630,9 +1630,8 @@ header nav ul li .dropdown-toggle:hover {
 }
 .generated-content {
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid #0085ff;
   border-radius: 5px;
-  background-color: #f9f9f9;
   overflow-x: auto; /* Add scroll if content overflows */
 }
 
@@ -1655,6 +1654,9 @@ header nav ul li .dropdown-toggle:hover {
   margin-bottom: 5px;
 }
 
+.generated-answers {
+  color: #0085ff;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .product-image {
