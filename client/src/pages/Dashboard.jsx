@@ -3,6 +3,9 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 const Dashboard = () => {
+  const stripHtmlTags = (html) => {
+    return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
+  };
   const progressData = [
     { value: 66, title: "Product Range Expansion" },
     { value: 75, title: "Customer Satisfaction" },
@@ -170,7 +173,7 @@ const Dashboard = () => {
                           style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
                         />
                       </td>
-                      <td>{product.smallDesc}</td>
+                      <td>{stripHtmlTags(product.smallDesc)}</td>
                     </tr>
                   ))
                 ) : (

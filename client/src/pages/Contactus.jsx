@@ -150,9 +150,10 @@ const Contactus = () => {
           <div className="contactbx2">
             <h2>Get in touch</h2>
             <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Velit
-              eligendi dolores fugiat similique blanditiis numquam dignissimos
-              ad saepe consectetur veritatis repellendus at.
+              We’re here to assist you with any inquiries or support you may
+              need. Whether you have questions about our products, need
+              technical support, or just want to learn more about what we do,
+              our team is ready to help.
             </p>
             <hr />
             <div className="address">
@@ -160,8 +161,9 @@ const Contactus = () => {
               <div className="FaLocationDot">
                 <FaLocationDot />
                 <p>
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                  Aspernatur.
+                  4V5R+682, Hari masjid lane, Lotus Compound, Near Badru
+                  Compound, kherani Road, Sakinaka, Andheri East, Mumbai,
+                  Maharashtra 72
                 </p>
               </div>
             </div>
@@ -171,13 +173,13 @@ const Contactus = () => {
                 <h3>Contact</h3>
                 <div className="FaPhone">
                   <FaPhone />
-                  <p>+91 8530532698 | +91 9272927739</p>
+                  <p>+91 89760 04552 | 95916 55720</p>
                 </div>
               </div>
               <div className="emailid">
                 <div className="IoIosMail">
                   <IoIosMail />
-                  <p>contact@example.com</p>
+                  <p>Mkhydraulicssales@gmail.com Mkhydraulics@gmail.com</p>
                 </div>
               </div>
             </div>

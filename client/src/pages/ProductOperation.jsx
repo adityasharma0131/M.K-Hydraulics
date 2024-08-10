@@ -3,9 +3,12 @@ import { Link } from "react-router-dom";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
 import axios from "axios";
-import toast, { Toaster } from 'react-hot-toast'; // Import toast and Toaster
+import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
 
 const ProductOperation = () => {
+  const stripHtmlTags = (html) => {
+    return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
+  };
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]); // Add state for products
   const [loading, setLoading] = useState(true);
@@ -43,7 +46,9 @@ const ProductOperation = () => {
   const handleDeleteCategory = async (categoryId) => {
     try {
       await axios.delete(`http://localhost:3000/categories/${categoryId}`);
-      setCategories(categories.filter((category) => category._id !== categoryId));
+      setCategories(
+        categories.filter((category) => category._id !== categoryId)
+      );
       toast.success("Category deleted successfully!"); // Show success notification
     } catch (error) {
       console.error("Error deleting category:", error);
@@ -69,7 +74,6 @@ const ProductOperation = () => {
       <div className="dashboard-name">
         <h1>Products Page</h1>
       </div>
-
       <div className="tables-area">
         <div className="recent-queries">
           <div className="operation-header">
@@ -144,14 +148,14 @@ const ProductOperation = () => {
                     <td>{product.name}</td>
                     <td>{product.category}</td>
                     <td>
-                    <img
-                          src={`http://localhost:3000/${product.image}`}
-                          alt={`Image of ${product.image}`}
-                          className="product-image"
-                          style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
-                        />
+                      <img
+                        src={`http://localhost:3000/${product.image}`}
+                        alt={`Image of ${product.image}`}
+                        className="product-image"
+                        style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
+                      />
                     </td>
-                    <td>{product.smallDesc}</td>
+                    <td>{stripHtmlTags(product.smallDesc)}</td>
                     <td className="action-icons">
                       <Link
                         to={`/product-operation/edit-product/${product._id}`}

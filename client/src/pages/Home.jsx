@@ -168,14 +168,14 @@ const Home = () => {
               <TbPhoneCall />
             </div>
             <h2 className="contacthead">Call Us</h2>
-            <h3 className="contactdesc">+91 8530532698 | +91 9272927739</h3>
+            <h3 className="contactdesc">+91 89760 04552 | 95916 55720</h3>
           </div>
           <div className="contact-item">
             <div className="icon">
               <IoIosMail />
             </div>
             <h2 className="contacthead">Email Us</h2>
-            <h3 className="contactdesc">contact@example.com</h3>
+            <h3 className="contactdesc"> Mkhydraulics@gmail.com </h3>
           </div>
         </div>
       </div>

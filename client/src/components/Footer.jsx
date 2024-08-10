@@ -3,7 +3,7 @@ import logo from "../assets/footer-logo.png";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaMailBulk, FaMailchimp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -116,24 +116,24 @@ const Footer = () => {
           {/* Footer-side */}
           <div className="footer-soc">
             <div className="footer-sec">
-              <h4 className="footer-head">Quick Links</h4>
+              <h4 className="footer-head">Contact</h4>
               <hr />
               <ul>
                 <li>
                   <TbPhoneCall />
                   <Link className="footer-desc">
-                    +91 8530532698 | +91 9272927739
+                    +91 89760 04552 | 95916 55720
                   </Link>
                 </li>
                 <li>
-                  <FaFacebook />
-                  <Link className="footer-desc">contact@example.com</Link>
+                  <IoIosMail />
+                  <Link className="footer-desc">
+                    Mkhydraulicssales@gmail.com <br /> Mkhydraulics@gmail.com
+                  </Link>
                 </li>
                 <li>
                   <FaLocationDot />
-                  <Link className="footer-desc">
-                    Lorem ipsum dolor sit amet conse
-                  </Link>
+                  <Link className="footer-desc">Google location</Link>
                 </li>
               </ul>
             </div>
@@ -151,7 +151,6 @@ const Footer = () => {
                       {social.name === "Facebook" && <FaFacebook />}
                       {social.name === "LinkedIn" && <FaLinkedin />}
                       {social.name === "WhatsApp" && <FaWhatsapp />}
-                      {social.name === "Email" && <IoIosMail />}
                       {/* Add more icons based on your social media types */}
                     </a>
                   </li>
