@@ -5,6 +5,7 @@ const productSchema = new mongoose.Schema({
   category: String,
   categoryId: String,
   images: [String], // Array of image paths
+  specImage: String, // Added for specific image
   smallDesc: String,
   fullDesc: String,
   features: String,

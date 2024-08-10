@@ -378,16 +378,25 @@ router.get("/products-home", async (req, res) => {
   }
 });
 
+// Create product route
 router.post(
   "/products",
-  upload.array("images", 3), // Adjust the number of images allowed if necessary
+  upload.fields([
+    { name: "images", maxCount: 3 },
+    { name: "specImage", maxCount: 1 },
+  ]),
   async (req, res) => {
     try {
       const product = new Product({
         name: req.body.name,
         category: req.body.category,
         categoryId: req.body.categoryId,
-        images: req.files.map((file) => file.path),
+        images: req.files["images"]
+          ? req.files["images"].map((file) => file.path)
+          : [],
+        specImage: req.files["specImage"]
+          ? req.files["specImage"][0].path
+          : null,
         smallDesc: req.body.smallDesc,
         fullDesc: req.body.fullDesc,
         features: req.body.features,
@@ -427,30 +436,42 @@ router.get("/products/:id", async (req, res) => {
 });
 
 // Update product route
-router.put("/products/:id", upload.array("images", 3), async (req, res) => {
-  try {
-    const updates = req.body;
+router.put(
+  "/products/:id",
+  upload.fields([
+    { name: "images", maxCount: 3 },
+    { name: "specImage", maxCount: 1 },
+  ]),
+  async (req, res) => {
+    try {
+      const updates = req.body;
 
-    // Handle image file uploads
-    if (req.files && req.files.length > 0) {
-      updates.images = req.files.map((file) => file.path);
+      // Handle image file uploads
+      if (req.files) {
+        if (req.files["images"]) {
+          updates.images = req.files["images"].map((file) => file.path);
+        }
+        if (req.files["specImage"]) {
+          updates.specImage = req.files["specImage"][0].path;
+        }
+      }
+
+      const product = await Product.findByIdAndUpdate(req.params.id, updates, {
+        new: true,
+        runValidators: true,
+      });
+
+      if (!product) {
+        return res.status(404).json({ error: "Product not found" });
+      }
+
+      res.json(product);
+    } catch (err) {
+      console.error("Error updating product:", err);
+      res.status(400).json({ error: err.message });
     }
-
-    const product = await Product.findByIdAndUpdate(req.params.id, updates, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!product) {
-      return res.status(404).json({ error: "Product not found" });
-    }
-
-    res.json(product);
-  } catch (err) {
-    console.error("Error updating product:", err);
-    res.status(400).json({ error: err.message });
   }
-});
+);
 
 // backend/routes/product.js
 router.get("/single-product/:id", async (req, res) => {

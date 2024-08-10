@@ -13,6 +13,7 @@ const EditProduct = () => {
     category: "",
     categoryId: "",
     images: [], // Updated to handle multiple images
+    specImage: null, // Added for specific image
     smallDesc: "",
     fullDesc: "",
     features: "",
@@ -47,6 +48,7 @@ const EditProduct = () => {
         setProduct({
           ...data,
           categoryId: data.categoryId || "",
+          specImage: data.specImage || null, // Initialize specImage
         });
       } catch (err) {
         console.error("Error fetching product:", err);
@@ -77,10 +79,15 @@ const EditProduct = () => {
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    if (files.length > 0) {
+    if (name === "specImage" && files.length > 0) {
       setProduct((prev) => ({
         ...prev,
-        images: [...prev.images, files[0]], // Updated to handle multiple images
+        specImage: files[0], // Handle specImage
+      }));
+    } else if (files.length > 0) {
+      setProduct((prev) => ({
+        ...prev,
+        images: Array.from(files), // Handle multiple images
       }));
     }
   };
@@ -97,10 +104,12 @@ const EditProduct = () => {
     try {
       const formData = new FormData();
       Object.keys(product).forEach((key) => {
-        if (Array.isArray(product[key])) {
+        if (key === "images") {
           product[key].forEach((file) => {
             formData.append("images", file); // Append each file in images array
           });
+        } else if (key === "specImage" && product[key]) {
+          formData.append("specImage", product[key]); // Append specImage
         } else if (product[key] !== null && product[key] !== "") {
           formData.append(key, product[key]);
         }
@@ -182,12 +191,22 @@ const EditProduct = () => {
                   <label className="form-label">Image {i + 1}</label>
                   <input
                     type="file"
-                    name={`image${i + 1}`}
+                    name={`images${i + 1}`}
+                    multiple
                     onChange={handleFileChange}
                     className="form-input"
                   />
                 </li>
               ))}
+              <li className="form-item">
+                <label className="form-label">Specific Image</label>
+                <input
+                  type="file"
+                  name="specImage"
+                  onChange={handleFileChange}
+                  className="form-input"
+                />
+              </li>
               <li className="form-item">
                 <label className="form-label">Small Description</label>
                 <ReactQuill

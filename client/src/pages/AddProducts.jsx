@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
   const navigate = useNavigate();
@@ -13,6 +12,7 @@ const AddProducts = () => {
     category: "",
     categoryId: "",
     images: [], // Updated to handle multiple images
+    specImage: null, // Added for specific image
     smallDesc: "",
     fullDesc: "",
     features: "",
@@ -57,11 +57,16 @@ const AddProducts = () => {
   };
 
   const handleFileChange = (e) => {
-    const { files } = e.target;
-    if (files.length > 0) {
+    const { name, files } = e.target;
+    if (name === "images") {
       setProduct((prev) => ({
         ...prev,
         images: [...prev.images, ...Array.from(files)], // Handle multiple files
+      }));
+    } else if (name === "specImage" && files.length > 0) {
+      setProduct((prev) => ({
+        ...prev,
+        specImage: files[0], // Handle single file for specImage
       }));
     }
   };
@@ -82,8 +87,10 @@ const AddProducts = () => {
           product[key].forEach((file) => {
             formData.append("images", file); // Append each file in images array
           });
-        } else if (product[key] !== "") {
+        } else if (product[key] !== "" && key !== "specImage") {
           formData.append(key, product[key]);
+        } else if (key === "specImage" && product.specImage) {
+          formData.append("specImage", product.specImage); // Append single specImage
         }
       });
 
@@ -101,6 +108,7 @@ const AddProducts = () => {
         category: "",
         categoryId: "",
         images: [],
+        specImage: null, // Reset specImage
         smallDesc: "",
         fullDesc: "",
         features: "",
@@ -174,13 +182,22 @@ const AddProducts = () => {
                   <label className="form-label">Image {i + 1}</label>
                   <input
                     type="file"
-                    name={`image${i + 1}`}
+                    name="images"
                     onChange={handleFileChange}
                     className="form-input"
                     multiple
                   />
                 </li>
               ))}
+              <li className="form-item">
+                <label className="form-label">Spec Image</label>
+                <input
+                  type="file"
+                  name="specImage"
+                  onChange={handleFileChange}
+                  className="form-input"
+                />
+              </li>
               <li className="form-item">
                 <label className="form-label">Small Description</label>
                 <ReactQuill
@@ -237,65 +254,6 @@ const AddProducts = () => {
             </ul>
           </form>
           {error && <p className="form-error">{error}</p>}
-          <div className="generated-answers">
-            <h2>Generated Answers:</h2>
-            <div>
-              <strong>Name:</strong> {product.name}
-            </div>
-            <div>
-              <strong>Category:</strong>{" "}
-              {categories.find((cat) => cat._id === product.categoryId)?.name ||
-                "N/A"}
-            </div>
-            {product.images.map((image, index) => (
-              <div key={index}>
-                <strong>Image {index + 1}:</strong>{" "}
-                {image ? image.name : "No image selected"}
-              </div>
-            ))}
-            <div>
-              <strong>Small Description:</strong>{" "}
-              <div
-                className="generated-content"
-                dangerouslySetInnerHTML={{ __html: product.smallDesc }}
-              />
-            </div>
-            <div>
-              <strong>Full Description:</strong>{" "}
-              <div
-                className="generated-content"
-                dangerouslySetInnerHTML={{ __html: product.fullDesc }}
-              />
-            </div>
-            <div>
-              <strong>Features:</strong>{" "}
-              <div
-                className="generated-content"
-                dangerouslySetInnerHTML={{ __html: product.features }}
-              />
-            </div>
-            <div>
-              <strong>Applications:</strong>{" "}
-              <div
-                className="generated-content"
-                dangerouslySetInnerHTML={{ __html: product.applications }}
-              />
-            </div>
-            <div>
-              <strong>Advantages:</strong>{" "}
-              <div
-                className="generated-content"
-                dangerouslySetInnerHTML={{ __html: product.advantages }}
-              />
-            </div>
-            <div>
-              <strong>Additional Description:</strong>{" "}
-              <div
-                className="generated-content"
-                dangerouslySetInnerHTML={{ __html: product.additionalDesc }}
-              />
-            </div>
-          </div>
         </div>
       </div>
       <Toaster />

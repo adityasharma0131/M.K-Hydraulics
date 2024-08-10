@@ -5,11 +5,14 @@ import HeroPage from "../components/HeroPage"; // Ensure this import is correct
 
 const SingleProduct = () => {
   const stripHtmlTags = (html) => {
+    if (!html) return "";
     return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
   };
 
   const { id } = useParams(); // Get the product ID from the URL
   const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true); // Added loading state
+  const [error, setError] = useState(null); // Added error state
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -17,21 +20,27 @@ const SingleProduct = () => {
         const response = await fetch(
           `http://localhost:3000/single-product/${id}`
         );
-        const result = await response.json();
-        if (response.ok) {
-          setProduct(result);
-        } else {
-          toast.error(result.message || "Failed to fetch product.");
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || "Failed to fetch product.");
         }
+        const result = await response.json();
+        setProduct(result);
       } catch (error) {
+        setError(error.message);
         toast.error("Error fetching product: " + error.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchProduct();
   }, [id]);
 
-  if (!product) return <div>Loading...</div>;
+  if (loading) return <div>Loading...</div>; // Display loading state
+  if (error) return <div>Error: {error}</div>; // Display error message
+
+  if (!product) return <div>No product found.</div>; // Handle case where no product is returned
 
   return (
     <>
@@ -55,8 +64,20 @@ const SingleProduct = () => {
         <h2 className="heading">Category: {product.category}</h2>
         <div className="product-details">
           <div className="product-section">
-            <h3 className="heading">Full Description</h3>
+            <h3 className="heading">Product Description</h3>
             <div>{stripHtmlTags(product.fullDesc)}</div>
+          </div>
+          <div className="product-section">
+            <h3 className="heading">Specification</h3>
+            {product.specImage ? (
+              <img
+                src={`http://localhost:3000/${product.specImage}`}
+                alt="Specification"
+                className="spec-image"
+              />
+            ) : (
+              <p>No specification image available</p>
+            )}
           </div>
           <div className="product-section">
             <h3 className="heading">Features</h3>
@@ -71,7 +92,7 @@ const SingleProduct = () => {
             <div>{stripHtmlTags(product.advantages)}</div>
           </div>
           <div className="product-section">
-            <h3 className="heading">Additional Description</h3>
+            <h3 className="heading">Description</h3>
             <div>{stripHtmlTags(product.additionalDesc)}</div>
           </div>
         </div>

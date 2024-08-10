@@ -256,7 +256,7 @@ header nav ul li .dropdown-toggle:hover {
   justify-content: center;
 }
 .footer-logo {
-  width: 20rem;
+  width: 18rem;
   height: 20rem;
 }
 
@@ -1658,7 +1658,6 @@ header nav ul li .dropdown-toggle:hover {
 .generated-answers {
   color: #0085ff;
 }
-
 .singlebox {
   color: #0085ff;
   position: relative;
@@ -1699,6 +1698,13 @@ header nav ul li .dropdown-toggle:hover {
   margin: 1rem 0;
 }
 
+.spec-image {
+  max-width: 100%;
+  height: auto; /* Ensures the image maintains aspect ratio */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
 @media (max-width: 768px) {
   .singlebox {
     padding: 1rem;
@@ -1713,6 +1719,10 @@ header nav ul li .dropdown-toggle:hover {
   .Sproduct-image {
     max-width: 90%;
   }
+
+  .spec-image {
+    max-width: 90%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -1723,8 +1733,11 @@ header nav ul li .dropdown-toggle:hover {
   .Sproduct-image {
     max-width: 100%;
   }
-}
 
+  .spec-image {
+    max-width: 100%;
+  }
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .product-image {

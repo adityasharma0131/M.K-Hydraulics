@@ -3,7 +3,7 @@ import logo from "../assets/footer-logo.png";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import { FaLocationDot } from "react-icons/fa6";
-import { FaInstagram, FaMailBulk, FaMailchimp } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa6";
@@ -37,9 +37,9 @@ const Footer = () => {
 
         // Organize products by category
         const productsByCategory = productsData.reduce((acc, product) => {
-          const { categoryId, name } = product;
+          const { categoryId, _id, name } = product;
           if (!acc[categoryId]) acc[categoryId] = [];
-          acc[categoryId].push(name);
+          acc[categoryId].push({ id: _id, name }); // Store id and name
           return acc;
         }, {});
 
@@ -77,23 +77,33 @@ const Footer = () => {
               <ul>
                 <li>
                   <IoIosArrowForward />
-                  <Link className="footer-desc">Home</Link>
+                  <Link to="/" className="footer-desc">
+                    Home
+                  </Link>
                 </li>
                 <li>
                   <IoIosArrowForward />
-                  <Link className="footer-desc">Products</Link>
+                  <Link to="/products" className="footer-desc">
+                    Products
+                  </Link>
                 </li>
                 <li>
                   <IoIosArrowForward />
-                  <Link className="footer-desc">Gallery</Link>
+                  <Link to="/gallery" className="footer-desc">
+                    Gallery
+                  </Link>
                 </li>
                 <li>
                   <IoIosArrowForward />
-                  <Link className="footer-desc">About us</Link>
+                  <Link to="/about-us" className="footer-desc">
+                    About us
+                  </Link>
                 </li>
                 <li>
                   <IoIosArrowForward />
-                  <Link className="footer-desc">Contact us</Link>
+                  <Link to="/contact-us" className="footer-desc">
+                    Contact us
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -102,10 +112,15 @@ const Footer = () => {
                 <h4 className="footer-head">{category.name}</h4>
                 <hr />
                 <ul>
-                  {(products[category._id] || []).map((productName, index) => (
+                  {(products[category._id] || []).map((product, index) => (
                     <li key={index}>
                       <IoIosArrowForward />
-                      <Link className="footer-desc">{productName}</Link>
+                      <Link
+                        to={`/product/${product.id}`}
+                        className="footer-desc"
+                      >
+                        {product.name}
+                      </Link>
                     </li>
                   ))}
                 </ul>
