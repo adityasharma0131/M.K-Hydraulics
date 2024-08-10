@@ -332,7 +332,8 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 /* Headings and Paragraphs */
-.heading1 {
+.heading1,
+.headingp {
   font-size: 8vh;
 }
 
@@ -1657,6 +1658,73 @@ header nav ul li .dropdown-toggle:hover {
 .generated-answers {
   color: #0085ff;
 }
+
+.singlebox {
+  color: #0085ff;
+  position: relative;
+  padding: 1rem;
+  margin: 2rem 1rem;
+  border-radius: 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9f9f9; /* Light background for better readability */
+}
+
+.product-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.Sproduct-image {
+  max-width: 40%;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product-details {
+  width: 100%;
+  text-align: left;
+}
+
+.product-section {
+  margin: 1rem 0;
+}
+
+@media (max-width: 768px) {
+  .singlebox {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .product-images {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .Sproduct-image {
+    max-width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .singlebox {
+    margin: 0.5rem;
+  }
+
+  .Sproduct-image {
+    max-width: 100%;
+  }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .product-image {
