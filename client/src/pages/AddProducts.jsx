@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Import Quill styles
-import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
+import "react-quill/dist/quill.snow.css";
+import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const AddProducts = () => {
@@ -12,7 +12,7 @@ const AddProducts = () => {
     name: "",
     category: "",
     categoryId: "",
-    image: null,
+    images: [], // Updated to handle multiple images
     smallDesc: "",
     fullDesc: "",
     features: "",
@@ -26,12 +26,12 @@ const AddProducts = () => {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    // Fetch categories from backend when component mounts
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/categories"); // Replace with your API endpoint
+        const response = await fetch("http://localhost:3000/categories");
+        if (!response.ok) throw new Error("Failed to fetch categories.");
         const data = await response.json();
-        setCategories(data); // Assuming the data is an array of category objects with 'name' and '_id' fields
+        setCategories(data);
       } catch (err) {
         console.error("Error fetching categories:", err);
         setError("Failed to fetch categories.");
@@ -44,11 +44,26 @@ const AddProducts = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setProduct((prev) => ({ ...prev, [name]: value }));
+    if (name === "category") {
+      const selectedCategory = categories.find((cat) => cat.name === value);
+      setProduct((prev) => ({
+        ...prev,
+        category: value,
+        categoryId: selectedCategory ? selectedCategory._id : "",
+      }));
+    } else {
+      setProduct((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleFileChange = (e) => {
-    setProduct((prev) => ({ ...prev, image: e.target.files[0] }));
+    const { files } = e.target;
+    if (files.length > 0) {
+      setProduct((prev) => ({
+        ...prev,
+        images: [...prev.images, ...Array.from(files)], // Handle multiple files
+      }));
+    }
   };
 
   const handleQuillChange = (name) => (value) => {
@@ -62,9 +77,12 @@ const AddProducts = () => {
 
     try {
       const formData = new FormData();
-      // Append each field to formData
       Object.keys(product).forEach((key) => {
-        if (product[key] !== null) {
+        if (Array.isArray(product[key])) {
+          product[key].forEach((file) => {
+            formData.append("images", file); // Append each file in images array
+          });
+        } else if (product[key] !== "") {
           formData.append(key, product[key]);
         }
       });
@@ -78,12 +96,11 @@ const AddProducts = () => {
         throw new Error("Network response was not ok.");
       }
 
-      // Reset form after successful submission
       setProduct({
         name: "",
         category: "",
         categoryId: "",
-        image: null,
+        images: [],
         smallDesc: "",
         fullDesc: "",
         features: "",
@@ -92,9 +109,8 @@ const AddProducts = () => {
         additionalDesc: "",
       });
 
-      // Show success message
       toast.success("Product added successfully!");
-      navigate('/product-operation')
+      navigate("/product-operation");
     } catch (err) {
       console.error("Error adding product:", err);
       setError("Failed to add product. Please try again.");
@@ -141,14 +157,7 @@ const AddProducts = () => {
                 <select
                   name="category"
                   value={product.category}
-                  onChange={(e) => {
-                    const selectedCategory = categories.find(cat => cat.name === e.target.value);
-                    setProduct(prev => ({
-                      ...prev,
-                      category: e.target.value,
-                      categoryId: selectedCategory ? selectedCategory._id : ""
-                    }));
-                  }}
+                  onChange={handleInputChange}
                   className="form-input"
                   required
                 >
@@ -160,15 +169,18 @@ const AddProducts = () => {
                   ))}
                 </select>
               </li>
-              <li className="form-item">
-                <label className="form-label">Image</label>
-                <input
-                  type="file"
-                  name="image"
-                  onChange={handleFileChange}
-                  className="form-input"
-                />
-              </li>
+              {Array.from({ length: 3 }, (_, i) => (
+                <li className="form-item" key={`image${i + 1}`}>
+                  <label className="form-label">Image {i + 1}</label>
+                  <input
+                    type="file"
+                    name={`image${i + 1}`}
+                    onChange={handleFileChange}
+                    className="form-input"
+                    multiple
+                  />
+                </li>
+              ))}
               <li className="form-item">
                 <label className="form-label">Small Description</label>
                 <ReactQuill
@@ -235,10 +247,12 @@ const AddProducts = () => {
               {categories.find((cat) => cat._id === product.categoryId)?.name ||
                 "N/A"}
             </div>
-            <div>
-              <strong>Image:</strong>{" "}
-              {product.image ? product.image.name : "No image selected"}
-            </div>
+            {product.images.map((image, index) => (
+              <div key={index}>
+                <strong>Image {index + 1}:</strong>{" "}
+                {image ? image.name : "No image selected"}
+              </div>
+            ))}
             <div>
               <strong>Small Description:</strong>{" "}
               <div
@@ -284,7 +298,7 @@ const AddProducts = () => {
           </div>
         </div>
       </div>
-      <Toaster /> {/* Add Toaster to render notifications */}
+      <Toaster />
     </>
   );
 };

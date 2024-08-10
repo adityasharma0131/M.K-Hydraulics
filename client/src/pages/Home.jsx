@@ -28,9 +28,9 @@ const Home = () => {
   const stripHtmlTags = (html) => {
     return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
   };
+
   const clientImages = [
     client1,
-
     client5,
     client6,
     client14,
@@ -110,26 +110,34 @@ const Home = () => {
           <hr />
           <div className="productcard">
             {products.length > 0 ? (
-              products.map((product) => (
-                <div className="card" key={product._id}>
-                  <img
-                    className="productimg"
-                    src={`http://localhost:3000/${product.image}`} // Adjust URL as needed
-                    alt={product.name}
-                  />
-                  <div className="arrowlink">
-                    <Link to={`/product/${product._id}`}>
-                      <GoArrowUpRight className="GoArrowUpRight" />
-                    </Link>
+              products.map((product) => {
+                // Get the first image from the images array
+                const firstImage =
+                  product.images && product.images.length > 0
+                    ? product.images[0]
+                    : null;
+
+                return (
+                  <div className="card" key={product._id}>
+                    <img
+                      className="productimg"
+                      src={firstImage ? `http://localhost:3000/${firstImage}` : undefined} // Adjust URL as needed
+                      alt={product.name}
+                    />
+                    <div className="arrowlink">
+                      <Link to={`/product/${product._id}`}>
+                        <GoArrowUpRight className="GoArrowUpRight" />
+                      </Link>
+                    </div>
+                    <div className="info">
+                      <h3 className="productname">{product.name}</h3>
+                      <p className="productdesc">
+                        {stripHtmlTags(product.smallDesc)}
+                      </p>
+                    </div>
                   </div>
-                  <div className="info">
-                    <h3 className="productname">{product.name}</h3>
-                    <p className="productdesc">
-                      {stripHtmlTags(product.smallDesc)}
-                    </p>
-                  </div>
-                </div>
-              ))
+                );
+              })
             ) : (
               <p>No products available.</p>
             )}

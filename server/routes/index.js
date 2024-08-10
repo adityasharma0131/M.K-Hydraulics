@@ -378,28 +378,32 @@ router.get("/products-home", async (req, res) => {
   }
 });
 
-router.post("/products", upload.single("image"), async (req, res) => {
-  try {
-    const product = new Product({
-      name: req.body.name,
-      category: req.body.category, // Store category name
-      categoryId: req.body.categoryId, // Store category ID
-      image: req.file ? req.file.path : null,
-      smallDesc: req.body.smallDesc,
-      fullDesc: req.body.fullDesc,
-      features: req.body.features,
-      applications: req.body.applications,
-      advantages: req.body.advantages,
-      additionalDesc: req.body.additionalDesc,
-    });
+router.post(
+  "/products",
+  upload.array("images", 3), // Adjust the number of images allowed if necessary
+  async (req, res) => {
+    try {
+      const product = new Product({
+        name: req.body.name,
+        category: req.body.category,
+        categoryId: req.body.categoryId,
+        images: req.files.map((file) => file.path),
+        smallDesc: req.body.smallDesc,
+        fullDesc: req.body.fullDesc,
+        features: req.body.features,
+        applications: req.body.applications,
+        advantages: req.body.advantages,
+        additionalDesc: req.body.additionalDesc,
+      });
 
-    await product.save();
-    res.status(201).json({ message: "Product added successfully!" });
-  } catch (error) {
-    console.error("Error adding product:", error);
-    res.status(500).json({ error: "Failed to add product." });
+      await product.save();
+      res.status(201).json({ message: "Product added successfully!" });
+    } catch (error) {
+      console.error("Error adding product:", error);
+      res.status(500).json({ error: "Failed to add product." });
+    }
   }
-});
+);
 
 router.delete("/products/:id", async (req, res) => {
   try {
@@ -422,17 +426,16 @@ router.get("/products/:id", async (req, res) => {
   }
 });
 
-// Route to update a product by ID
-router.put("/products/:id", upload.single("image"), async (req, res) => {
+// Update product route
+router.put("/products/:id", upload.array("images", 3), async (req, res) => {
   try {
     const updates = req.body;
 
-    // Handle image file upload
-    if (req.file) {
-      updates.image = req.file.path;
+    // Handle image file uploads
+    if (req.files && req.files.length > 0) {
+      updates.images = req.files.map((file) => file.path);
     }
 
-    // Update product in the database
     const product = await Product.findByIdAndUpdate(req.params.id, updates, {
       new: true,
       runValidators: true,
@@ -444,12 +447,13 @@ router.put("/products/:id", upload.single("image"), async (req, res) => {
 
     res.json(product);
   } catch (err) {
+    console.error("Error updating product:", err);
     res.status(400).json({ error: err.message });
   }
 });
 
 // backend/routes/product.js
-router.get('/single-product/:name/:id', async (req, res) => {
+router.get("/single-product/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
     if (!product) {

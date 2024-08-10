@@ -6,14 +6,15 @@ const SingleProduct = () => {
   const stripHtmlTags = (html) => {
     return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
   };
-  const { id, name } = useParams(); // Get both the product ID and name from the URL
+
+  const { id } = useParams(); // Get the product ID from the URL
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/single-product/${name}/${id}`
+          `http://localhost:3000/single-product/${id}`
         );
         const result = await response.json();
         if (response.ok) {
@@ -27,14 +28,27 @@ const SingleProduct = () => {
     };
 
     fetchProduct();
-  }, [id, name]);
+  }, [id]);
 
   if (!product) return <div>Loading...</div>;
 
   return (
     <div className="single-product">
       <h1>{product.name}</h1>
-      <img src={`http://localhost:3000/${product.image}`} alt={product.name} />
+      <div className="product-images">
+        {product.images && product.images.length > 0 ? (
+          product.images.map((image, index) => (
+            <img
+              key={index}
+              src={`http://localhost:3000/${image}`}
+              alt={`${product.name} image ${index + 1}`}
+              style={{ maxWidth: "500px", maxHeight: "500px", margin: "10px" }} // Adjust size and spacing as needed
+            />
+          ))
+        ) : (
+          <p>No images available</p>
+        )}
+      </div>
       <h2>Category: {product.category}</h2>
       <div className="product-details">
         <div className="product-section">
@@ -54,6 +68,7 @@ const SingleProduct = () => {
           <div>{stripHtmlTags(product.advantages)}</div>
         </div>
         <div className="product-section">
+          <h3>Additional Description</h3>
           <div>{stripHtmlTags(product.additionalDesc)}</div>
         </div>
       </div>

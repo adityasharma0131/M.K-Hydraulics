@@ -9,6 +9,7 @@ const ProductOperation = () => {
   const stripHtmlTags = (html) => {
     return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
   };
+
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]); // Add state for products
   const [loading, setLoading] = useState(true);
@@ -143,34 +144,46 @@ const ProductOperation = () => {
             </thead>
             <tbody>
               {products.length > 0 ? (
-                products.map((product) => (
-                  <tr key={product._id}>
-                    <td>{product.name}</td>
-                    <td>{product.category}</td>
-                    <td>
-                      <img
-                        src={`http://localhost:3000/${product.image}`}
-                        alt={`Image of ${product.image}`}
-                        className="product-image"
-                        style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
-                      />
-                    </td>
-                    <td>{stripHtmlTags(product.smallDesc)}</td>
-                    <td className="action-icons">
-                      <Link
-                        to={`/product-operation/edit-product/${product._id}`}
-                        className="edit-link"
-                      >
-                        <MdEditNote className="edit-icon" />
-                      </Link>
-                      <AiFillDelete
-                        className="delete-icon"
-                        onClick={() => handleDeleteProduct(product._id)}
-                        style={{ cursor: "pointer" }}
-                      />
-                    </td>
-                  </tr>
-                ))
+                products.map((product) => {
+                  // Get the first image from the images array
+                  const firstImage =
+                    product.images && product.images.length > 0
+                      ? product.images[0]
+                      : null;
+
+                  return (
+                    <tr key={product._id}>
+                      <td>{product.name}</td>
+                      <td>{product.category}</td>
+                      <td>
+                        {firstImage ? (
+                          <img
+                            src={`http://localhost:3000/${firstImage}`}
+                            alt={`Image of ${product.name}`}
+                            className="product-image"
+                            style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
+                          />
+                        ) : (
+                          <p>No image available</p>
+                        )}
+                      </td>
+                      <td>{stripHtmlTags(product.smallDesc)}</td>
+                      <td className="action-icons">
+                        <Link
+                          to={`/product-operation/edit-product/${product._id}`}
+                          className="edit-link"
+                        >
+                          <MdEditNote className="edit-icon" />
+                        </Link>
+                        <AiFillDelete
+                          className="delete-icon"
+                          onClick={() => handleDeleteProduct(product._id)}
+                          style={{ cursor: "pointer" }}
+                        />
+                      </td>
+                    </tr>
+                  );
+                })
               ) : (
                 <tr>
                   <td colSpan="5">No products available</td>

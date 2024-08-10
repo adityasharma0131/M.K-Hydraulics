@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 const EditProduct = () => {
@@ -13,7 +12,7 @@ const EditProduct = () => {
     name: "",
     category: "",
     categoryId: "",
-    image: null,
+    images: [], // Updated to handle multiple images
     smallDesc: "",
     fullDesc: "",
     features: "",
@@ -77,7 +76,13 @@ const EditProduct = () => {
   };
 
   const handleFileChange = (e) => {
-    setProduct((prev) => ({ ...prev, image: e.target.files[0] }));
+    const { name, files } = e.target;
+    if (files.length > 0) {
+      setProduct((prev) => ({
+        ...prev,
+        images: [...prev.images, files[0]], // Updated to handle multiple images
+      }));
+    }
   };
 
   const handleQuillChange = (name) => (value) => {
@@ -92,7 +97,11 @@ const EditProduct = () => {
     try {
       const formData = new FormData();
       Object.keys(product).forEach((key) => {
-        if (product[key] !== null && product[key] !== "") {
+        if (Array.isArray(product[key])) {
+          product[key].forEach((file) => {
+            formData.append("images", file); // Append each file in images array
+          });
+        } else if (product[key] !== null && product[key] !== "") {
           formData.append(key, product[key]);
         }
       });
@@ -168,15 +177,17 @@ const EditProduct = () => {
                   ))}
                 </select>
               </li>
-              <li className="form-item">
-                <label className="form-label">Image</label>
-                <input
-                  type="file"
-                  name="image"
-                  onChange={handleFileChange}
-                  className="form-input"
-                />
-              </li>
+              {Array.from({ length: 3 }, (_, i) => (
+                <li className="form-item" key={`image${i + 1}`}>
+                  <label className="form-label">Image {i + 1}</label>
+                  <input
+                    type="file"
+                    name={`image${i + 1}`}
+                    onChange={handleFileChange}
+                    className="form-input"
+                  />
+                </li>
+              ))}
               <li className="form-item">
                 <label className="form-label">Small Description</label>
                 <ReactQuill
@@ -225,14 +236,18 @@ const EditProduct = () => {
                   className="form-quill"
                 />
               </li>
+              {error && (
+                <li className="form-item">
+                  <p className="error-message">{error}</p>
+                </li>
+              )}
               <li className="form-item">
                 <button type="submit" className="add" disabled={loading}>
-                  {loading ? "Updating..." : "Update +"}
+                  {loading ? "Updating..." : "Update Product"}
                 </button>
               </li>
             </ul>
           </form>
-          {error && <p className="form-error">{error}</p>}
         </div>
       </div>
       <Toaster />

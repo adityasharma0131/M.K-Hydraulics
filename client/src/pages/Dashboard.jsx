@@ -6,6 +6,7 @@ const Dashboard = () => {
   const stripHtmlTags = (html) => {
     return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
   };
+
   const progressData = [
     { value: 66, title: "Product Range Expansion" },
     { value: 75, title: "Customer Satisfaction" },
@@ -161,21 +162,33 @@ const Dashboard = () => {
               </thead>
               <tbody>
                 {products.length > 0 ? (
-                  products.map((product) => (
-                    <tr key={product._id}>
-                      <td>{product.name}</td>
-                      <td>{product.category}</td>
-                      <td>
-                        <img
-                          src={`http://localhost:3000/${product.image}`}
-                          alt={product.name}
-                          className="product-image"
-                          style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
-                        />
-                      </td>
-                      <td>{stripHtmlTags(product.smallDesc)}</td>
-                    </tr>
-                  ))
+                  products.map((product) => {
+                    // Get the first image from the images array
+                    const firstImage =
+                      product.images && product.images.length > 0
+                        ? product.images[0]
+                        : null;
+
+                    return (
+                      <tr key={product._id}>
+                        <td>{product.name}</td>
+                        <td>{product.category}</td>
+                        <td>
+                          {firstImage ? (
+                            <img
+                              src={`http://localhost:3000/${firstImage}`}
+                              alt={product.name}
+                              className="product-image"
+                              style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed
+                            />
+                          ) : (
+                            <p>No image available</p>
+                          )}
+                        </td>
+                        <td>{stripHtmlTags(product.smallDesc)}</td>
+                      </tr>
+                    );
+                  })
                 ) : (
                   <tr>
                     <td colSpan="4">No products available</td>
