@@ -9,41 +9,40 @@ import { TbPhoneCall } from "react-icons/tb";
 
 // Importing client images
 import client1 from "../assets/image 10.png";
+import client2 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM.png";
+import client3 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM.png";
 import client5 from "../assets/image 7.png";
 import client6 from "../assets/image 8.png";
 import client14 from "../assets/WhatsApp Image 2024-07-29 at 9.09.31 AM.jpeg";
+import client19 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (2).png";
+import client16 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM (2).png";
 import client15 from "../assets/WhatsApp Image 2024-07-29 at 9.09.34 AM.jpeg";
-import client16 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (1).jpeg";
-import client17 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (2).jpeg";
 import client18 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (3).jpeg";
-import client19 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM.jpeg";
 import client20 from "../assets/WhatsApp Image 2024-07-29 at 9.09.36 AM (3).jpeg";
 import client21 from "../assets/WhatsApp Image 2024-07-29 at 9.09.36 AM.jpeg";
-import client22 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM (2).jpeg";
+import client22 from "../assets/WhatsApp Image 2024-07-29 at 9.09.35 AM (1).png";
 import client23 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM (3).jpeg";
-import client24 from "../assets/WhatsApp Image 2024-07-29 at 9.09.37 AM.jpeg";
 import client25 from "../assets/WhatsApp Image 2024-07-29 at 9.09.38 AM.jpeg";
 
 const Home = () => {
   const stripHtmlTags = (html) => {
     return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
   };
-
   const clientImages = [
     client1,
+    client2,
+    client3,
     client5,
     client6,
     client14,
     client15,
     client16,
-    client17,
     client18,
     client19,
     client20,
     client21,
     client22,
     client23,
-    client24,
     client25,
   ];
 
@@ -121,7 +120,11 @@ const Home = () => {
                   <div className="card" key={product._id}>
                     <img
                       className="productimg"
-                      src={firstImage ? `http://localhost:3000/${firstImage}` : undefined} // Adjust URL as needed
+                      src={
+                        firstImage
+                          ? `http://localhost:3000/${firstImage}`
+                          : undefined
+                      } // Adjust URL as needed
                       alt={product.name}
                     />
                     <div className="arrowlink">
