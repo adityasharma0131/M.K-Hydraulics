@@ -7,10 +7,11 @@ const Contact = require("../Models/Contact");
 const UserModel = require("../Models/User");
 const Social = require("../Models/Social");
 const Product = require("../Models/Product");
+const path = require("path");
 
-
-
-router.get("/", async (req, res) => {
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, "public")));
+app.get("/", async (req, res) => {
   try {
     res.render("index", { title: "My Express App" });
   } catch (error) {
