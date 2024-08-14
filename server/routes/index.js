@@ -8,6 +8,17 @@ const UserModel = require("../Models/User");
 const Social = require("../Models/Social");
 const Product = require("../Models/Product");
 
+
+
+router.get("/", async (req, res) => {
+  try {
+    console.log("Success!!!!!!!")
+  } catch (error) {
+    console.log("Error")
+  }
+});
+
+
 // Add a new category
 router.post("/add-category", async (req, res) => {
   const { name } = req.body;
