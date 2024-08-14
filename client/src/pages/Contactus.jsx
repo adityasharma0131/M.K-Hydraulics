@@ -23,7 +23,7 @@ const Contactus = () => {
   useEffect(() => {
     const fetchSocialLinks = async () => {
       try {
-        const response = await fetch("https://mkhydraulics.co.in/social-links");
+        const response = await fetch("http://localhost:3000/social-links");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         setSocialLinks(data);
@@ -47,7 +47,7 @@ const Contactus = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("https://mkhydraulics.co.in/contact-submit", {
+      const response = await fetch("http://localhost:3000/contact-submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

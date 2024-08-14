@@ -16,7 +16,7 @@ const SocialOperation = () => {
   useEffect(() => {
     const fetchSocialMediaAccounts = async () => {
       try {
-        const response = await axios.get("https://mkhydraulics.co.in/socials");
+        const response = await axios.get("http://localhost:3000/socials");
         setSocialMediaAccounts(response.data);
       } catch (error) {
         console.error("Error fetching social media accounts:", error);

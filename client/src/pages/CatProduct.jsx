@@ -21,13 +21,13 @@ const CatProduct = () => {
       try {
         // Fetch category details
         const categoryResponse = await axios.get(
-          `https://mkhydraulics.co.in/categories/${categoryId}`
+          `http://localhost:3000/categories/${categoryId}`
         );
         setCategory(categoryResponse.data);
 
         // Fetch products based on category ID
         const productsResponse = await axios.get(
-          "https://mkhydraulics.co.in/products",
+          "http://localhost:3000/products",
           {
             params: { categoryId }, // Send category ID as query parameter
           }
@@ -77,7 +77,7 @@ const CatProduct = () => {
                   <div className="card" key={product._id}>
                     <img
                       className="productimg"
-                      src={firstImage ? `https://mkhydraulics.co.in/${firstImage}` : undefined} // Display only the first image
+                      src={firstImage ? `http://localhost:3000/${firstImage}` : undefined} // Display only the first image
                       alt={product.name}
                     />
                     <div className="arrowlink">

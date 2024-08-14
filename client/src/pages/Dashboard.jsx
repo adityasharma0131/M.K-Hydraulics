@@ -27,7 +27,7 @@ const Dashboard = () => {
     setLoggedInUser(localStorage.getItem("loggedInUser"));
 
     // Fetch recent queries
-    fetch("https://mkhydraulics.co.in/recent-queries")
+    fetch("http://localhost:3000/recent-queries")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -38,7 +38,7 @@ const Dashboard = () => {
       .catch((error) => console.error("Error fetching recent queries:", error));
 
     // Fetch admin users
-    fetch("https://mkhydraulics.co.in/admin-users")
+    fetch("http://localhost:3000/admin-users")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -49,7 +49,7 @@ const Dashboard = () => {
       .catch((error) => console.error("Error fetching admin users:", error));
 
     // Fetch products
-    fetch("https://mkhydraulics.co.in/products")
+    fetch("http://localhost:3000/products")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -176,7 +176,7 @@ const Dashboard = () => {
                         <td>
                           {firstImage ? (
                             <img
-                              src={`https://mkhydraulics.co.in/${firstImage}`}
+                              src={`http://localhost:3000/${firstImage}`}
                               alt={product.name}
                               className="product-image"
                               style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed

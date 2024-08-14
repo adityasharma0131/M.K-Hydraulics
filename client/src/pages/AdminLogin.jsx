@@ -33,7 +33,7 @@ const AdminLogin = () => {
       return handleError("Email and password are required");
     }
     try {
-      const url = `https://mkhydraulics.co.in/auth/login`;
+      const url = `http://localhost:3000/auth/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {

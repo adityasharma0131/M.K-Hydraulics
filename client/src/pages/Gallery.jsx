@@ -14,7 +14,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch("https://mkhydraulics.co.in/gallery");
+        const response = await fetch("http://localhost:3000/gallery");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -38,7 +38,7 @@ const Gallery = () => {
   const nextImage = () => {
     setData((prev) => {
       const nextIndex = (prev.i + 1) % images.length;
-      const nextImageUrl = `https://mkhydraulics.co.in/uploads/${images[nextIndex].filename}`;
+      const nextImageUrl = `http://localhost:3000/uploads/${images[nextIndex].filename}`;
 
       return { img: nextImageUrl, i: nextIndex };
     });
@@ -47,7 +47,7 @@ const Gallery = () => {
   const prevImage = () => {
     setData((prev) => {
       const prevIndex = (prev.i - 1 + images.length) % images.length;
-      const prevImageUrl = `https://mkhydraulics.co.in/uploads/${images[prevIndex].filename}`;
+      const prevImageUrl = `http://localhost:3000/uploads/${images[prevIndex].filename}`;
 
       return { img: prevImageUrl, i: prevIndex };
     });
@@ -143,7 +143,7 @@ const Gallery = () => {
               {images.map((item, index) => (
                 <img
                   key={item._id}
-                  src={`https://mkhydraulics.co.in/uploads/${item.filename}`}
+                  src={`http://localhost:3000/uploads/${item.filename}`}
                   alt={`Gallery Image ${index + 1}`}
                   style={{
                     width: "100%",
@@ -152,7 +152,7 @@ const Gallery = () => {
                   }}
                   onClick={() =>
                     viewImage(
-                      `https://mkhydraulics.co.in/uploads/${item.filename}`,
+                      `http://localhost:3000/uploads/${item.filename}`,
                       index
                     )
                   }

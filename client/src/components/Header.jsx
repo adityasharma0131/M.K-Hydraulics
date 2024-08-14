@@ -35,7 +35,7 @@ const Header = () => {
     const fetchCategories = async () => {
       try {
         const response = await axios.get(
-          "https://mkhydraulics.co.in/categories"
+          "http://localhost:3000/categories"
         );
         setCategories(response.data);
       } catch (error) {

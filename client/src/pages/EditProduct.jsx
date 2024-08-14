@@ -29,7 +29,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("https://mkhydraulics.co.in/categories");
+        const response = await fetch("http://localhost:3000/categories");
         if (!response.ok) throw new Error("Failed to fetch categories.");
         const data = await response.json();
         setCategories(data);
@@ -42,7 +42,7 @@ const EditProduct = () => {
 
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`https://mkhydraulics.co.in/products/${id}`);
+        const response = await fetch(`http://localhost:3000/products/${id}`);
         if (!response.ok) throw new Error("Product not found.");
         const data = await response.json();
         setProduct({
@@ -115,7 +115,7 @@ const EditProduct = () => {
         }
       });
 
-      const response = await fetch(`https://mkhydraulics.co.in/products/${id}`, {
+      const response = await fetch(`http://localhost:3000/products/${id}`, {
         method: "PUT",
         body: formData,
       });

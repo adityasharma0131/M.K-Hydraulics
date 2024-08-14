@@ -22,7 +22,7 @@ const ProductOperation = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("https://mkhydraulics.co.in/categories");
+      const response = await axios.get("http://localhost:3000/categories");
       setCategories(response.data);
       setLoading(false);
     } catch (error) {
@@ -34,7 +34,7 @@ const ProductOperation = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("https://mkhydraulics.co.in/products");
+      const response = await axios.get("http://localhost:3000/products");
       setProducts(response.data);
       setLoading(false);
     } catch (error) {
@@ -46,7 +46,7 @@ const ProductOperation = () => {
 
   const handleDeleteCategory = async (categoryId) => {
     try {
-      await axios.delete(`https://mkhydraulics.co.in/categories/${categoryId}`);
+      await axios.delete(`http://localhost:3000/categories/${categoryId}`);
       setCategories(
         categories.filter((category) => category._id !== categoryId)
       );
@@ -60,7 +60,7 @@ const ProductOperation = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      await axios.delete(`https://mkhydraulics.co.in/products/${productId}`);
+      await axios.delete(`http://localhost:3000/products/${productId}`);
       setProducts(products.filter((product) => product._id !== productId));
       toast.success("Product deleted successfully!"); // Show success notification
     } catch (error) {
@@ -158,7 +158,7 @@ const ProductOperation = () => {
                       <td>
                         {firstImage ? (
                           <img
-                            src={`https://mkhydraulics.co.in/${firstImage}`}
+                            src={`http://localhost:3000/${firstImage}`}
                             alt={`Image of ${product.name}`}
                             className="product-image"
                             style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed

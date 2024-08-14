@@ -13,7 +13,7 @@ const UserOperation = () => {
     setLoggedInUser(localStorage.getItem("loggedInUser"));
 
     // Fetch admin users
-    fetch("https://mkhydraulics.co.in/admin-users")
+    fetch("http://localhost:3000/admin-users")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -25,7 +25,7 @@ const UserOperation = () => {
   }, []);
 
   const handleDelete = (userId) => {
-    fetch(`https://mkhydraulics.co.in/admin-users/${userId}`, {
+    fetch(`http://localhost:3000/admin-users/${userId}`, {
       method: "DELETE",
     })
       .then((response) => {

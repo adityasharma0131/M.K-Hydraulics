@@ -13,7 +13,7 @@ const EditSocials = () => {
   useEffect(() => {
     const fetchSocial = async () => {
       try {
-        const response = await axios.get(`https://mkhydraulics.co.in/socials/${id}`);
+        const response = await axios.get(`http://localhost:3000/socials/${id}`);
         setSocial(response.data);
         setLoading(false);
       } catch (error) {
@@ -33,7 +33,7 @@ const EditSocials = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`https://mkhydraulics.co.in/socials/${id}`, social);
+      await axios.put(`http://localhost:3000/socials/${id}`, social);
       toast.success("Social media account updated successfully!");
       navigate("/social-operation");
     } catch (error) {

@@ -18,7 +18,7 @@ const SingleProduct = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `https://mkhydraulics.co.in/single-product/${id}`
+          `http://localhost:3000/single-product/${id}`
         );
         if (!response.ok) {
           const errorData = await response.json();
@@ -52,7 +52,7 @@ const SingleProduct = () => {
             product.images.map((image, index) => (
               <img
                 key={index}
-                src={`https://mkhydraulics.co.in/${image}`}
+                src={`http://localhost:3000/${image}`}
                 alt={`${product.name} image ${index + 1}`}
                 className="Sproduct-image"
               />
@@ -71,7 +71,7 @@ const SingleProduct = () => {
             <h3 className="heading">Specification</h3>
             {product.specImage ? (
               <img
-                src={`https://mkhydraulics.co.in/${product.specImage}`}
+                src={`http://localhost:3000/${product.specImage}`}
                 alt="Specification"
                 className="spec-image"
               />
