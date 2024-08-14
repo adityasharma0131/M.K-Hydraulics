@@ -17,7 +17,7 @@ app.set("view engine", "ejs");
 
 app.use(
   cors({
-    origin: "http://localhost:4173", // Frontend URL
+    origin: "*", // Frontend URL
     methods: "GET, POST, PUT, DELETE",
     credentials: true,
   })
