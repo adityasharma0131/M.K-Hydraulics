@@ -28,7 +28,7 @@ const AddProducts = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/categories");
+        const response = await fetch("https://mkhydraulics.co.in/categories");
         if (!response.ok) throw new Error("Failed to fetch categories.");
         const data = await response.json();
         setCategories(data);
@@ -94,7 +94,7 @@ const AddProducts = () => {
         }
       });
 
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch("https://mkhydraulics.co.in/products", {
         method: "POST",
         body: formData,
       });

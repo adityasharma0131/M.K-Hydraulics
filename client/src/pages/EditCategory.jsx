@@ -16,7 +16,7 @@ const EditCategory = () => {
     const fetchCategory = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/categories/${id}`
+          `https://mkhydraulics.co.in/categories/${id}`
         );
         setCategoryName(response.data.name);
         setLoading(false);
@@ -37,7 +37,7 @@ const EditCategory = () => {
   const handleEditCategory = async () => {
     try {
       const response = await axios.put(
-        `http://localhost:3000/categories/${id}`,
+        `https://mkhydraulics.co.in/categories/${id}`,
         { name: categoryName }
       );
       if (response.data.success) {

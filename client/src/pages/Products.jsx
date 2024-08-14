@@ -19,13 +19,13 @@ const Products = () => {
       try {
         // Fetch categories
         const categoriesResponse = await axios.get(
-          "http://localhost:3000/categories"
+          "https://mkhydraulics.co.in/categories"
         );
         setCategories(categoriesResponse.data);
 
         // Fetch products
         const productsResponse = await axios.get(
-          "http://localhost:3000/products"
+          "https://mkhydraulics.co.in/products"
         );
         const products = productsResponse.data;
 
@@ -79,7 +79,7 @@ const Products = () => {
                         className="productimg"
                         src={
                           firstImage
-                            ? `http://localhost:3000/${firstImage}`
+                            ? `https://mkhydraulics.co.in/${firstImage}`
                             : undefined
                         } // Display only the first image
                         alt={product.name}

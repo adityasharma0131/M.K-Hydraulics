@@ -22,7 +22,7 @@ const Footer = () => {
       try {
         // Fetch categories
         const categoriesResponse = await fetch(
-          "http://localhost:3000/categories"
+          "https://mkhydraulics.co.in/categories"
         );
         if (!categoriesResponse.ok)
           throw new Error("Network response was not ok");
@@ -30,7 +30,9 @@ const Footer = () => {
         setCategories(categoriesData);
 
         // Fetch products
-        const productsResponse = await fetch("http://localhost:3000/products");
+        const productsResponse = await fetch(
+          "https://mkhydraulics.co.in/products"
+        );
         if (!productsResponse.ok)
           throw new Error("Network response was not ok");
         const productsData = await productsResponse.json();
@@ -46,7 +48,9 @@ const Footer = () => {
         setProducts(productsByCategory);
 
         // Fetch social media links
-        const socialResponse = await fetch("http://localhost:3000/socials");
+        const socialResponse = await fetch(
+          "https://mkhydraulics.co.in/socials"
+        );
         if (!socialResponse.ok) throw new Error("Network response was not ok");
         const socialData = await socialResponse.json();
         setSocialLinks(socialData);

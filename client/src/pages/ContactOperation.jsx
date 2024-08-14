@@ -9,7 +9,7 @@ const ContactOperation = () => {
 
   useEffect(() => {
     // Fetch contact data from the backend
-    fetch("http://localhost:3000/contact-queries") // Adjust the URL if necessary
+    fetch("https://mkhydraulics.co.in/contact-queries") // Adjust the URL if necessary
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -28,7 +28,7 @@ const ContactOperation = () => {
   }, []);
 
   const handleDelete = (contactId) => {
-    fetch(`http://localhost:3000/contact-queries/${contactId}`, {
+    fetch(`https://mkhydraulics.co.in/contact-queries/${contactId}`, {
       method: "DELETE",
     })
       .then((response) => {

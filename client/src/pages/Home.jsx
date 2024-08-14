@@ -54,7 +54,7 @@ const Home = () => {
     const fetchProducts = async () => {
       try {
         // Fetch 3 products from the backend
-        const response = await axios.get("http://localhost:3000/products-home");
+        const response = await axios.get("https://mkhydraulics.co.in/products-home");
         setProducts(response.data);
       } catch (err) {
         setError(err);
@@ -122,7 +122,7 @@ const Home = () => {
                       className="productimg"
                       src={
                         firstImage
-                          ? `http://localhost:3000/${firstImage}`
+                          ? `https://mkhydraulics.co.in/${firstImage}`
                           : undefined
                       } // Adjust URL as needed
                       alt={product.name}

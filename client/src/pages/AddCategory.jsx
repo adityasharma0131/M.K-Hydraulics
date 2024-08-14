@@ -20,7 +20,7 @@ const AddCategory = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/add-category", {
+      const response = await fetch("https://mkhydraulics.co.in/add-category", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
