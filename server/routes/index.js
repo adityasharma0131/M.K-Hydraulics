@@ -12,12 +12,12 @@ const Product = require("../Models/Product");
 
 router.get("/", async (req, res) => {
   try {
-    console.log("Success!!!!!!!")
+    res.render("index", { title: "My Express App" });
   } catch (error) {
-    console.log("Error")
+    console.log("Error");
+    res.status(500).send("An error occurred");
   }
 });
-
 
 // Add a new category
 router.post("/add-category", async (req, res) => {
