@@ -182,7 +182,7 @@ const Home = () => {
               <TbPhoneCall />
             </div>
             <h2 className="contacthead">Call Us</h2>
-            <h3 className="contactdesc">+91 89760 04552 | 95916 55720</h3>
+            <h3 className="contactdesc">+91 89760 04552 | 85916 55720</h3>
           </div>
           <div className="contact-item">
             <div className="icon">

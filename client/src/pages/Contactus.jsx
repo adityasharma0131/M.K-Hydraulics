@@ -173,7 +173,7 @@ const Contactus = () => {
                 <h3>Contact</h3>
                 <div className="FaPhone">
                   <FaPhone />
-                  <p>+91 89760 04552 | 95916 55720</p>
+                  <p>+91 89760 04552 | 85916 55720</p>
                 </div>
               </div>
               <div className="emailid">

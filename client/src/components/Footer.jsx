@@ -147,7 +147,7 @@ const Footer = () => {
                 <li>
                   <TbPhoneCall />
                   <Link className="footer-desc">
-                    +91 89760 04552 | 95916 55720
+                    +91 89760 04552 | 85916 55720
                   </Link>
                 </li>
                 <li>
