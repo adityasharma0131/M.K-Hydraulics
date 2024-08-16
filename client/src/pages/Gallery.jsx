@@ -14,7 +14,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch("http://localhost:3000/gallery");
+        const response = await fetch("/api/gallery");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -37,8 +37,8 @@ const Gallery = () => {
 
   const nextImage = () => {
     setData((prev) => {
-      const nextIndex = (prev.i + 1) % images.length;
-      const nextImageUrl = `http://localhost:3000/uploads/${images[nextIndex].filename}`;
+      const nextIndex = (prev.i + 1) % images?.length;
+      const nextImageUrl = `/api/uploads/${images[nextIndex].filename}`;
 
       return { img: nextImageUrl, i: nextIndex };
     });
@@ -46,8 +46,8 @@ const Gallery = () => {
 
   const prevImage = () => {
     setData((prev) => {
-      const prevIndex = (prev.i - 1 + images.length) % images.length;
-      const prevImageUrl = `http://localhost:3000/uploads/${images[prevIndex].filename}`;
+      const prevIndex = (prev.i - 1 + images?.length) % images?.length;
+      const prevImageUrl = `/uploads/${images[prevIndex].filename}`;
 
       return { img: prevImageUrl, i: prevIndex };
     });
@@ -143,7 +143,7 @@ const Gallery = () => {
               {images.map((item, index) => (
                 <img
                   key={item._id}
-                  src={`http://localhost:3000/uploads/${item.filename}`}
+                  src={`/uploads/${item.filename}`}
                   alt={`Gallery Image ${index + 1}`}
                   style={{
                     width: "100%",
@@ -152,7 +152,7 @@ const Gallery = () => {
                   }}
                   onClick={() =>
                     viewImage(
-                      `http://localhost:3000/uploads/${item.filename}`,
+                      `/uploads/${item.filename}`,
                       index
                     )
                   }

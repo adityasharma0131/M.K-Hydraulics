@@ -18,7 +18,7 @@ const SingleProduct = () => {
     const fetchProduct = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/single-product/${id}`
+          `/api/single-product/${id}`
         );
         if (!response.ok) {
           const errorData = await response.json();
@@ -48,11 +48,11 @@ const SingleProduct = () => {
       <div className="singlebox">
         <h1 className="headingp">{product.name}</h1>
         <div className="product-images">
-          {product.images && product.images.length > 0 ? (
+          {product.images && product.images?.length > 0 ? (
             product.images.map((image, index) => (
               <img
                 key={index}
-                src={`http://localhost:3000/${image}`}
+                src={`/${image}`}
                 alt={`${product.name} image ${index + 1}`}
                 className="Sproduct-image"
               />
@@ -71,7 +71,7 @@ const SingleProduct = () => {
             <h3 className="heading">Specification</h3>
             {product.specImage ? (
               <img
-                src={`http://localhost:3000/${product.specImage}`}
+                src={`/${product.specImage}`}
                 alt="Specification"
                 className="spec-image"
               />

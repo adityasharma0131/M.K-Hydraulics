@@ -29,7 +29,7 @@ const EditProduct = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/categories");
+        const response = await fetch("/api/categories");
         if (!response.ok) throw new Error("Failed to fetch categories.");
         const data = await response.json();
         setCategories(data);
@@ -42,7 +42,7 @@ const EditProduct = () => {
 
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/products/${id}`);
+        const response = await fetch(`/products/${id}`);
         if (!response.ok) throw new Error("Product not found.");
         const data = await response.json();
         setProduct({
@@ -79,12 +79,12 @@ const EditProduct = () => {
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    if (name === "specImage" && files.length > 0) {
+    if (name === "specImage" && files?.length > 0) {
       setProduct((prev) => ({
         ...prev,
         specImage: files[0], // Handle specImage
       }));
-    } else if (files.length > 0) {
+    } else if (files?.length > 0) {
       setProduct((prev) => ({
         ...prev,
         images: Array.from(files), // Handle multiple images
@@ -115,7 +115,7 @@ const EditProduct = () => {
         }
       });
 
-      const response = await fetch(`http://localhost:3000/products/${id}`, {
+      const response = await fetch(`/products/${id}`, {
         method: "PUT",
         body: formData,
       });

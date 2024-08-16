@@ -3,7 +3,7 @@ import logo from "../assets/Black_and_Blue_Airplane_Travel_Logo-removebg-preview
 import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { NavLink, Link } from "react-router-dom";
-import axios from "axios";
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,10 +34,10 @@ const Header = () => {
     // Fetch categories from backend
     const fetchCategories = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:3000/categories"
+        const response = await fetch(
+          "/api/categories"
         );
-        setCategories(response.data);
+        setCategories(await response.json());
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -89,7 +89,7 @@ const Header = () => {
             </div>
             {isDropdownOpen && (
               <ul className="dropdown-menu">
-                {categories.length > 0 ? (
+                {categories?.length > 0 ? (
                   categories.map((category) => (
                     <li key={category._id}>
                       <NavLink

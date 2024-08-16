@@ -13,7 +13,7 @@ const UserOperation = () => {
     setLoggedInUser(localStorage.getItem("loggedInUser"));
 
     // Fetch admin users
-    fetch("http://localhost:3000/admin-users")
+    fetch("/api/admin-users")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -25,7 +25,7 @@ const UserOperation = () => {
   }, []);
 
   const handleDelete = (userId) => {
-    fetch(`http://localhost:3000/admin-users/${userId}`, {
+    fetch(`/admin-users/${userId}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -62,7 +62,7 @@ const UserOperation = () => {
             </tr>
           </thead>
           <tbody>
-            {adminUsers.length > 0 ? (
+            {adminUsers?.length > 0 ? (
               adminUsers.map((user) => (
                 <tr key={user._id}>
                   <td>{user.name}</td>

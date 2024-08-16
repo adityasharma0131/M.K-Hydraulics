@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { MdEditNote } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
-import axios from "axios";
+
 import toast, { Toaster } from "react-hot-toast"; // Import toast and Toaster
 
 const ProductOperation = () => {
@@ -22,8 +22,8 @@ const ProductOperation = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/categories");
-      setCategories(response.data);
+      const response = await fetch("/api/categories");
+      setCategories(await response.json());
       setLoading(false);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -34,8 +34,8 @@ const ProductOperation = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/products");
-      setProducts(response.data);
+      const response = await fetch("/api/products");
+      setProducts(await response.json());
       setLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -46,7 +46,9 @@ const ProductOperation = () => {
 
   const handleDeleteCategory = async (categoryId) => {
     try {
-      await axios.delete(`http://localhost:3000/categories/${categoryId}`);
+      const response = await fetch(`/categories/${categoryId}`, {
+        method: "DELETE", 
+      });
       setCategories(
         categories.filter((category) => category._id !== categoryId)
       );
@@ -60,7 +62,9 @@ const ProductOperation = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      await axios.delete(`http://localhost:3000/products/${productId}`);
+      const response = await fetch(`/products/${productId}`, {
+        method: "DELETE", 
+      });
       setProducts(products.filter((product) => product._id !== productId));
       toast.success("Product deleted successfully!"); // Show success notification
     } catch (error) {
@@ -96,7 +100,7 @@ const ProductOperation = () => {
                 </tr>
               </thead>
               <tbody>
-                {categories.length > 0 ? (
+                {categories?.length > 0 ? (
                   categories.map((category) => (
                     <tr key={category._id}>
                       <td>{category.name}</td>
@@ -143,11 +147,11 @@ const ProductOperation = () => {
               </tr>
             </thead>
             <tbody>
-              {products.length > 0 ? (
+              {products?.length > 0 ? (
                 products.map((product) => {
                   // Get the first image from the images array
                   const firstImage =
-                    product.images && product.images.length > 0
+                    product.images && product.images?.length > 0
                       ? product.images[0]
                       : null;
 
@@ -158,7 +162,7 @@ const ProductOperation = () => {
                       <td>
                         {firstImage ? (
                           <img
-                            src={`http://localhost:3000/${firstImage}`}
+                            src={`/${firstImage}`}
                             alt={`Image of ${product.name}`}
                             className="product-image"
                             style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed

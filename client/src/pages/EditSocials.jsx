@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
-import axios from "axios";
+
 import toast, { Toaster } from "react-hot-toast";
 
 const EditSocials = () => {
@@ -13,8 +13,8 @@ const EditSocials = () => {
   useEffect(() => {
     const fetchSocial = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/socials/${id}`);
-        setSocial(response.data);
+        const response = await fetch(`/socials/${id}`);
+        setSocial(await response.json());
         setLoading(false);
       } catch (error) {
         console.error("Error fetching social media account:", error);
@@ -33,7 +33,13 @@ const EditSocials = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3000/socials/${id}`, social);
+      const response = await fetch(`/socials/${id}`, {
+        method: "PUT", 
+        headers: {
+          "Content-Type": "application/json", 
+        },
+        body: JSON.stringify(social), 
+      });
       toast.success("Social media account updated successfully!");
       navigate("/social-operation");
     } catch (error) {

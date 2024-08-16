@@ -8,7 +8,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 
 const SocialOperation = () => {
   const [socialMediaAccounts, setSocialMediaAccounts] = useState([]);
@@ -16,8 +16,8 @@ const SocialOperation = () => {
   useEffect(() => {
     const fetchSocialMediaAccounts = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/socials");
-        setSocialMediaAccounts(response.data);
+        const response = await fetch("/api/socials");
+        setSocialMediaAccounts(await response.json());
       } catch (error) {
         console.error("Error fetching social media accounts:", error);
       }

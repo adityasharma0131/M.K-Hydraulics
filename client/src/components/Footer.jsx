@@ -22,16 +22,21 @@ const Footer = () => {
       try {
         // Fetch categories
         const categoriesResponse = await fetch(
-          "http://localhost:3000/categories"
+          "/api/categories"
         );
+
+
+        
         if (!categoriesResponse.ok)
           throw new Error("Network response was not ok");
+
+        console.log(categoriesResponse.body);
         const categoriesData = await categoriesResponse.json();
         setCategories(categoriesData);
 
         // Fetch products
         const productsResponse = await fetch(
-          "http://localhost:3000/products"
+          "/api/products"
         );
         if (!productsResponse.ok)
           throw new Error("Network response was not ok");
@@ -49,8 +54,9 @@ const Footer = () => {
 
         // Fetch social media links
         const socialResponse = await fetch(
-          "http://localhost:3000/socials"
+          "/api/social-links"
         );
+        console.log(socialResponse);  
         if (!socialResponse.ok) throw new Error("Network response was not ok");
         const socialData = await socialResponse.json();
         setSocialLinks(socialData);

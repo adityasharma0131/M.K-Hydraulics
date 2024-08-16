@@ -22,7 +22,7 @@ const AddGallery = () => {
     formData.append("image-file", file);
 
     try {
-      const response = await fetch("http://localhost:3000/upload-image", {
+      const response = await fetch("/api/upload-image", {
         method: "POST",
         body: formData,
       });
