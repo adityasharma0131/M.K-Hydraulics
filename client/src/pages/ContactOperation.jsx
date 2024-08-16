@@ -9,7 +9,7 @@ const ContactOperation = () => {
 
   useEffect(() => {
     // Fetch contact data from the backend
-    fetch("http://localhost:3000/contact-queries") // Adjust the URL if necessary
+    fetch("/api/contact-queries") // Adjust the URL if necessary
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -28,7 +28,7 @@ const ContactOperation = () => {
   }, []);
 
   const handleDelete = (contactId) => {
-    fetch(`http://localhost:3000/contact-queries/${contactId}`, {
+    fetch(`/contact-queries/${contactId}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -66,7 +66,7 @@ const ContactOperation = () => {
             </tr>
           </thead>
           <tbody>
-            {contacts.length > 0 ? (
+            {contacts?.length > 0 ? (
               contacts.map((contact) => (
                 <tr key={contact._id}>
                   <td>{contact.name}</td>

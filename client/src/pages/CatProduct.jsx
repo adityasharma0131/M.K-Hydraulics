@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import HeroPage from "../components/HeroPage";
-import axios from "axios";
+
 
 // Function to strip HTML tags from a string
 const stripHtmlTags = (html) => {
@@ -20,19 +20,16 @@ const CatProduct = () => {
     const fetchCategoryAndProducts = async () => {
       try {
         // Fetch category details
-        const categoryResponse = await axios.get(
-          `http://localhost:3000/categories/${categoryId}`
+        const categoryResponse = await fetch(
+          `/api/categories/${categoryId}`
         );
-        setCategory(categoryResponse.data);
+        setCategory(await categoryResponse.json());
 
         // Fetch products based on category ID
-        const productsResponse = await axios.get(
-          "http://localhost:3000/products",
-          {
-            params: { categoryId }, // Send category ID as query parameter
-          }
-        );
-        setProducts(productsResponse.data);
+        const queryParams = new URLSearchParams({ categoryId }).toString();
+        const productsResponse = await fetch(
+          `/api/products?${queryParams}`);
+        setProducts(await productsResponse.json());
       } catch (err) {
         setError(err);
         console.error("Error fetching category or products:", err);
@@ -65,11 +62,11 @@ const CatProduct = () => {
           </h1>
           <hr />
           <div className="productcard">
-            {products.length > 0 ? (
+            {products?.length > 0 ? (
               products.map((product) => {
                 // Get the first image from the images array
                 const firstImage =
-                  product.images && product.images.length > 0
+                  product.images && product.images?.length > 0
                     ? product.images[0]
                     : null;
 
@@ -77,7 +74,7 @@ const CatProduct = () => {
                   <div className="card" key={product._id}>
                     <img
                       className="productimg"
-                      src={firstImage ? `http://localhost:3000/${firstImage}` : undefined} // Display only the first image
+                      src={firstImage ? `/${firstImage}` : undefined} // Display only the first image
                       alt={product.name}
                     />
                     <div className="arrowlink">

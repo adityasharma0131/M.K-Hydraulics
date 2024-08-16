@@ -11,7 +11,7 @@ const GalleryOperation = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch("http://localhost:3000/gallery");
+        const response = await fetch("/api/gallery");
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -30,7 +30,7 @@ const GalleryOperation = () => {
 
   const handleDelete = async (imageId) => {
     try {
-      const response = await fetch(`http://localhost:3000/gallery/${imageId}`, {
+      const response = await fetch(`/gallery/${imageId}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -75,12 +75,12 @@ const GalleryOperation = () => {
                 </tr>
               </thead>
               <tbody>
-                {gallery.length > 0 ? (
+                {gallery?.length > 0 ? (
                   gallery.map((item) => (
                     <tr key={item._id}>
                       <td>
                         <img
-                          src={`http://localhost:3000/uploads/${item.filename}`}
+                          src={`/uploads/${item.filename}`}
                           alt={`Image of ${item.filename}`}
                           className="product-image"
                           style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed

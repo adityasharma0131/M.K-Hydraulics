@@ -28,7 +28,7 @@ const AddProducts = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch("http://localhost:3000/categories");
+        const response = await fetch("/api/categories");
         if (!response.ok) throw new Error("Failed to fetch categories.");
         const data = await response.json();
         setCategories(data);
@@ -63,7 +63,7 @@ const AddProducts = () => {
         ...prev,
         images: [...prev.images, ...Array.from(files)], // Handle multiple files
       }));
-    } else if (name === "specImage" && files.length > 0) {
+    } else if (name === "specImage" && files?.length > 0) {
       setProduct((prev) => ({
         ...prev,
         specImage: files[0], // Handle single file for specImage
@@ -94,7 +94,7 @@ const AddProducts = () => {
         }
       });
 
-      const response = await fetch("http://localhost:3000/products", {
+      const response = await fetch("/api/products", {
         method: "POST",
         body: formData,
       });

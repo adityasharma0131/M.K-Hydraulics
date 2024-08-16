@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { GoArrowUpRight } from "react-icons/go";
 import HeroPage from "../components/HeroPage";
-import axios from "axios";
+
 
 const Products = () => {
   const stripHtmlTags = (html) => {
@@ -18,16 +18,16 @@ const Products = () => {
     const fetchCategoriesAndProducts = async () => {
       try {
         // Fetch categories
-        const categoriesResponse = await axios.get(
-          "http://localhost:3000/categories"
+        const categoriesResponse = await fetch(
+          "/categories"
         );
-        setCategories(categoriesResponse.data);
+        setCategories(await categoriesResponse.json());
 
         // Fetch products
-        const productsResponse = await axios.get(
-          "http://localhost:3000/products"
+        const productsResponse = await fetch(
+          "/products"
         );
-        const products = productsResponse.data;
+        const products = productsResponse.json();
 
         // Organize products by category
         const productsMap = {};
@@ -65,11 +65,11 @@ const Products = () => {
             <hr />
             <div className="productcard">
               {productsByCategory[category.name] &&
-              productsByCategory[category.name].length > 0 ? (
+              productsByCategory[category.name]?.length > 0 ? (
                 productsByCategory[category.name].map((product) => {
                   // Get the first image from the images array
                   const firstImage =
-                    product.images && product.images.length > 0
+                    product.images && product.images?.length > 0
                       ? product.images[0]
                       : null;
 
@@ -79,7 +79,7 @@ const Products = () => {
                         className="productimg"
                         src={
                           firstImage
-                            ? `http://localhost:3000/${firstImage}`
+                            ? `/${firstImage}`
                             : undefined
                         } // Display only the first image
                         alt={product.name}

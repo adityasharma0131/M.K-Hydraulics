@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { IoIosArrowForward } from "react-icons/io";
-import axios from "axios";
+
 import toast, { Toaster } from 'react-hot-toast';
 
 const EditCategory = () => {
@@ -15,10 +15,10 @@ const EditCategory = () => {
   useEffect(() => {
     const fetchCategory = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:3000/categories/${id}`
+        const response = await fetch(
+          `/categories/${id}`
         );
-        setCategoryName(response.data.name);
+        setCategoryName(await response.json().name);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching category:", error);
@@ -36,11 +36,17 @@ const EditCategory = () => {
 
   const handleEditCategory = async () => {
     try {
-      const response = await axios.put(
-        `http://localhost:3000/categories/${id}`,
-        { name: categoryName }
+      const response = await fetch(
+        `/categories/${id}`,
+        {
+          method: "PUT", 
+          headers: {
+            "Content-Type": "application/json", 
+          },
+          body: JSON.stringify({ name: categoryName }), 
+        }
       );
-      if (response.data.success) {
+      if (await response.json().success) {
         toast.success("Category updated successfully!");
         navigate("/product-operation");
       } else {

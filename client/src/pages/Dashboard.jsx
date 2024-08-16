@@ -27,7 +27,7 @@ const Dashboard = () => {
     setLoggedInUser(localStorage.getItem("loggedInUser"));
 
     // Fetch recent queries
-    fetch("http://localhost:3000/recent-queries")
+    fetch("/api/recent-queries")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -38,7 +38,7 @@ const Dashboard = () => {
       .catch((error) => console.error("Error fetching recent queries:", error));
 
     // Fetch admin users
-    fetch("http://localhost:3000/admin-users")
+    fetch("/api/admin-users")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -49,7 +49,7 @@ const Dashboard = () => {
       .catch((error) => console.error("Error fetching admin users:", error));
 
     // Fetch products
-    fetch("http://localhost:3000/products")
+    fetch("/api/products")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -101,7 +101,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {recentQueries.length > 0 ? (
+              {recentQueries?.length > 0 ? (
                 recentQueries.map((query, index) => (
                   <tr key={index}>
                     <td>{query.name}</td>
@@ -128,7 +128,7 @@ const Dashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {adminUsers.length > 0 ? (
+              {adminUsers?.length > 0 ? (
                 adminUsers.map((user) => (
                   <tr key={user._id}>
                     <td>{user._id}</td>
@@ -161,11 +161,11 @@ const Dashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {products.length > 0 ? (
+                {products?.length > 0 ? (
                   products.map((product) => {
                     // Get the first image from the images array
                     const firstImage =
-                      product.images && product.images.length > 0
+                      product.images && product.images?.length > 0
                         ? product.images[0]
                         : null;
 
@@ -176,7 +176,7 @@ const Dashboard = () => {
                         <td>
                           {firstImage ? (
                             <img
-                              src={`http://localhost:3000/${firstImage}`}
+                              src={`/${firstImage}`}
                               alt={product.name}
                               className="product-image"
                               style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed

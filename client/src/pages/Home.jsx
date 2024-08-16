@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import { Link } from "react-router-dom";
 import logo from "../assets/Black_and_Blue_Airplane_Travel_Logo-removebg-preview.png";
 import backgroundImage from "../assets/image 25.png";
@@ -54,8 +54,8 @@ const Home = () => {
     const fetchProducts = async () => {
       try {
         // Fetch 3 products from the backend
-        const response = await axios.get("http://localhost:3000/products-home");
-        setProducts(response.data);
+        const response = await fetch("/api/products-home");
+        setProducts(await response.json());
       } catch (err) {
         setError(err);
         console.error("Error fetching products:", err);
@@ -108,11 +108,11 @@ const Home = () => {
           <h1 className="heading1">Our Products</h1>
           <hr />
           <div className="productcard">
-            {products.length > 0 ? (
+            {products?.length > 0 ? (
               products.map((product) => {
                 // Get the first image from the images array
                 const firstImage =
-                  product.images && product.images.length > 0
+                  product.images && product.images?.length > 0
                     ? product.images[0]
                     : null;
 
@@ -122,7 +122,7 @@ const Home = () => {
                       className="productimg"
                       src={
                         firstImage
-                          ? `http://localhost:3000/${firstImage}`
+                          ? `/${firstImage}`
                           : undefined
                       } // Adjust URL as needed
                       alt={product.name}
