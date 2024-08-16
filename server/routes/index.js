@@ -183,6 +183,7 @@ router.get("/categories", async (req, res) => {
 router.get("/gallery", async (req, res) => {
   try {
     const images = await Image.find();
+    console.log(images)
     res.json(images);
   } catch (error) {
     res.status(500).json({ message: error.message });

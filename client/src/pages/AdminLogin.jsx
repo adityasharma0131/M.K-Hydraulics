@@ -33,7 +33,7 @@ const AdminLogin = () => {
       return handleError("Email and password are required");
     }
     try {
-      const url = `/auth/login`;
+      const url = `/api/auth/login`;
       const response = await fetch(url, {
         method: "POST",
         headers: {
