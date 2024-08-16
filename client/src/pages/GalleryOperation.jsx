@@ -30,7 +30,7 @@ const GalleryOperation = () => {
 
   const handleDelete = async (imageId) => {
     try {
-      const response = await fetch(`/gallery/${imageId}`, {
+      const response = await fetch(`/api/gallery/${imageId}`, {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -80,7 +80,7 @@ const GalleryOperation = () => {
                     <tr key={item._id}>
                       <td>
                         <img
-                          src={`/uploads/${item.filename}`}
+                          src={`${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/uploads/${item.filename}`}
                           alt={`Image of ${item.filename}`}
                           className="product-image"
                           style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed

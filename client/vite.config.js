@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: process.env.MODE !== 'prod' ? 'http://localhost:3000' : process.env.PROD,
+        target: process.env.VITE_MODE !== 'prod' ? 'http://localhost:3000' : process.env.VITE_PROD,
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''), 
       },

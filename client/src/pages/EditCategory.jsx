@@ -16,9 +16,10 @@ const EditCategory = () => {
     const fetchCategory = async () => {
       try {
         const response = await fetch(
-          `/categories/${id}`
+          `/api/categories/${id}`
         );
-        setCategoryName(await response.json().name);
+        const { name } = await response.json();
+        setCategoryName(name);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching category:", error);
@@ -37,7 +38,7 @@ const EditCategory = () => {
   const handleEditCategory = async () => {
     try {
       const response = await fetch(
-        `/categories/${id}`,
+        `/api/categories/${id}`,
         {
           method: "PUT", 
           headers: {
@@ -46,7 +47,9 @@ const EditCategory = () => {
           body: JSON.stringify({ name: categoryName }), 
         }
       );
-      if (await response.json().success) {
+      const success = await response.json();
+      console.log("success",success.success);
+      if (success) {
         toast.success("Category updated successfully!");
         navigate("/product-operation");
       } else {

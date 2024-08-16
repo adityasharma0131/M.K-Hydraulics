@@ -23,7 +23,8 @@ const ProductOperation = () => {
   const fetchCategories = async () => {
     try {
       const response = await fetch("/api/categories");
-      setCategories(await response.json());
+      const categories = await response.json();
+      setCategories(categories);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching categories:", error);
@@ -35,7 +36,8 @@ const ProductOperation = () => {
   const fetchProducts = async () => {
     try {
       const response = await fetch("/api/products");
-      setProducts(await response.json());
+      const products = await response.json();
+      setProducts(products);
       setLoading(false);
     } catch (error) {
       console.error("Error fetching products:", error);
@@ -46,7 +48,7 @@ const ProductOperation = () => {
 
   const handleDeleteCategory = async (categoryId) => {
     try {
-      const response = await fetch(`/categories/${categoryId}`, {
+      const response = await fetch(`/api/categories/${categoryId}`, {
         method: "DELETE", 
       });
       setCategories(
@@ -62,7 +64,7 @@ const ProductOperation = () => {
 
   const handleDeleteProduct = async (productId) => {
     try {
-      const response = await fetch(`/products/${productId}`, {
+      const response = await fetch(`/api/products/${productId}`, {
         method: "DELETE", 
       });
       setProducts(products.filter((product) => product._id !== productId));
@@ -150,10 +152,14 @@ const ProductOperation = () => {
               {products?.length > 0 ? (
                 products.map((product) => {
                   // Get the first image from the images array
-                  const firstImage =
+                  var firstImage =
                     product.images && product.images?.length > 0
                       ? product.images[0]
                       : null;
+
+                  if (firstImage) {
+                    firstImage = `${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/${firstImage}`;
+                  }
 
                   return (
                     <tr key={product._id}>
@@ -162,7 +168,7 @@ const ProductOperation = () => {
                       <td>
                         {firstImage ? (
                           <img
-                            src={`/${firstImage}`}
+                            src={`${firstImage}`}
                             alt={`Image of ${product.name}`}
                             className="product-image"
                             style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed

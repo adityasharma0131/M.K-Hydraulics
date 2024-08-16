@@ -17,7 +17,8 @@ const SocialOperation = () => {
     const fetchSocialMediaAccounts = async () => {
       try {
         const response = await fetch("/api/socials");
-        setSocialMediaAccounts(await response.json());
+        const data = await response.json();
+        setSocialMediaAccounts(data);
       } catch (error) {
         console.error("Error fetching social media accounts:", error);
       }

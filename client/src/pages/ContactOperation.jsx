@@ -28,7 +28,7 @@ const ContactOperation = () => {
   }, []);
 
   const handleDelete = (contactId) => {
-    fetch(`/contact-queries/${contactId}`, {
+    fetch(`/api/contact-queries/${contactId}`, {
       method: "DELETE",
     })
       .then((response) => {

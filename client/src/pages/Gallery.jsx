@@ -47,7 +47,7 @@ const Gallery = () => {
   const prevImage = () => {
     setData((prev) => {
       const prevIndex = (prev.i - 1 + images?.length) % images?.length;
-      const prevImageUrl = `/uploads/${images[prevIndex].filename}`;
+      const prevImageUrl = `${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/uploads/${images[prevIndex].filename}`;
 
       return { img: prevImageUrl, i: prevIndex };
     });
@@ -143,7 +143,7 @@ const Gallery = () => {
               {images.map((item, index) => (
                 <img
                   key={item._id}
-                  src={`/uploads/${item.filename}`}
+                  src={`${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/uploads/${item.filename}`}
                   alt={`Gallery Image ${index + 1}`}
                   style={{
                     width: "100%",
@@ -152,7 +152,7 @@ const Gallery = () => {
                   }}
                   onClick={() =>
                     viewImage(
-                      `/uploads/${item.filename}`,
+                      `${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/uploads/${item.filename}`,
                       index
                     )
                   }

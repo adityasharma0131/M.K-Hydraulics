@@ -25,7 +25,7 @@ const UserOperation = () => {
   }, []);
 
   const handleDelete = (userId) => {
-    fetch(`/admin-users/${userId}`, {
+    fetch(`/api/admin-users/${userId}`, {
       method: "DELETE",
     })
       .then((response) => {

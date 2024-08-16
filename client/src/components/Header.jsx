@@ -37,7 +37,8 @@ const Header = () => {
         const response = await fetch(
           "/api/categories"
         );
-        setCategories(await response.json());
+        const data = await response.json();
+        setCategories(data);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }

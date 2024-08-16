@@ -19,15 +19,16 @@ const Products = () => {
       try {
         // Fetch categories
         const categoriesResponse = await fetch(
-          "/categories"
+          "/api/categories"
         );
-        setCategories(await categoriesResponse.json());
+        const categories = await categoriesResponse.json();
+        setCategories(categories);
 
         // Fetch products
         const productsResponse = await fetch(
-          "/products"
+          "/api/products"
         );
-        const products = productsResponse.json();
+        const products = await productsResponse.json();
 
         // Organize products by category
         const productsMap = {};
@@ -68,10 +69,14 @@ const Products = () => {
               productsByCategory[category.name]?.length > 0 ? (
                 productsByCategory[category.name].map((product) => {
                   // Get the first image from the images array
-                  const firstImage =
+                  var firstImage =
                     product.images && product.images?.length > 0
                       ? product.images[0]
                       : null;
+                  
+                  if(firstImage){
+                    firstImage = `${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/${firstImage}`;
+                  }
 
                   return (
                     <div className="card" key={product._id}>
@@ -79,7 +84,7 @@ const Products = () => {
                         className="productimg"
                         src={
                           firstImage
-                            ? `/${firstImage}`
+                            ? `${firstImage}`
                             : undefined
                         } // Display only the first image
                         alt={product.name}

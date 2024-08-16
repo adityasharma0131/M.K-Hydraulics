@@ -16,7 +16,7 @@ const EditUser = () => {
 
   useEffect(() => {
     // Fetch the user data
-    fetch(`/admin-users/${id}`)
+    fetch(`/api/admin-users/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -35,7 +35,7 @@ const EditUser = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`/admin-users/${id}`, {
+    fetch(`/api/admin-users/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
