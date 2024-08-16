@@ -52,7 +52,7 @@ const SingleProduct = () => {
             product.images.map((image, index) => (
               <img
                 key={index}
-                src={`/${image}`}
+                src={`${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/${image}`}
                 alt={`${product.name} image ${index + 1}`}
                 className="Sproduct-image"
               />
@@ -71,7 +71,7 @@ const SingleProduct = () => {
             <h3 className="heading">Specification</h3>
             {product.specImage ? (
               <img
-                src={`/${product.specImage}`}
+                src={`${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/${product.specImage}`}
                 alt="Specification"
                 className="spec-image"
               />

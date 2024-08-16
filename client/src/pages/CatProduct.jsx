@@ -23,13 +23,15 @@ const CatProduct = () => {
         const categoryResponse = await fetch(
           `/api/categories/${categoryId}`
         );
-        setCategory(await categoryResponse.json());
+        const categoryData = await categoryResponse.json();
+        setCategory(categoryData);
 
         // Fetch products based on category ID
         const queryParams = new URLSearchParams({ categoryId }).toString();
         const productsResponse = await fetch(
           `/api/products?${queryParams}`);
-        setProducts(await productsResponse.json());
+          const productsData = await productsResponse.json();
+        setProducts(productsData);
       } catch (err) {
         setError(err);
         console.error("Error fetching category or products:", err);
@@ -65,16 +67,18 @@ const CatProduct = () => {
             {products?.length > 0 ? (
               products.map((product) => {
                 // Get the first image from the images array
-                const firstImage =
+                var firstImage =
                   product.images && product.images?.length > 0
                     ? product.images[0]
                     : null;
-
+                if(firstImage){
+                  firstImage= `${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/${firstImage}`;
+                }
                 return (
                   <div className="card" key={product._id}>
                     <img
                       className="productimg"
-                      src={firstImage ? `/${firstImage}` : undefined} // Display only the first image
+                      src={firstImage ? `${firstImage}` : undefined} // Display only the first image
                       alt={product.name}
                     />
                     <div className="arrowlink">

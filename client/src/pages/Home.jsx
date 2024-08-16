@@ -55,7 +55,8 @@ const Home = () => {
       try {
         // Fetch 3 products from the backend
         const response = await fetch("/api/products-home");
-        setProducts(await response.json());
+        const data = await response.json();
+        setProducts(data);
       } catch (err) {
         setError(err);
         console.error("Error fetching products:", err);
@@ -111,18 +112,20 @@ const Home = () => {
             {products?.length > 0 ? (
               products.map((product) => {
                 // Get the first image from the images array
-                const firstImage =
+                var firstImage =
                   product.images && product.images?.length > 0
                     ? product.images[0]
                     : null;
-
+                if (firstImage) {
+                  firstImage = `${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/${firstImage}`;
+                }
                 return (
                   <div className="card" key={product._id}>
                     <img
                       className="productimg"
                       src={
                         firstImage
-                          ? `/${firstImage}`
+                          ? `${firstImage}`
                           : undefined
                       } // Adjust URL as needed
                       alt={product.name}

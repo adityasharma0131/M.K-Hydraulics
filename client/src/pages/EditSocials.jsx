@@ -13,8 +13,9 @@ const EditSocials = () => {
   useEffect(() => {
     const fetchSocial = async () => {
       try {
-        const response = await fetch(`/socials/${id}`);
-        setSocial(await response.json());
+        const response = await fetch(`/api/socials/${id}`);
+        const data = await response.json();
+        setSocial(data);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching social media account:", error);
@@ -33,7 +34,7 @@ const EditSocials = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`/socials/${id}`, {
+      const response = await fetch(`/api/socials/${id}`, {
         method: "PUT", 
         headers: {
           "Content-Type": "application/json", 

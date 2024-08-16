@@ -4,7 +4,7 @@ import "react-circular-progressbar/dist/styles.css";
 
 const Dashboard = () => {
   const stripHtmlTags = (html) => {
-    return html.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
+    return html?.replace(/<\/?[^>]+(>|$)/g, ""); // Regular expression to remove HTML tags
   };
 
   const progressData = [
@@ -164,10 +164,14 @@ const Dashboard = () => {
                 {products?.length > 0 ? (
                   products.map((product) => {
                     // Get the first image from the images array
-                    const firstImage =
+                    var firstImage =
                       product.images && product.images?.length > 0
                         ? product.images[0]
                         : null;
+
+                    if (firstImage) {
+                      firstImage = `${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/${firstImage}`;
+                    }
 
                     return (
                       <tr key={product._id}>
@@ -176,7 +180,7 @@ const Dashboard = () => {
                         <td>
                           {firstImage ? (
                             <img
-                              src={`/${firstImage}`}
+                              src={`${firstImage}`}
                               alt={product.name}
                               className="product-image"
                               style={{ maxWidth: "150px", maxHeight: "150px" }} // Adjust size as needed

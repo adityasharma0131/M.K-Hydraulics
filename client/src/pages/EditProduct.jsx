@@ -42,7 +42,7 @@ const EditProduct = () => {
 
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/products/${id}`);
+        const response = await fetch(`/api/products/${id}`);
         if (!response.ok) throw new Error("Product not found.");
         const data = await response.json();
         setProduct({
@@ -115,7 +115,7 @@ const EditProduct = () => {
         }
       });
 
-      const response = await fetch(`/products/${id}`, {
+      const response = await fetch(`/api/products/${id}`, {
         method: "PUT",
         body: formData,
       });
