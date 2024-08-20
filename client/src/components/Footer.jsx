@@ -200,7 +200,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="botttom">
-        <h3>Designed & Developed By Aditya Suresh Sharma</h3>
+        <h3>Designed & Developed By Adityasharma0431@gmail.com</h3>
       </div>
     </>
   );
