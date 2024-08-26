@@ -189,7 +189,7 @@ const Home = () => {
               <IoIosMail />
             </div>
             <h2 className="contacthead">Email Us</h2>
-            <h3 className="contactdesc"> Mkhydraulics@gmail.com </h3>
+            <h3 className="contactdesc"> mkhydraulics@gmail.com </h3>
           </div>
         </div>
       </div>

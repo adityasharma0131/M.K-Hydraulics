@@ -153,7 +153,7 @@ const Footer = () => {
                 <li>
                   <IoIosMail />
                   <Link className="footer-desc">
-                    Mkhydraulicssales@gmail.com <br /> Mkhydraulics@gmail.com
+                    mkhydraulicssales@gmail.com <br /> mkhydraulics@gmail.com
                   </Link>
                 </li>
                 <li>

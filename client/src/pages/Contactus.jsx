@@ -179,7 +179,7 @@ const Contactus = () => {
               <div className="emailid">
                 <div className="IoIosMail">
                   <IoIosMail />
-                  <p>Mkhydraulicssales@gmail.com Mkhydraulics@gmail.com</p>
+                  <p>mkhydraulicssales@gmail.com mkhydraulics@gmail.com</p>
                 </div>
               </div>
             </div>
