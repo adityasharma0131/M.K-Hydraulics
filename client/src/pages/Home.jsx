@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 import logo from "../assets/Black_and_Blue_Airplane_Travel_Logo-removebg-preview.png";
-import backgroundImage from "../assets/image 25.png";
+import backgroundImage from "../assets/bgimg5.png";
 import { GoArrowUpRight } from "react-icons/go";
 import { IoIosMail } from "react-icons/io";
 import { TbPhoneCall } from "react-icons/tb";
@@ -117,17 +117,17 @@ const Home = () => {
                     ? product.images[0]
                     : null;
                 if (firstImage) {
-                  firstImage = `${import.meta.env.VITE_MODE=="prod"? import.meta.env.VITE_PROD_BACKEND:import.meta.env.VITE_DEV_BACKEND}/${firstImage}`;
+                  firstImage = `${
+                    import.meta.env.VITE_MODE == "prod"
+                      ? import.meta.env.VITE_PROD_BACKEND
+                      : import.meta.env.VITE_DEV_BACKEND
+                  }/${firstImage}`;
                 }
                 return (
                   <div className="card" key={product._id}>
                     <img
                       className="productimg"
-                      src={
-                        firstImage
-                          ? `${firstImage}`
-                          : undefined
-                      } // Adjust URL as needed
+                      src={firstImage ? `${firstImage}` : undefined} // Adjust URL as needed
                       alt={product.name}
                     />
                     <div className="arrowlink">

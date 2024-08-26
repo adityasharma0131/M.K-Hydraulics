@@ -166,7 +166,6 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 /* Section Styles */
-.homepage,
 .weare,
 .our-products,
 .products,
@@ -178,6 +177,7 @@ header nav ul li .dropdown-toggle:hover {
   position: relative;
   overflow: hidden;
 }
+
 .about-content {
   display: flex;
   justify-content: center;
@@ -186,11 +186,12 @@ header nav ul li .dropdown-toggle:hover {
 }
 
 .homepage {
-  /* background-color: black; */
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  /* background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (14) 1.png"); */
   justify-content: center;
+  position: relative;
+  overflow: hidden;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -209,21 +210,22 @@ header nav ul li .dropdown-toggle:hover {
 
 @keyframes change {
   0% {
+    background-image: url("../src/assets/bgimg1.png");
   }
   20% {
-    background-image: url("../src/assets/WhatsApp Image 2024-07-30 at 2.46.55 PM 1.png");
+    background-image: url("../src/assets/bgimg2.png");
   }
   40% {
-    background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (15) 1.png");
+    background-image: url("../src/assets/bgimg3.png");
   }
   60% {
-    background-image: url("../src/assets/WhatsApp Image 2024-07-30 at 2.46.55 PM (1) 1.png");
+    background-image: url("../src/assets/bgimg4.png");
   }
   80% {
-    background-image: url("../src/assets/pikaso_enhance__vivid_2K_Standard_r_c_ (16) 1.png");
+    background-image: url("../src/assets/bgimg5.png");
   }
   100% {
-    background-image: url("../src/assets/WhatsApp Image 2024-07-30 at 2.46.55 PM (1) 1.png");
+    background-image: url("../src/assets/bgimg1.png");
   }
 }
 
