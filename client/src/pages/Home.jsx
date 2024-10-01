@@ -81,7 +81,7 @@ const Home = () => {
       <div className="weare">
         <div className="bgbox">
           <h1 className="heading1">We Are,</h1>
-          <h1 className="heading2">M.K Hydraulics</h1>
+          <h1 className="heading2">M K Hydraulics</h1>
           <p className="para">
             We Are, M.K Hydraulics Established in 2006, M.K Hydraulics is a
             leading manufacturer renowned for its expertise in delivering
